@@ -1,0 +1,41 @@
+
+
+.panel-menu
+{
+    border-color: rgb(93, 173, 226);
+}
+.panel-menu > .panel-heading 
+{
+    background: rgb(93, 173, 226);
+    color: #ffffff;
+    border-color: rgb(93, 173, 226);
+}
+.panel-submenu
+{
+    border-color: rgb(72, 201, 176);
+}
+.panel-submenu > .panel-heading 
+{
+    background: rgb(72, 201, 176);
+    color: #ffffff;
+    border-color: rgb(72, 201, 176);
+}
+.titlealumno{
+    position: relative;
+    top: 16px;
+}
+.nuevoalumno{
+    border-color:rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+    color: rgb(93, 173, 226);
+    float: right;
+    position: relative;
+    top: 9px;
+    transition: .7s;
+    font-size: 15px;
+}
+.nuevoalumno:hover{
+    background: none;
+    border-color:rgb(255, 255, 255);
+    color:rgb(255, 255, 255);
+}

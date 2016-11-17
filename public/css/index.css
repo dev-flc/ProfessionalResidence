@@ -1,0 +1,15 @@
+
+.footer{
+  background-color: rgb(52,152,219);
+}
+.footer,footer,a{
+  color: #FFF;
+}
+  .div {
+  background-image: url("../../img/mision.jpg");
+  background-attachment: fixed;
+  height: 500px;
+}
+.mision{
+  background: #FFF;
+}
