@@ -17,12 +17,11 @@
                 </li>
                 <li><a href=""><span class="glyphicon glyphicon-book" aria-hidden="true"></span>  Proyectos</a>
                 </li>
-                <li><a href=""><span class="glyphicon glyphicon-book" aria-hidden="true"></span>  {{ Auth::user()->name }}</a>
-                </li>
+                
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>USUARIO <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span>   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                     <li><a href="{{ route('admin.auth.logout') }}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Cerrar Sesion</a>
                     </li>

@@ -11,6 +11,7 @@
  		<li role="presentation" class="active"><a href="#escuela" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Alumno</a></li>
   		<li role="presentation"><a href="#director" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Usuario</a></li>
   		<li role="presentation"><a href="#direccion" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Dirección</a></li>
+      <li role="presentation"><a href="#final" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Escuela</a></li>
 	</ul><br>
 	<div class="tab-content">
 		<!-- inicio escuela -->
@@ -187,14 +188,35 @@
                 </div>
   			</div>
   			<div class="panel-footer">
-                <div class="form-group">
-                    {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
-                </div><br>
+                
             </div>
   			</div>
-  			{!! Form::close() !!}
+  			
   		</div>
   		<!-- fin direcciones -->
+
+      <div role="tabpanel" class="tab-pane" id="final">
+        <div class="panel panel-default">
+        <div class="panel-heading">Datos Usuario</div>
+        <div class="panel-body">
+          <div class="form-group">
+            {!! Form::label('type','Escuela') !!}<br />
+            <select class="form-control" name="escuelaid">
+              <option value="">Seleccione una escuela</option>
+              @foreach($escuela as $escuelas)
+                <option value="{{ $escuelas->id }}">{{ $escuelas->ESC_nombre }}</option>
+              @endforeach
+            </select>             
+          </div> 
+        </div>
+        <div class="panel-footer">
+                        <div class="form-group">
+                    {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
+                </div><br>
+                    </div>
+        </div>
+        {!! Form::close() !!}
+      </div>
 	</div>
 
  </div>

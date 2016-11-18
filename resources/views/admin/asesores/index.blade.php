@@ -1,7 +1,6 @@
 @extends('admin.templates.main')
 
 @section('title', 'Lista de Asesores')
-<h1>jkdskjdskjldskljsdkjlsdkjsdl</h1>
 @section('titulo', 'Lista de Asesores')
 @section('buttonlink')
 

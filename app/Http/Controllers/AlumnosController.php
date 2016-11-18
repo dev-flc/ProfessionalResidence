@@ -29,7 +29,8 @@ class AlumnosController extends Controller
 #    $user = Auth::user();
 
    
-$aaa =Alumno::Buscador($request->matricula)->select('*')->join('users','users.id','=','alumnos.USU_id')->paginate(5);
+    #$aaa =Alumno::Buscador($request->matricula)->select('*')->join('users','users.id','=','alumnos.USU_id')->paginate(5);
+     $aaa=Alumno::Buscador($request->matricula)->paginate(5);
      return View('admin.alumnos.index')->with('aaa',$aaa);
     }
 
@@ -40,7 +41,8 @@ $aaa =Alumno::Buscador($request->matricula)->select('*')->join('users','users.id
      */
     public function create()
     {
-        return view('admin.alumnos.create');
+        $escuela=Escuela::all();
+        return view('admin.alumnos.create')->with('escuela',$escuela);
     }
 
     /**
@@ -66,19 +68,10 @@ $aaa =Alumno::Buscador($request->matricula)->select('*')->join('users','users.id
         $user->email=($request->correo);
         $user->password=bcrypt($request->pass);
         $user->foto="user.png";
-        $user->type="asesor";
+        $user->type="alumno";
         $user->save();
         $iduser= User::find($user->id);
-/*
-->join('estatus','estatus.id','=','alumnos.id')
-       ->join('users','users.id','=','alumnos.id')
-       ->join('tutores','tutores.id','=','alumnos.id')
-       ->join('direcciones','direcciones.id','=','alumnos.id')
-       ->join('escuelas','escuelas.id','=','alumnos.id')
-       ->join('anteproyectos','anteproyectos.id','=','alumnos.id')
-       ->join('esquemas','esquemas.id','=','alumnos.id')
-       ->join('alumnos_asesores','alumnos_asesores.ALU_id','=','alumnos.id')
-*/
+
 
 
         $escuela= new Alumno;
@@ -91,9 +84,10 @@ $aaa =Alumno::Buscador($request->matricula)->select('*')->join('users','users.id
         $escuela->ALU_matricula=($request->matricula);
         $escuela->ALU_semestre=($request->semestre); 
 
-        $escuela->EST_id=($idestatus->id);
+        $escuela->EST_id=1;
         $escuela->USU_id=($iduser->id);
-        $escuela->DIR_id=($iddireccion->id);   
+        $escuela->DIR_id=($iddireccion->id);  
+        $escuela->ESC_id=($request->escuelaid);
         $escuela->save();           
         
         flash('Alumno Registrado correctamente', 'info')->important();
@@ -128,18 +122,21 @@ $aaa =Alumno::Buscador($request->matricula)->select('*')->join('users','users.id
      */
     public function edit($id)
     {
+       
        $alum = Alumno::select('*')
        ->join('estatus','estatus.id','=','alumnos.EST_id')
        ->join('users','users.id','=','alumnos.USU_id')
-       ->join('tutores','tutores.id','=','alumnos.TUT_id')
+       
        ->join('direcciones','direcciones.id','=','alumnos.DIR_id')
        ->join('escuelas','escuelas.id','=','alumnos.ESC_id')
-       ->join('anteproyectos','anteproyectos.id','=','alumnos.ANT_id')
-       ->join('esquemas','esquemas.id','=','alumnos.ESQ_id')
+       #->join('anteproyectos','anteproyectos.id','=','alumnos.ANT_id')
+       #->join('esquemas','esquemas.id','=','alumnos.ESQ_id')
        #->join('alumnos_asesores','alumnos_asesores.ALU_id','=','alumnos.id')
        ->findOrFail($id);; 
-        #dd($alumnos);
-        return view('admin.alumnos.edit')->with('alum', $alum);
+        
+        #dd($alum);
+       return view('admin.alumnos.edit')->with('alum', $alum);
+        
     }
 
     /**
