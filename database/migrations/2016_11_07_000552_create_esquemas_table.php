@@ -15,8 +15,8 @@ class CreateEsquemasTable extends Migration
         Schema::create('esquemas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ESQ_nombre');
-            $table->string('ESQ_descripcion');
-            $table->integer('EST_id')->unsigned();
+            $table->longText('ESQ_descripcion');
+            $table->integer('EST_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('EST_id')->references('id')->on('estatus');
         });

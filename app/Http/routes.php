@@ -24,8 +24,8 @@ Route::group(['middleware'=>['web']], function (){
 	
 });
 
-#Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
+#Route::group(['prefix'=>'admin'], function(){
 
 /*alumnos  */
 	Route::resource('alumnos','AlumnosController');
@@ -80,17 +80,23 @@ Route::group(['prefix'=>'admin'], function(){
 		]);
 });
 
-#Route::group(['prefix'=>'asesor','middleware'=>['asesor','auth']], function(){
-Route::group(['prefix'=>'asesor'], function(){
+Route::group(['prefix'=>'asesor','middleware'=>['asesor','auth']], function(){
+#Route::group(['prefix'=>'asesor'], function(){
 
 Route::resource('alumnos','AsesorAlumnosController');
 
 });
 
-#Route::auth();
 
+Route::group(['prefix'=>'alumno','middleware'=>['alumno','auth']], function(){
+Route::resource('perfil','PerfilController');
+});
+
+
+
+#Route::auth();
 #Route::get('/home', 'HomeController@index');
-	Route::resource('escuelas','EscuelasController');
+Route::resource('escuelas','EscuelasController');
 
 Route::resource('/general','GeneralController');
 

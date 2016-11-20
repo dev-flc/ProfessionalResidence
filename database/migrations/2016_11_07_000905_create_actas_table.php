@@ -15,8 +15,8 @@ class CreateActasTable extends Migration
         Schema::create('actas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ACT_nombre');
-            $table->string('ACT_descripcion');
-            $table->string('ACT_fecha');
+            $table->longText('ACT_descripcion');
+            $table->dateTime('ACT_fecha');
             $table->integer('SEC_id')->unsigned();
             $table->timestamps();
             $table->foreign('SEC_id')->references('id')->on('secretarios');

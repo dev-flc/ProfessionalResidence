@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Residence\Http\Requests;
 
-class GeneralController@index extends Controller
+class PerfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class GeneralController@index extends Controller
      */
     public function index()
     {
-        return view('quienessomos');
+       return view('alumnos.perfil.index');
     }
 
     /**

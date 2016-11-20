@@ -3,18 +3,18 @@
 namespace Residence\Http\Middleware;
 use Illuminate\Contracts\Auth\Guard;
 
+
 use Closure;
 
-class Admin
+class Alumno
 {
-    protected $auth;
+     protected $auth;
 
 
     public function __construct(Guard $auth)
     {
         $this->auth=$auth;
     }
-
     /**
      * Handle an incoming request.
      *
@@ -22,9 +22,10 @@ class Admin
      * @param  \Closure  $next
      * @return mixed
      */
+    
     public function handle($request, Closure $next)
     {
-        if($this->auth->user()->presidende())
+       if($this->auth->user()->alumnologin())
         {
             return $next($request);
         }
@@ -32,10 +33,9 @@ class Admin
         {
             return redirect()->route('asesor.alumnos.index');
         }
-        elseif($this->auth->user()->alumnologin())
+        elseif($this->auth->user()->presidende())
         {
-             return redirect()->route('alumno.perfil.index');
+             return redirect()->route('admin.alumnos.index');
         }
-        
     }
 }

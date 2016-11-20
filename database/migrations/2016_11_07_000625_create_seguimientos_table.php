@@ -15,8 +15,8 @@ class CreateSeguimientosTable extends Migration
         Schema::create('seguimientos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('SEG_nombre');
-            $table->string('SEG_descripcion');
-            $table->string('SEG_fecha');
+            $table->longText('SEG_descripcion');
+            $table->dateTime('SEG_fecha');
             $table->string('SEG_archivo');
             $table->integer('ESQ_id')->unsigned(); 
             $table->timestamps();

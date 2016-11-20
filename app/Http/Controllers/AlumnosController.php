@@ -132,7 +132,7 @@ class AlumnosController extends Controller
        #->join('anteproyectos','anteproyectos.id','=','alumnos.ANT_id')
        #->join('esquemas','esquemas.id','=','alumnos.ESQ_id')
        #->join('alumnos_asesores','alumnos_asesores.ALU_id','=','alumnos.id')
-       ->findOrFail($id);; 
+       ->findOrFail($id); 
         
         #dd($alum);
        return view('admin.alumnos.edit')->with('alum', $alum);

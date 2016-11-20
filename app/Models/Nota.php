@@ -9,12 +9,12 @@ class Nota extends Model
     protected $table = 'notas';
     protected $filleble=
     [
-    	'NOT_nombre','NOT_descripcion','NOT_archivo','DIA_id'
+    	'NOT_nombre','NOT_descripcion','NOT_archivo'
     ];
 
     #uno a muchos Diario
-    public function diarios()
+    public function diario()
     {
-    	return $this->hasMany('Residence\Models\Diario');
+    	return $this->belongsTo('Residence\Models\Diario');
     }
 }

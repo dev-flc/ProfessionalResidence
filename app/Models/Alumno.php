@@ -9,7 +9,7 @@ class Alumno extends Model
     protected $table = 'alumnos';
     protected $filleble=
     [
-    	'ALU_nombre','ALU_apellido_p','ALU_apellido_m','ALU_sexo','ALU_correo','ALU_tel','ALU_cel','ALU_matricula','ALU_semestre','EST_id','USU_id','TUT_id','DIR_id','ESC_id','ANT_id','ESQ_id','DIA_id'
+    	'ALU_nombre','ALU_apellido_p','ALU_apellido_m','ALU_sexo','ALU_tel','ALU_cel','ALU_matricula','ALU_semestre','ALU_periodo','EST_id','USU_id','TUT_id','DIR_id','ESC_id','ANT_id','ESQ_id'
     ];
 
     #muchos a muchos asesores
@@ -63,7 +63,7 @@ class Alumno extends Model
     #uno a uno  diario
     public function diario()
     {
-        return $this->hasOne('Residence\Models\Diario');
+        return $this->belongsTo('Residence\Models\Diario');
     }
 
     #Buscador

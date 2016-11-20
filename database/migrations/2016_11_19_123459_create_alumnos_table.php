@@ -22,6 +22,7 @@ class CreateAlumnosTable extends Migration
             $table->string('ALU_cel');
             $table->string('ALU_matricula');
             $table->string('ALU_semestre');
+            $table->string('ALU_periodo');
             $table->integer('EST_id')->unsigned()->nullable();
             $table->integer('USU_id')->unsigned()->nullable();
             $table->integer('TUT_id')->unsigned()->nullable();
@@ -29,7 +30,6 @@ class CreateAlumnosTable extends Migration
             $table->integer('ESC_id')->unsigned()->nullable();
             $table->integer('ANT_id')->unsigned()->nullable();
             $table->integer('ESQ_id')->unsigned()->nullable();
-            $table->integer('DIA_id')->unsigned()->nullable();
 
             $table->foreign('EST_id')->references('id')->on('estatus');
             $table->foreign('USU_id')->references('id')->on('users');
@@ -38,7 +38,6 @@ class CreateAlumnosTable extends Migration
             $table->foreign('ESC_id')->references('id')->on('escuelas');
             $table->foreign('ANT_id')->references('id')->on('anteproyectos');
             $table->foreign('ESQ_id')->references('id')->on('esquemas');
-            $table->foreign('DIA_id')->references('id')->on('diarios');
             $table->timestamps();
         });
 

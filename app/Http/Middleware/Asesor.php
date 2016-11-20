@@ -30,5 +30,9 @@ class Asesor
         {
              return redirect()->route('admin.alumnos.index');
         }
+        elseif($this->auth->user()->alumnologin())
+        {
+             return redirect()->route('alumno.perfil.index');
+        }
     }
 }

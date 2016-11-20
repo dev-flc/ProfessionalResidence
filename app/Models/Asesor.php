@@ -9,7 +9,7 @@ class Asesor extends Model
    	protected $table ='asesores';
     protected $filleble =
     [
-        'ASE_nombre','ASE_apellido_p','ASE_apellido_m','ASE_correo','ASE_tel','ASE_cel','DIR_id','USU_id'
+        'ASE_nombre','ASE_apellido_p','ASE_apellido_m','ASE_tel','ASE_cel','DIR_id','USU_id'
     ];
 
     #muchos a muchos alumnos

@@ -15,12 +15,9 @@ class CreateNotasTable extends Migration
         Schema::create('notas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('NOT_nombre');
-            $table->string('NOT_descripcion');
+            $table->longText('NOT_descripcion');
             $table->string('NOT_archivo');
-            $table->integer('DIA_id')->unsigned();
             $table->timestamps();
-            $table->foreign('DIA_id')->references('id')->on('diarios');
-
         });
     }
 

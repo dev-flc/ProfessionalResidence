@@ -15,9 +15,8 @@ class CreateComentariodocumentosTable extends Migration
         Schema::create('comentarios_documentos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('CODO_usuario');
-            $table->string('CODO_fecha');
-            $table->string('CODO_hora');
-            $table->string('CODO_comentario');
+            $table->dateTime('CODO_fecha');
+            $table->longText('CODO_comentario');
             $table->integer('DOC_id')->unsigned();
             $table->timestamps();
             $table->foreign('DOC_id')->references('id')->on('documentos');
