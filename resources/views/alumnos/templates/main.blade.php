@@ -2,61 +2,32 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>@yield('title','Default')  | Panel de admin</title>
+	<title>@yield('title','Default')</title>
 	<link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
-	<link rel="stylesheet" href="{{ asset('css/main.css') }}">
-
 </head>
 <style type="text/css">
 	body{
 		background: rgb(235, 237, 239);
 	}
 </style>
-@include('admin.templates.partes.nav')
+<header>
+	@include('alumnos.templates.partes.nav')	
+</header>
 <body>
-	
 	<div class="container-fluid">
 		@include('flash::message')
 	</div>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-3">
-			<div class="panel panel-submenu">
-  				<div class="panel-heading">
-       				<h3 class="panel-title">Menu</h3>
-       			</div>		
-  				<div class="panel-body">
-          <style type="text/css">
-            .admin-menu{
-              background: rgb(244, 246, 246);
-              border-radius: 10px;
-            }
-          </style>
-  					 
-  	<ul class="nav nav-pills nav-stacked admin-menu">
-         
-          <li><a href="#" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio  </a></li>
-          <li><a href="{{ route('admin.alumnos.index') }}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Alumnos  </a></li>
-          <li><a href="{{ route('admin.escuelas.index') }}" ><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Ecuelas  </a></li>
-          <li><a href="{{ route('admin.asesores.index') }}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Asesores  </a></li>
-          <li><a href="#" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> proyectos  </a></li>
-          
-        </ul>
-				</div>
+				@yield('submenu')	
 			</div>
+			<div class="col-sm-9">	
+				@yield('content')
 			</div>
-		<div class="col-sm-9">	
-			@yield('content')
 		</div>
 	</div>
-</div>
-	
-
-
-	<script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
-	<script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
-
+<script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
+<script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
 </body>
-
 </html>
