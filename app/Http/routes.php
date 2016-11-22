@@ -90,6 +90,27 @@ Route::resource('alumnos','AsesorAlumnosController');
 
 Route::group(['prefix'=>'alumno','middleware'=>['alumno','auth']], function(){
 Route::resource('perfil','PerfilController');
+
+
+Route::resource('esquema','AlumnoEsquemaController');
+Route::get('descarga/{id}',[
+	'uses' => 'AlumnoEsquemaController@descarga',
+	'as' => 'alumno.descarga.descarga'
+	]);
+
+Route::resource('ensayo','AlumnoEnsayoController');
+
+Route::get('descargaensayo/{id}',[
+	'uses' => 'AlumnoEnsayoController@descarga',
+	'as' => 'alumno.descargaensayo.descarga'
+	]);
+
+Route::resource('diario','AlumnoDiarioController');
+
+Route::get('descargadiario/{id}',[
+	'uses' => 'AlumnoDiarioController@descargadiario',
+	'as' => 'alumno.descargadiario.descarga'
+	]);
 });
 
 

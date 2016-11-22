@@ -12,7 +12,8 @@ class CreateComentariodocumentosTable extends Migration
      */
         public function up()
     {
-        Schema::create('comentarios_documentos', function (Blueprint $table) {
+        Schema::create('comentarios_documentos', function (Blueprint $table) 
+        {
             $table->increments('id');
             $table->string('CODO_usuario');
             $table->dateTime('CODO_fecha');

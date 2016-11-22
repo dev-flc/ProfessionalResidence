@@ -31,7 +31,12 @@ VALUES
  ('2', '2'),
  ('3', '3'),
  ('4', '4'),
- ('5', '5');
+ ('5', '5'),
+ ('6', '6'),
+ ('7', '7'),
+ ('8', '8'),
+ ('9', '9'),
+ ('10', '10');
 
  # Escuelas
 INSERT INTO `residence`.`escuelas` (`id`, `ESC_nombre`, `ESC_clave`, `DIR_id`, `DI_id`) 
@@ -60,22 +65,22 @@ VALUES
 ('5', 'esquema 5', 'este es mi esquema', '5');
 
 #documentos
-INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DOC_fecha`, `DOC_archivo`, `ANT_id`)
+INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DOC_fecha`, `DOC_fecha_entrega`, `DOC_hora_entrega`, `DOC_archivo`, `ANT_id`, `EST_id`)
  VALUES 
- ('1', 'anteproyecto 1', 'descripcion del anteproyecto', '2016-10-10', 'no hay archivo', '1'),
- ('2', 'anteproyecto 2', 'descripcion del anteproyecto', '2016-10-10', 'no hay archivo', '2'),
- ('3', 'anteproyecto 3', 'descripcion del anteproyecto', '2016-10-10', 'no hay archivo', '3'),
- ('4', 'anteproyecto 4', 'descripcion del anteproyecto', '2016-10-10', 'no hay archivo', '4'),
- ('5', 'anteproyecto 5', 'descripcion del anteproyecto', '2016-10-10', 'no hay archivo', '5');
+ ('1', 'anteproyecto 1', 'descripcion del anteproyecto', '2016-03-19', '201-03-19',' 08:00:00', 'no hay archivo', '1', '9'),
+ ('2', 'anteproyecto 2', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19',' 08:00:00', 'no hay archivo', '2', '9'),
+ ('3', 'anteproyecto 3', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19',' 08:00:00', 'no hay archivo', '3', '9'),
+ ('4', 'anteproyecto 4', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19',' 08:00:00', 'no hay archivo', '4', '9'),
+ ('5', 'anteproyecto 5', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19 ','08:00:00', 'no hay archivo', '5', '9');
 
 
  #seguimientos
-INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_archivo`, `ESQ_id`) 
+INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_fecha_entrega`, `SEG_hora_entrega`, `SEG_archivo`, `ESQ_id`,`EST_id`) 
 VALUES 
 
-('3', 'seguimiento 3', 'descripcion del seguimiento', '2016-10-11', 'no hay archovo', '3'),
-('4', 'seguimiento 4', 'descripcion del seguimiento', '2016-10-11', 'no hay archovo', '4'),
-('5', 'seguimiento 5', 'descripcion del seguimiento', '2016-10-11', 'no hay archovo', '5');
+('3', 'seguimiento 3', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '3','9'),
+('4', 'seguimiento 4', 'descripcion del seguimiento', '2016-03-19','2016-03-19 ','08:00:00', 'no hay archovo', '4','9'),
+('5', 'seguimiento 5', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '5','9');
 
 #comentariodocumentos
 INSERT INTO `residence`.`comentarios_documentos` (`id`, `CODO_usuario`, `CODO_fecha`, `CODO_comentario`, `DOC_id`)
@@ -89,8 +94,6 @@ INSERT INTO `residence`.`comentarios_documentos` (`id`, `CODO_usuario`, `CODO_fe
 #comentarioseguimientos
 INSERT INTO `residence`.`comentarios_seguimientos` (`id`, `COSE_usuario`, `COSE_fecha`, `COSE_comentario`, `SEG_id`)
  VALUES 
- ('1', '1', '2014-03-19 18:00:00', 'comentario', '1'),
- ('2', '2', '2014-03-19 18:00:00', 'comentario', '2'),
  ('3', '3', '2014-03-19 18:00:00', 'comentario', '3'),
  ('4', '4', '2014-03-19 18:00:00', 'comentario', '4'),
  ('5', '5', '2014-03-19 18:00:00', 'comentario', '5');
@@ -181,10 +184,12 @@ VALUES
   ('9', 'titulo del diario', 'descripcion','2014-03-19 18:00:00', '9', '1'),
   ('10', 'titulo del diario', 'descripcion','2014-03-19 18:00:00', '10', '1');
 
-INSERT INTO `residence`.`alumnos_asesores` (`id`, `ALU_id`, `ASE_id`)
+INSERT INTO `residence`.`alumnos_asesores` (`id`, `ALU_id`, `ASE_id`,`ALAS_tipo`)
  VALUES 
- ('1', '1', '1'),
- ('2', '2', '1'),
- ('3', '3', '3'),
- ('4', '4', '4'),
- ('5', '5', '2');
+ ('1', '1', '1','asesor'),
+ ('2', '2', '1','asesor'),
+ ('3', '3', '3','asesor'),
+ ('4', '4', '4','asesor'),
+ ('5', '5', '2','asesor'),
+ ('6', '1', '2','revisor'),
+ ('7', '1', '4','revisor');

@@ -29,4 +29,14 @@ class Estatus extends Model
     {
         return $this->belongsTo('Residence\Models\Alumno');
     }
+
+    public function seguimiento()
+    {
+        return $this->belongsTo('Residence\Models\Seguimiento');
+    }
+
+    public function documento()
+    {
+        return $this->belongsTo('Residence\Models\Documento');
+    }
 }

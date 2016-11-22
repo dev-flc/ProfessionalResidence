@@ -9,7 +9,7 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('admin.alumnos.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Esquema</a>
+                <li><a href="{{ route('admin.alumnos.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  dsdsEsquema</a>
                 </li>
                 <li><a href=""><span class="glyphicon glyphicon-list" aria-hidden="true"></span>  Escuelas</a>
                 </li>
