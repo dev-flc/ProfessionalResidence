@@ -133,16 +133,15 @@
                     <td>{{ $alumnos->ALU_cel }}</td>
                   </tr>
                 </table>
-                <p>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                 <p>
+                  <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
+                    <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                 <!--
+                  <a href="{{ route('alumno.perfil.show', $alumnos->id) }}" id="link">
+                    <span class="label label-success">ver perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-primary">editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
-                  </a>
+                  -->
                 </p>
                 </center>
                 @endforeach
@@ -158,14 +157,14 @@
           <div class="panel-heading">Panel heading without title</div>
           <div class="panel-body">
             <!-- inicio formulario-->
-            {{Form::open(['route'=>['alumno.ensayo.update',$documento->id],'method'=>'PUT','files'=>true])}}
+            {{Form::open(['route'=>['alumno.ensayo.update',$seguimiento->id],'method'=>'PUT','files'=>true])}}
               <div class="form-group">
                 {!! Form::label('nombre','nombre') !!}
-                {!! Form::text('nombre',$documento->SEG_nombre,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!}
+                {!! Form::text('nombre',$seguimiento->SEG_nombre,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!}
               </div>
               <div class="form-group">
                 {!! Form::label('fecha','fecha Entrega') !!}
-                {!! Form::text('fecha',$documento->SEG_fecha,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!} 
+                {!! Form::text('fecha',$seguimiento->SEG_fecha,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!} 
               </div>
               <div class="form-group">
                 {!! Form::label('file','Archivo') !!}
@@ -173,7 +172,7 @@
               </div>
               <div class="form-group">
                 {!! Form::label('descripcion','Descripcion') !!}
-                {!! Form::textarea('descripcion',$documento->SEG_descripcion,['class'=>'form-control','rows'=>'6','required']) !!}
+                {!! Form::textarea('descripcion',$seguimiento->SEG_descripcion,['class'=>'form-control','rows'=>'6','required']) !!}
               </div>
           </div>
           <div class="modal-footer">

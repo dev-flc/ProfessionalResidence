@@ -9,7 +9,7 @@
 
 </head>
 <header>
-  <!-- Inicio navbar -->
+<!-- Inicio navbar -->
 <div id="navbar-menu" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header"><a class="navbar-brand" href="#">ENUF</a>
@@ -93,10 +93,6 @@
     border-radius: 50%;
   }
   
-  .inputt
-  {
-    border: none;
-  }
 </style>
   <div class="container-fluid">
     @include('flash::message')
@@ -166,8 +162,15 @@
                     </td>
                     <td>{{ $alumnos->ALU_cel }}</td>
                   </tr>
+                  <tr>
+                    <td>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      Semestre:
+                    </td>
+                    <td>{{ $alumnos->ALU_semestre }}</td>
+                  </tr>
                 </table>
-                 <p>
+               <p>
                   <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
                     <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
@@ -190,31 +193,50 @@
         <div class="panel panel-default">
           <div class="panel-heading">Panel heading without title</div>
           <div class="panel-body">
-            <!-- inicio formulario-->
-            {{Form::open(['route'=>['alumno.esquema.update',$documento->id],'method'=>'PUT','files'=>true])}}
-              <div class="form-group">
-                {!! Form::label('nombre','nombre') !!}
-                {!! Form::text('nombre',$documento->DOC_nombre,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!}
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Diario</div>
+                  <div class="panel-body">
+                  <style type="text/css">
+                    p{
+                      text-align: justify;
+                    }
+                  </style>
+                    @foreach ($diario as $dia)
+                      <label>Titulo</label>
+                      <p>{{ $dia->DIA_nombre }}</p>
+
+                      <label>Descripcion</label>
+                      
+                      {!! $dia->DIA_descripcion !!}
+                      
+                    @endforeach
+                  </div>
+                </div>
               </div>
-              <div class="form-group">
-                {!! Form::label('fecha','fecha Entrega') !!}
-                {!! Form::text('fecha',$documento->DOC_fecha,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!} 
+              <div class="col-sm-6">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Bitacora</div>
+                  <div class="panel-body">
+                     @foreach ($nota as $not)
+                     <label>Titulo</label>
+                      <p style="text-align: justify;">{{ $not->NOT_nombre }}</p>
+                     <label>descripcion</label>
+                      {!! $not->NOT_descripcion !!}
+                  </div>
+                  <div class="panel-footer">
+                     <a href="{{ route('alumno.diario.edit', $not->id) }}">| Editar |</a>
+                    @if($not->NOT_archivo=="archivo.pdf")
+                    
+                    @else
+                      <a href="{{ route('alumno.descargadiario.descarga', $not->id) }}">| Descargar |</a>
+                    @endif
+                    </div>
+                  @endforeach
+                </div>
               </div>
-              <div class="form-group">
-                {!! Form::label('file','Archivo') !!}
-                {!! Form::file('file',['required']) !!}
-              </div>
-              <div class="form-group">
-                {!! Form::label('descripcion','Descripcion') !!}
-                {!! Form::textarea('descripcion',$documento->DOC_descripcion,['class'=>'form-control','rows'=>'6','required']) !!}
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}     
-          </div>
-          {!! Form::close() !!}
-          <!-- final Formulario -->
+            </div>
           </div>
         </div>
       </div> 
@@ -248,6 +270,5 @@ $( "#shower" ).click(function() {
   $( ".cla" ).show("slow");
 });
 </script>
-
 </body>
 </html>

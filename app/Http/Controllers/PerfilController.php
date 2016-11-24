@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Residence\Http\Requests;
 
 use Residence\Models\Alumno;
+use Residence\User;
 use Auth;
 use Residence\Models\Asesor;
 use Residence\Models\Director;
@@ -26,11 +27,12 @@ class PerfilController extends Controller
      */
     public function index()
     {
-        
         $user = Auth::user()->id;
-        $foto = Auth::user()->foto;
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
 
-        $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
         foreach ($alumno as $alu)
         {
             $idescuela=$alu->ESC_id;
@@ -61,6 +63,7 @@ class PerfilController extends Controller
         #dd($revisor);
         return view('alumnos.perfil.index')
         ->with('alumno',$alumno)
+        ->with('user',$user)
         ->with('escuela',$escuela)
         ->with('tutor',$tutor)
         ->with('asesor',$asesor)
@@ -98,7 +101,7 @@ class PerfilController extends Controller
      */
     public function show($id)
     {
-        //
+        #dd('dsdsds',$id);
     }
 
     /**
@@ -109,7 +112,26 @@ class PerfilController extends Controller
      */
     public function edit($id)
     {
-        //
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
+
+        $alumno = Alumno::select('*')->where('id','=',$id)->get();
+
+        foreach ($alumno as $alu)
+        {   $alum=$alu->id;
+            $idescuela=$alu->ESC_id;
+            $idtutor=$alu->TUT_id;
+            $idalumno=$alu->id;
+            $iddireccion=$alu->DIR_id;
+        }
+
+        $direccion = Direccion::select('*')->where('id','=',$iddireccion)->get();
+        return view('alumnos.perfil.edit')
+        ->with('user',$user)
+        ->with('alumno',$alumno)
+        ->with('direccion',$direccion);
+
     }
 
     /**
@@ -121,9 +143,50 @@ class PerfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        
+
+        $alumno=Alumno::find($id);
+        $alumno->ALU_nombre=($request->nombre);     
+        $alumno->ALU_apellido_p=($request->apellidop);
+        $alumno->ALU_apellido_m=($request->apellidom);
+        $alumno->ALU_sexo=($request->sex);
+        $alumno->ALU_tel=($request->telefono);
+        $alumno->ALU_cel=($request->celular);
+        $alumno->ALU_periodo=($request->periodo);
+        $alumno->ALU_matricula=($request->matricula);
+        $alumno->ALU_semestre=($request->semestre);
+        $alumno->save();
+
+        flash('Los datos fueron modificados correctamente', 'info')->important();
+        return redirect()->route('alumno.perfil.index');
+        
     }
 
+      public function updatefoto(Request $request, $id)
+    {
+        
+
+       
+         if($request->file('file'))
+        { 
+            $file=$request->file('file');
+            $nombre = 'documento_'.time().'.'.$file->getClientOriginalExtension();   
+            $path=public_path().'/files/documentos/';
+            $file->move($path, $nombre);
+
+            $alumno=User::find($id);
+            $alumno->foto=$nombre;
+            $alumno->save();
+            dd('yes');
+        }
+        else
+        {
+            $nombre="foto.png";
+        }
+        
+        
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -132,6 +195,6 @@ class PerfilController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

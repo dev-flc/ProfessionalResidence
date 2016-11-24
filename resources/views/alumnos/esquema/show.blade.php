@@ -1,12 +1,9 @@
-
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>inicio</title>
   <link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
-
 </head>
 <header>
   <!-- Inicio navbar -->
@@ -74,7 +71,7 @@
     margin: 10px;
     border-radius: 5px;
   }
-  #link
+   #link
   {
     text-decoration: none;
   }
@@ -92,11 +89,21 @@
     height: 40px;
     border-radius: 50%;
   }
-  
-  .inputt
-  {
+  #izq{
+    float: right;
+  }
+  #descrip{
+  text-align: justify;
+  }
+  #link{
+    text-decoration: none;
+  }
+  .novisible{
+    background: #fff;
+    color: #fff;
     border: none;
   }
+  
 </style>
   <div class="container-fluid">
     @include('flash::message')
@@ -109,7 +116,7 @@
           <div class="panel-heading">Datos personales</div>
           <div class="panel-body">
             <div class="thumbnail">
-               <br />
+              <br />
                @foreach ($user as $use)
               <img id="imgperfil" src="/files/documentos/{{ $use->foto }} " alt="...">
               
@@ -130,6 +137,7 @@
               @endforeach
               </div>
               <!-- Fin formulario de imagen -->
+
               <div class="caption">
                 @foreach ($alumno as $alumnos)
                 <center>
@@ -166,8 +174,15 @@
                     </td>
                     <td>{{ $alumnos->ALU_cel }}</td>
                   </tr>
+                  <tr>
+                    <td>
+                      <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+                      Semestre:
+                    </td>
+                    <td>{{ $alumnos->ALU_semestre }}</td>
+                  </tr>
                 </table>
-                 <p>
+               <p>
                   <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
                     <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
@@ -188,66 +203,78 @@
       <!-- container inicio -->
       <div class="col-sm-9">  
         <div class="panel panel-default">
-          <div class="panel-heading">Panel heading without title</div>
+          <div class="panel-heading">...</div>
           <div class="panel-body">
-            <!-- inicio formulario-->
-            {{Form::open(['route'=>['alumno.esquema.update',$documento->id],'method'=>'PUT','files'=>true])}}
-              <div class="form-group">
-                {!! Form::label('nombre','nombre') !!}
-                {!! Form::text('nombre',$documento->DOC_nombre,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!}
-              </div>
-              <div class="form-group">
-                {!! Form::label('fecha','fecha Entrega') !!}
-                {!! Form::text('fecha',$documento->DOC_fecha,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!} 
-              </div>
-              <div class="form-group">
-                {!! Form::label('file','Archivo') !!}
-                {!! Form::file('file',['required']) !!}
-              </div>
-              <div class="form-group">
-                {!! Form::label('descripcion','Descripcion') !!}
-                {!! Form::textarea('descripcion',$documento->DOC_descripcion,['class'=>'form-control','rows'=>'6','required']) !!}
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}     
-          </div>
-          {!! Form::close() !!}
-          <!-- final Formulario -->
+            @foreach ($documento as $doc)
+            <h1>{{ $doc->DOC_nombre }}</h1>
+            <div class="panel panel-default">
+            <div class="panel-body">
+            <label>Descripcion:</label><br>
+            <p id="descrip">{{ $doc->DOC_descripcion}}</p> 
+            <p>  <a href="{{ route('alumno.descarga.descarga', $doc->id) }}" id="link" target="_blank">Descargar <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                             </a></p>
+            <p>
+            <strong>Fecha de entrega:</strong> {{ $doc->DOC_fecha }} <strong>Subido:</strong> {{ $doc->DOC_fecha_entrega }} | {{ $doc->DOC_hora_entrega }} 
+            @foreach ($alumno as $alu)
+            <span id="izq"><strong>Alumno: </strong><span class="label label-primary">{{ $alu->ALU_nombre }} {{ $alu->ALU_apellido_p }}  {{ $alu->ALU_apellido_m }}</span></span>
+            @endforeach
+            </p>
+            </div>
+            </div>
+            
+            @endforeach
+
+            @foreach ($comentario as $com)
+     
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+        <div class="panel-heading"><h4><span class="label label-danger">{{ $com->CODO_usuario }}</span></h4></div>
+        <div class="panel-body">
+          <p>{{ $com->CODO_comentario }}</p>
+          <a id="izq" href="#" data-toggle="modal" data-target="#myModal">Cometar <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      </div>
+
+      @endforeach
           </div>
         </div>
       </div> 
     </div><!-- fin row -->
   </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Nuevo Comentario</h4>
+      </div>
+      <div class="modal-body">
+         @foreach($documento as $do)
+        {{Form::open(['route'=>['alumno.esquema.comentdocument',$do->id],'method'=>'PUT'])}}
+           
+            @foreach ($alumno as $as)
+                {!! Form::text('nombre',$as->ALU_nombre,['class'=>'novisible','readonly']) !!}
+            @endforeach
+            <div class="form-group">
+                
+                <textarea name="comentario" class="form-control" placeholder="comentario" rows="8" required ></textarea>
+            </div>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Cometar</button>
+        {!! Form::close() !!}
+        @endforeach
+      </div>
+    </div>
+  </div>
+</div>
+
 <script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
 <script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
-
-<script type="text/javascript">
-  function previewFile() {
-  var preview = document.querySelector('img');
-  var file    = document.querySelector('input[type=file]').files[0];
-  var reader  = new FileReader();
-
-  reader.onloadend = function () {
-    preview.src = reader.result;
-  }
-
-  if (file) {
-    reader.readAsDataURL(file);
-  } else {
-    preview.src = "";
-  }
-}
-</script>
-<script>
-$( "#hider" ).click(function() {
-  $( ".cla" ).hide("swing");
-  });
-$( "#shower" ).click(function() {
-  $( ".cla" ).show("slow");
-});
-</script>
-
 </body>
 </html>

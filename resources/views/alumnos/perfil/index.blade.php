@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>inicio</title>
+  <title>Perfil</title>
   <link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
 
 </head>
@@ -90,16 +90,32 @@
   }
   .colorfondoblanco
   {
-    background: #fff;
+    background: rgb(229, 231, 233);
+    border-radius: 10px;
   }
   table
   {
     width: 100%;
   }
-  #link
+ #link
   {
     text-decoration: none;
   }
+  #shower{
+    position: relative;
+    left: 60%;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .7s;
+  }
+  #shower:hover{
+    background: #5cb85c;
+  }
+  .bb{
+    height: 40px;
+    border-radius: 50%;
+  }
+  
 </style>
   <div class="container-fluid">
     @include('flash::message')
@@ -113,7 +129,27 @@
           <div class="panel-body">
             <div class="thumbnail">
               <br />
-              <img id="imgperfil" src="http://www.gamesforchange.org/g4cwp/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="...">
+               @foreach ($user as $use)
+              <img id="imgperfil" src="/files/documentos/{{ $use->foto }} " alt="...">
+              
+              <span id="shower" class="label label-default">editar foto <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
+              <br>
+
+            <!-- Formulario de imagen -->
+              <div class="cla" style="display:none;">
+                 {{Form::open(['route'=>['alumno.update.updatefoto',$use->id],'method'=>'PUT','files'=>'true'])}}
+                <div class="form-group">
+                  {!! Form::file('file',['class'=>'form-control','onchange'=>'previewFile()','required']) !!}
+                </div> 
+                <center>
+                  <button  id="hider" class="btn btn-danger bb" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <button class="btn btn-success bb" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                </center>
+                {!! Form::close() !!}
+              @endforeach
+              </div>
+              <!-- Fin formulario de imagen -->
+
               <div class="caption">
                 @foreach ($alumno as $alumnos)
                 <center>
@@ -159,15 +195,14 @@
                   </tr>
                 </table>
                 <p>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                  <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
+                    <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                 <!--
+                  <a href="{{ route('alumno.perfil.show', $alumnos->id) }}" id="link">
+                    <span class="label label-success">ver perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-primary">editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
-                  </a>
+                  -->
                 </p>
                 </center>
                 @endforeach
@@ -187,16 +222,16 @@
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="container-fluid colorfondoblanco">
+                      <br>
                       <label>Datos Esceula</label>
-                      <hr>
-                      <table>
+                      <table class="table table-hover">
                       @foreach($escuela as $school)
                         <tr>
-                          <td>Nombre:</td>
+                          <td><strong>Nombre:</strong></td>
                           <td><center>{{ $school->ESC_nombre }}</center></td>
                         </tr>
                         <tr>
-                          <td>Clave:</td>
+                          <td><strong>Clave:</strong></td>
                           <td><center>{{ $school->ESC_clave }}</center></td>
                         </tr>
                       @endforeach
@@ -205,20 +240,21 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="container-fluid colorfondoblanco">
+                      <br>
                       <label>Director</label>
-                      <hr>
-                      <table>
+                      
+                      <table class="table table-hover">
                       @foreach($director as $di)
                         <tr>
-                          <td>Nombre:</td>
+                          <td><strong>Nombre:</strong></td>
                           <td><center>{{ $di->DI_nombre }}</center></td>
                         </tr>
                         <tr>
-                          <td>Apellidos:</td>
+                          <td><strong>Apellidos:</strong></td>
                           <td><center>{{ $di->DI_apellido_p }} {{ $di->DI_apellido_m }}</center></td>
                         </tr>
                         <tr>
-                          <td>Correo:</td>
+                          <td><strong>Correo:</strong></td>
                           <td><center>{{ $di->DI_correo }}</center></td>
                         </tr>
                       @endforeach
@@ -227,46 +263,49 @@
                   </div>
                   <div class="col-sm-4">
                     <div class="container-fluid colorfondoblanco">
+                      <br>
                       <label>Tutor</label>
-                      <hr>
-                      <table>
+                      <table class="table table-hover">
                       @foreach($tutor as $tu)
                         <tr>
-                          <td>Nombre:</td>
+                          <td><strong>Nombre:</strong></td>
                           <td><center>{{ $tu->TUT_nombre }}</center></td>
                         </tr>
                         <tr>
-                          <td>Apellidos:</td>
+                          <td><strong>Apellidos:</strong></td>
                           <td><center>{{ $tu->TUT_apellido_p }} {{ $tu->TUT_apellido_m }}</center></td>
                         </tr>
                         <tr>
-                          <td>Correo:</td>
+                          <td><strong>Correo:</strong></td>
                           <td><center>{{ $tu->TUT_correo }}</center></td>
                         </tr>
                         <tr>
-                          <td>Telefono:</td>
+                          <td><strong>Telefono:</strong></td>
                           <td><center>{{ $tu->TUT_tel }}</center></td>
                         </tr>
                         <tr>
-                          <td>Celular:</td>
+                          <td><strong>Celular:</strong></td>
                           <td><center>{{ $tu->TUT_cel }}</center></td>
                         </tr>
-                      @endforeach
+                      
                       </table>
                     </div>
                   </div>
                 </div>
                 <hr />
-                <a href="" id="link" class="pull-right">|
+                <!--<a href="" id="link" class="pull-right">|
                   <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar |
                 </a>
                 <a href="" id="link" class="pull-right">|
                   <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Descargar Solicitud | 
-                </a>
+                </a>-->
+                @endforeach
               </div>
             </div>
             <div class="panel panel-default">
-              <div class="panel-heading">Panel heading without title</div>
+              <div class="panel-heading">
+              Asesor 
+              @if( $alumnos->ALU_semestre==8)| Revisores @endif</div>
               <div class="panel-body">
                 <div class="row">
                   <div class="col-sm-6">
@@ -282,37 +321,28 @@
                         </td>
                       </tr>
                       <tr>
-                        <td>Nombre:</td>
+                        <td><strong>Nombre:</strong></td>
                         <td><center>{{ $ase->ASE_nombre }}</center></td>
                       </tr>
                       <tr>
-                        <td>Apellidos:</td>
+                        <td><strong>Apellidos:</strong></td>
                         <td><center>{{ $ase->ASE_apellido_p }} {{ $ase->ASE_apellido_m }}</center></td>
                       </tr>
                       <tr>
-                        <td>Telefono:</td>
+                        <td><strong>Telefono:</strong></td>
                         <td><center>{{ $ase->ASE_tel }}</center></td>
                       </tr>
                       <tr>
-                        <td>Correo:</td>
+                        <td><strong>Correo:</strong></td>
                         <td><center>{{ $ase->ASE_cel }}</center></td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
-                          <a id="link" class="pull-right"  href="#">
-                            | Ver Perfil <span class="glyphicon glyphicon-user" aria-hidden="true"></span> |
-                          </a>
-                        </td>
                       </tr>
                       @endforeach
                     </table>
                   </div>
                   <div class="col-sm-6">
+                   @foreach( $revisor as $rev )
+                      @if( $alumnos->ALU_semestre==8)
                     <label>Revisores</label>
-                    
-                      @foreach( $revisor as $rev )
                       <table class="table">
                       <tr>
                         <td rowspan="5">
@@ -323,22 +353,23 @@
                         </td>
                       </tr>
                       <tr>
-                        <td>Nombre:</td>
+                        <td><strong>Nombre:</strong></td>
                         <td><center>{{ $rev->ASE_nombre }}</center></td>
                       </tr>
                       <tr>
-                        <td>Apellidos:</td>
+                        <td><strong>Apellidos:</strong></td>
                         <td><center>{{ $rev->ASE_apellido_p }} {{ $rev->ASE_apellido_m }}</center></td>
                       </tr>
                       <tr>
-                        <td>Telefono:</td>
+                        <td><strong>Telefono:</strong></td>
                         <td><center>{{ $rev->ASE_tel }}</center></td>
                       </tr>
                       <tr>
-                        <td>Correo:</td>
+                        <td><strong>Correo:</strong></td>
                         <td><center>{{ $rev->ASE_cel }}</center></td>
                       </tr>
                       </table>
+                      @endif
                       @endforeach
                     
                   </div>
@@ -352,5 +383,56 @@
   </div>
 <script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
 <script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript">
+  function previewFile() {
+  var preview = document.querySelector('img');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
+
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  }
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+</script>
+<script>
+$( "#hider" ).click(function() {
+  $( ".cla" ).hide("swing");
+  });
+$( "#shower" ).click(function() {
+  $( ".cla" ).show("slow");
+});
+</script>
+<script type="text/javascript">
+  function previewFile() {
+  var preview = document.querySelector('img');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
+
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  }
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+</script>
+<script>
+$( "#hider" ).click(function() {
+  $( ".cla" ).hide("swing");
+  });
+$( "#shower" ).click(function() {
+  $( ".cla" ).show("slow");
+});
+</script>
+
 </body>
 </html>

@@ -8,6 +8,8 @@ use Residence\Http\Requests;
 use Residence\Models\Alumno;
 use Residence\Models\Anteproyecto;
 use Residence\Models\Documento;
+use Residence\Models\Comentariodocumento;
+use Residence\User;
 use Residence\Http\Controllers\Response;
 use Auth;
 use Laracasts\Flash\Flash;
@@ -22,10 +24,12 @@ class AlumnoEsquemaController extends Controller
     public function index()
     {
         $totaldocumentos=0;
-        $user = Auth::user()->id;
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
         $foto = Auth::user()->foto;
 
-        $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
         foreach ($alumno as $alu)
         {
             $idanteproyecto=$alu->ANT_id;
@@ -41,6 +45,7 @@ class AlumnoEsquemaController extends Controller
         }
         
         return view('alumnos.esquema.index')
+        ->with('user',$user)
         ->with('alumno',$alumno)
         ->with('anteproyecto',$anteproyecto)
         ->with('totaldocumentos',$totaldocumentos)
@@ -77,7 +82,21 @@ class AlumnoEsquemaController extends Controller
      */
     public function show($id)
     {
-        //
+         $foto = Auth::user()->foto;
+         $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
+
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
+
+
+        $documento =Documento::select('*')->where('id','=',$id)->get();
+        $comentario=Comentariodocumento::select('*')->where('DOC_id','=',$id)->get();
+        return view('alumnos.esquema.show')
+        ->with('alumno',$alumno)
+        ->with('user',$user)
+        ->with('comentario',$comentario)
+        ->with('documento',$documento);
     }
 
     /**
@@ -88,14 +107,18 @@ class AlumnoEsquemaController extends Controller
      */
     public function edit($id)
     {
-        $user = Auth::user()->id;
+        
         $foto = Auth::user()->foto;
+         $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
 
-        $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
 
         $documento =Documento::all()->find($id);
         return view('alumnos.esquema.edit')
         ->with('alumno',$alumno)
+        ->with('user',$user)
         ->with('documento',$documento);
     }
 
@@ -171,4 +194,21 @@ class AlumnoEsquemaController extends Controller
     {
         //
     }
+    public function comentdocument(Request $request, $id)
+    {
+
+        $fechaentrega=date('Y-m-d');
+        $horaa=date('h:i:s');
+        $fecha=$fechaentrega." ".$horaa;
+       $coment=new Comentariodocumento;
+       $coment->CODO_usuario=($request->nombre);
+       $coment->CODO_fecha=$fecha;
+       $coment->CODO_comentario=($request->comentario);
+       $coment->DOC_id=$id;
+       $coment->save();
+
+       dd('yess');
+    }
+
+
 }

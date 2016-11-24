@@ -9,7 +9,7 @@ class Comentarioseguimiento extends Model
     protected $table = 'comentarios_seguimientos';
     protected $filleble=
     [
-    	'COSE_usuario','COSE_fecha','COSE_hora','COSE_comentario','SEG_id'
+    	'COSE_usuario','COSE_fecha','COSE_comentario','SEG_id'
     ];
 
     #uno a muchos documentos 

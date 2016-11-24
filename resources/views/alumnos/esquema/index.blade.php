@@ -71,10 +71,25 @@
     margin: 10px;
     border-radius: 5px;
   }
-  #link
+   #link
   {
     text-decoration: none;
   }
+  #shower{
+    position: relative;
+    left: 60%;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .7s;
+  }
+  #shower:hover{
+    background: #5cb85c;
+  }
+  .bb{
+    height: 40px;
+    border-radius: 50%;
+  }
+  
 </style>
   <div class="container-fluid">
     @include('flash::message')
@@ -88,7 +103,27 @@
           <div class="panel-body">
             <div class="thumbnail">
               <br />
-              <img id="imgperfil" src="http://www.gamesforchange.org/g4cwp/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="...">
+               @foreach ($user as $use)
+              <img id="imgperfil" src="/files/documentos/{{ $use->foto }} " alt="...">
+              
+              <span id="shower" class="label label-default">editar foto <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
+              <br>
+
+            <!-- Formulario de imagen -->
+              <div class="cla" style="display:none;">
+                 {{Form::open(['route'=>['alumno.update.updatefoto',$use->id],'method'=>'PUT','files'=>'true'])}}
+                <div class="form-group">
+                  {!! Form::file('file',['class'=>'form-control','onchange'=>'previewFile()','required']) !!}
+                </div> 
+                <center>
+                  <button  id="hider" class="btn btn-danger bb" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <button class="btn btn-success bb" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                </center>
+                {!! Form::close() !!}
+              @endforeach
+              </div>
+              <!-- Fin formulario de imagen -->
+
               <div class="caption">
                 @foreach ($alumno as $alumnos)
                 <center>
@@ -133,16 +168,15 @@
                     <td>{{ $alumnos->ALU_semestre }}</td>
                   </tr>
                 </table>
-                <p>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+               <p>
+                  <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
+                    <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                 <!--
+                  <a href="{{ route('alumno.perfil.show', $alumnos->id) }}" id="link">
+                    <span class="label label-success">ver perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-primary">editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
-                  </a>
+                  -->
                 </p>
                 </center>
                 @endforeach
@@ -209,8 +243,12 @@
                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Archivo:
                         </td>
                         <td>
-                            <a href="{{ route('alumno.esquema.edit', $docs->id) }}"  id="link">Editar <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></a>
-                             <a href="{{ route('alumno.descarga.descarga', $docs->id) }}" id="link" target="_blank">Descargar <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></a>
+                            <a href="{{ route('alumno.esquema.edit', $docs->id) }}"  id="link">Editar <span class="glyphicon glyphicon-open-file" aria-hidden="true"></span>
+                            </a>
+
+                             <a href="{{ route('alumno.descarga.descarga', $docs->id) }}" id="link" target="_blank">Descargar <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+                             </a>
+                             <a href="{{ route('alumno.esquema.show', $docs->id) }}" id="link">Ver <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span></a>
                         </td>
                       </tr>
                       <!-- fin datos subido-->

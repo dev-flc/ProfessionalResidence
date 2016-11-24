@@ -9,7 +9,7 @@
 
 </head>
 <header>
-  <!-- Inicio navbar -->
+<!-- Inicio navbar -->
 <div id="navbar-menu" class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header"><a class="navbar-brand" href="#">ENUF</a>
@@ -93,10 +93,6 @@
     border-radius: 50%;
   }
   
-  .inputt
-  {
-    border: none;
-  }
 </style>
   <div class="container-fluid">
     @include('flash::message')
@@ -109,7 +105,7 @@
           <div class="panel-heading">Datos personales</div>
           <div class="panel-body">
             <div class="thumbnail">
-               <br />
+              <br />
                @foreach ($user as $use)
               <img id="imgperfil" src="/files/documentos/{{ $use->foto }} " alt="...">
               
@@ -130,6 +126,8 @@
               @endforeach
               </div>
               <!-- Fin formulario de imagen -->
+
+
               <div class="caption">
                 @foreach ($alumno as $alumnos)
                 <center>
@@ -166,17 +164,15 @@
                     </td>
                     <td>{{ $alumnos->ALU_cel }}</td>
                   </tr>
+                  <tr>
+                    <td>
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      Semestre:
+                    </td>
+                    <td>{{ $alumnos->ALU_semestre }}</td>
+                  </tr>
                 </table>
-                 <p>
-                  <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
-                    <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
-                  </a>
-                 <!--
-                  <a href="{{ route('alumno.perfil.show', $alumnos->id) }}" id="link">
-                    <span class="label label-success">ver perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
-                  </a>
-                  -->
-                </p>
+                
                 </center>
                 @endforeach
               </div>
@@ -186,40 +182,92 @@
       </div>
       <!-- fin perfil foto -->
       <!-- container inicio -->
+
       <div class="col-sm-9">  
         <div class="panel panel-default">
-          <div class="panel-heading">Panel heading without title</div>
+          <div class="panel-heading">Datos personales</div>
           <div class="panel-body">
-            <!-- inicio formulario-->
-            {{Form::open(['route'=>['alumno.esquema.update',$documento->id],'method'=>'PUT','files'=>true])}}
+            @foreach ($alumno as $alum)
+            {{Form::open(['route'=>['alumno.perfil.update',$alum->id],'method'=>'PUT','files'=>'true'])}}
               <div class="form-group">
-                {!! Form::label('nombre','nombre') !!}
-                {!! Form::text('nombre',$documento->DOC_nombre,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!}
+                {!! Form::label('nombre','Nombre') !!}
+                {!! Form::text('nombre',$alum->ALU_nombre,['class'=>'form-control','required'])!!}
               </div>
+
               <div class="form-group">
-                {!! Form::label('fecha','fecha Entrega') !!}
-                {!! Form::text('fecha',$documento->DOC_fecha,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!} 
+                {!! Form::label('apellidop','Apellido paterno') !!}
+                {!! Form::text('apellidop',$alum->ALU_apellido_p,['class'=>'form-control','required'])!!}
               </div>
+
               <div class="form-group">
-                {!! Form::label('file','Archivo') !!}
-                {!! Form::file('file',['required']) !!}
+                {!! Form::label('apellidom','Apellido materno') !!}
+                {!! Form::text('apellidom',$alum->ALU_apellido_m,['class'=>'form-control','placeholder'=>'Requiere apellido materno','required'])!!}
               </div>
+
               <div class="form-group">
-                {!! Form::label('descripcion','Descripcion') !!}
-                {!! Form::textarea('descripcion',$documento->DOC_descripcion,['class'=>'form-control','rows'=>'6','required']) !!}
+                {!! Form::label('sexo','Sexo') !!}<br>
+                {{ Form::radio('sex', 'hombre',true) }} Hombre  {{ Form::radio('sex', 'mujer') }} Mujer
               </div>
+
+              <div class="form-group">
+                {!! Form::label('telefono','Telefono') !!}
+                {!! Form::number('telefono',$alum->ALU_tel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
+              </div>
+
+              <div class="form-group">
+                {!! Form::label('celular','Celular') !!}
+                {!! Form::number('celular',$alum->ALU_cel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
+              </div>
+              
+              <div class="form-group">
+                {!! Form::label('periodo','Periodo') !!}<br>
+                {{ Form::radio('periodo', 'Agosto-Diciembre',true) }} Agosto-Diciembre  {{ Form::radio('periodo', 'Enero-Marzo') }} Enero-Marzo
+              </div>
+
+              <div class="form-group">
+                {!! Form::label('matricula','matricula') !!}
+                {!! Form::number('matricula',$alum->ALU_matricula,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!} 
+              </div>
+                <div class="form-group">
+                {!! Form::label('semestre','semestre') !!}
+                {!! Form::select('semestre',['7'=>'7','8'=>'8'],null,['class'=>'form-control']) !!}
+              </div>
+            </div>  
+            <div class="panel-footer foo">
+              <div class="form-group">
+                {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
+              </div><br>
+            </div>
+
+            {!! Form::close() !!}
+            @endforeach
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-            {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}     
-          </div>
-          {!! Form::close() !!}
-          <!-- final Formulario -->
+          <div class="col-sm-3"></div>
+          <div class="col-sm-9">
+            <div class="panel panel-default">
+          <div class="panel-heading">Datos personales</div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <table border="1">
+                  <tr>
+                    <td>assas</td>
+                    <td>asas</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div> 
+          </div>
     </div><!-- fin row -->
   </div>
+
+
+
+
 <script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
 <script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
 

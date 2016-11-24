@@ -8,6 +8,11 @@
 	.panell { padding:0px; }
 	.panell table tr td { padding-left: 15px }
 	.panell .table {margin-bottom: 0px; }
+    #imglist{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%
+    }
 </style>
  
             <div class="panel-group" id="accordion">
@@ -78,7 +83,7 @@
 </tr>
     @foreach($pivot as $alumno)
     <tr>
-        <td> <img src="{!! $alumno->foto !!}"></td>
+        <td><img id="imglist" src="/files/documentos/{{ $alumno->foto }} " alt="..."></td>
         <td> {!! $alumno->ALU_nombre !!}</td>
         <td> {!! $alumno->ALU_apellido_p !!}</td>
         <td> {!! $alumno->ALU_matricula !!}</td>

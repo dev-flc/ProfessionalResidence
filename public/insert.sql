@@ -60,6 +60,7 @@ VALUES
 INSERT INTO `residence`.`esquemas` (`id`, `ESQ_nombre`, `ESQ_descripcion`, `EST_id`) 
 VALUES 
 ('1', 'esquema 1', 'este es mi esquema', '1'),
+('2', 'esquema 2', 'este es mi esquema', '2'),
 ('3', 'esquema 3', 'este es mi esquema', '3'),
 ('4', 'esquema 4', 'este es mi esquema', '4'),
 ('5', 'esquema 5', 'este es mi esquema', '5');
@@ -78,9 +79,11 @@ INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DO
 INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_fecha_entrega`, `SEG_hora_entrega`, `SEG_archivo`, `ESQ_id`,`EST_id`) 
 VALUES 
 
-('3', 'seguimiento 3', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '3','9'),
-('4', 'seguimiento 4', 'descripcion del seguimiento', '2016-03-19','2016-03-19 ','08:00:00', 'no hay archovo', '4','9'),
-('5', 'seguimiento 5', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '5','9');
+('1', 'seguimiento', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '1','9'),
+('2', 'seguimiento', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '2','9'),
+('3', 'seguimiento', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '3','9'),
+('4', 'seguimiento', 'descripcion del seguimiento', '2016-03-19','2016-03-19 ','08:00:00', 'no hay archovo', '4','9'),
+('5', 'seguimiento', 'descripcion del seguimiento', '2016-03-19','2016-03-19',' 08:00:00', 'no hay archovo', '5','9');
 
 #comentariodocumentos
 INSERT INTO `residence`.`comentarios_documentos` (`id`, `CODO_usuario`, `CODO_fecha`, `CODO_comentario`, `DOC_id`)
@@ -94,6 +97,8 @@ INSERT INTO `residence`.`comentarios_documentos` (`id`, `CODO_usuario`, `CODO_fe
 #comentarioseguimientos
 INSERT INTO `residence`.`comentarios_seguimientos` (`id`, `COSE_usuario`, `COSE_fecha`, `COSE_comentario`, `SEG_id`)
  VALUES 
+ ('1', '1', '2014-01-19 18:00:00', 'comentario', '1'),
+ ('2', '2', '2014-02-19 18:00:00', 'comentario', '2'),
  ('3', '3', '2014-03-19 18:00:00', 'comentario', '3'),
  ('4', '4', '2014-03-19 18:00:00', 'comentario', '4'),
  ('5', '5', '2014-03-19 18:00:00', 'comentario', '5');
@@ -193,3 +198,50 @@ INSERT INTO `residence`.`alumnos_asesores` (`id`, `ALU_id`, `ASE_id`,`ALAS_tipo`
  ('5', '5', '2','asesor'),
  ('6', '1', '2','revisor'),
  ('7', '1', '4','revisor');
+
+ UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 1', `DOC_archivo`='archivo.pdf', `ANT_id`='1' WHERE `id`='2';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 2', `DOC_archivo`='archivo.pdf', `ANT_id`='2' WHERE `id`='3';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 2', `DOC_archivo`='archivo.pdf', `ANT_id`='2' WHERE `id`='4';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 3', `DOC_archivo`='archivo.pdf', `ANT_id`='3' WHERE `id`='5';
+INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DOC_fecha`, `DOC_fecha_entrega`, `DOC_hora_entrega`, `DOC_archivo`, `ANT_id`, `EST_id`) VALUES ('6', 'anteproyecto 3', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '3', '9');
+INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DOC_fecha`, `DOC_fecha_entrega`, `DOC_hora_entrega`, `DOC_archivo`, `ANT_id`, `EST_id`) VALUES ('7', 'anteproyecto 4', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '4', '9');
+INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DOC_fecha`, `DOC_fecha_entrega`, `DOC_hora_entrega`, `DOC_archivo`, `ANT_id`, `EST_id`) VALUES ('8', 'anteproyecto 4', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '4', '9');
+INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DOC_fecha`, `DOC_fecha_entrega`, `DOC_hora_entrega`, `DOC_archivo`, `ANT_id`, `EST_id`) VALUES ('9', 'anteproyecto 5', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '5', '9');
+INSERT INTO `residence`.`documentos` (`id`, `DOC_nombre`, `DOC_descripcion`, `DOC_fecha`, `DOC_fecha_entrega`, `DOC_hora_entrega`, `DOC_archivo`, `ANT_id`, `EST_id`) VALUES ('10', 'anteproyecto 5', 'descripcion del anteproyecto', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '5', '9');
+UPDATE `residence`.`documentos` SET `DOC_archivo`='archivo.pdf' WHERE `id`='1';
+
+
+UPDATE `residence`.`seguimientos` SET `SEG_archivo`='archivo.pdf', `ESQ_id`='1' WHERE `id`='2';
+UPDATE `residence`.`seguimientos` SET `SEG_archivo`='archivo.pdf', `ESQ_id`='2' WHERE `id`='3';
+UPDATE `residence`.`seguimientos` SET `SEG_archivo`='archivo.pdf', `ESQ_id`='2' WHERE `id`='4';
+UPDATE `residence`.`seguimientos` SET `SEG_archivo`='archivo.pdf', `ESQ_id`='3' WHERE `id`='5';
+INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_fecha_entrega`, `SEG_hora_entrega`, `SEG_archivo`, `ESQ_id`, `EST_id`) VALUES ('6', 'seguimiento', 'descripcion del seguimiento', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '3', '9');
+INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_fecha_entrega`, `SEG_hora_entrega`, `SEG_archivo`, `ESQ_id`, `EST_id`) VALUES ('7', 'seguimiento', 'descripcion del seguimiento', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '4', '9');
+INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_fecha_entrega`, `SEG_hora_entrega`, `SEG_archivo`, `ESQ_id`, `EST_id`) VALUES ('8', 'seguimiento', 'descripcion del seguimiento', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '4', '9');
+INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_fecha_entrega`, `SEG_hora_entrega`, `SEG_archivo`, `ESQ_id`, `EST_id`) VALUES ('9', 'seguimiento', 'descripcion del seguimiento', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '5', '9');
+INSERT INTO `residence`.`seguimientos` (`id`, `SEG_nombre`, `SEG_descripcion`, `SEG_fecha`, `SEG_fecha_entrega`, `SEG_hora_entrega`, `SEG_archivo`, `ESQ_id`, `EST_id`) VALUES ('10', 'seguimiento', 'descripcion del seguimiento', '2016-03-19', '2016-03-19', '08:00:00', 'archivo.pdf', '5', '9');
+UPDATE `residence`.`seguimientos` SET `SEG_archivo`='archivo.pdf' WHERE `id`='1';
+
+
+UPDATE `residence`.`seguimientos` SET `SEG_nombre`='seguimiento dos' WHERE `id`='2';
+UPDATE `residence`.`seguimientos` SET `SEG_nombre`='seguimiento dos' WHERE `id`='4';
+UPDATE `residence`.`seguimientos` SET `SEG_nombre`='seguimiento dos' WHERE `id`='6';
+UPDATE `residence`.`seguimientos` SET `SEG_nombre`='seguimiento dos' WHERE `id`='8';
+UPDATE `residence`.`seguimientos` SET `SEG_nombre`='seguimiento dos' WHERE `id`='10';
+
+INSERT INTO `residence`.`seguitosasignacion` (`id`, `SEGS_nombre`, `SEGS_fecha`) VALUES ('1', 'seguimiento', '2016-03-19');
+INSERT INTO `residence`.`seguitosasignacion` (`id`, `SEGS_nombre`, `SEGS_fecha`) VALUES ('2', 'seguimiento dos', '2016-03-19');
+
+
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 2' WHERE `id`='2';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 2' WHERE `id`='6';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 2' WHERE `id`='8';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 2' WHERE `id`='10';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 1' WHERE `id`='3';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 1' WHERE `id`='5';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 1' WHERE `id`='7';
+UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 1' WHERE `id`='9';
+
+
+INSERT INTO `residence`.`documentosasignacion` (`id`, `DOCS_nombre`, `DOCS_fecha`) VALUES ('1', 'anteproyecto 1', '2016-03-19');
+INSERT INTO `residence`.`documentosasignacion` (`id`, `DOCS_nombre`, `DOCS_fecha`) VALUES ('2', 'anteproyecto 2', '2016-03-19');

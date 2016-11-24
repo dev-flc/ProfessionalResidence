@@ -8,6 +8,7 @@ use Residence\Http\Requests;
 use Residence\Models\Alumno;
 use Residence\Models\Esquema;
 use Residence\Models\Seguimiento;
+use Residence\User;
 use Residence\Http\Controllers\Response;
 use Auth;
 use Laracasts\Flash\Flash;
@@ -21,10 +22,11 @@ class AlumnoEnsayoController extends Controller
     public function index()
     {
         $totaldocumentos=0;
-        $user = Auth::user()->id;
-        $foto = Auth::user()->foto;
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
 
-        $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
         foreach ($alumno as $alu)
         {
             $idesquema=$alu->ESQ_id;
@@ -41,6 +43,7 @@ class AlumnoEnsayoController extends Controller
         
         return view('alumnos.ensayo.index')
         ->with('alumno',$alumno)
+        ->with('user',$user)
         ->with('esquema',$esquema)
         ->with('totaldocumentos',$totaldocumentos)
         ->with('seguimiento',$seguimiento);
@@ -87,7 +90,18 @@ class AlumnoEnsayoController extends Controller
      */
     public function edit($id)
     {
+        $foto = Auth::user()->foto;
+         $iduser = Auth::user()->id;
         
+        $user= User::select('*')->where('id','=',$iduser)->get();
+
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
+
+        $seguimiento =Seguimiento::all()->find($id);
+        return view('alumnos.ensayo.edit')
+        ->with('alumno',$alumno)
+        ->with('user',$user)
+        ->with('seguimiento',$seguimiento);
     }
 
     /**

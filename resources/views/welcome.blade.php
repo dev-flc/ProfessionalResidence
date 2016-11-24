@@ -79,62 +79,16 @@
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
+      @foreach ($asesor as $ase)
         <div class="col-lg-3">
           <center>
           <img class="img-circle" src="../../img/estudiantes7.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
+          <h2>{{ $ase->ASE_nombre }}</h2>
+          <h4>{{ $ase->ASE_apellido_p }} {{ $ase->ASE_apellido_m }}</h4>
           </center>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <center>
-          <img class="img-circle" src="../../img/mision.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
-          </center>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <center>
-          <img class="img-circle" src="../../img/mision.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
-          </center>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <center>
-          <img class="img-circle" src="../../img/mision.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
-          </center>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <center>
-          <img class="img-circle" src="../../img/mision.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
-          </center>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <center>
-          <img class="img-circle" src="../../img/mision.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
-          </center>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <center>
-          <img class="img-circle" src="../../img/mision.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
-          </center>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-3">
-          <center>
-          <img class="img-circle" src="../../img/mision.jpg" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
-          <h4>Apellidos</h4>
-          </center>
-        </div><!-- /.col-lg-4 -->
+        </div><!-- /.col-lg-3 -->
+        @endforeach
+        
         
       </div><!-- /.row -->
 <br />

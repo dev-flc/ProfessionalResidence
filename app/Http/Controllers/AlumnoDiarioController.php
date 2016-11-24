@@ -8,7 +8,9 @@ use Residence\Http\Requests;
 use Residence\Models\Alumno;
 use Residence\Models\Diario;
 use Residence\Models\Nota;
+use Residence\User;
 use Auth;
+use Laracasts\Flash\Flash;
 class AlumnoDiarioController extends Controller
 {
     /**
@@ -18,11 +20,15 @@ class AlumnoDiarioController extends Controller
      */
     public function index()
     {
-        $totaldocumentos=0;
-        $user = Auth::user()->id;
-        $foto = Auth::user()->foto;
 
-        $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
+        
+      
+        $foto = Auth::user()->foto;
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
+
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
         foreach ($alumno as $alu)
         {
             $idalum=$alu->id;
@@ -32,10 +38,12 @@ class AlumnoDiarioController extends Controller
         $diario=Diario::select('*')->where('ALU_id','=',$idalum)
         ->join('notas','notas.id','=','diarios.NOT_id')
         ->get();
-        
 
+        
+        # dd($diario);
         return view('alumnos.diario.index')
         ->with('diario',$diario)
+        ->with('user',$user)
         ->with('alumno',$alumno);
     }
 
@@ -46,11 +54,12 @@ class AlumnoDiarioController extends Controller
      */
     public function create()
     {
-        $totaldocumentos=0;
-        $user = Auth::user()->id;
-        $foto = Auth::user()->foto;
+       
+         $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
 
-        $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
         foreach ($alumno as $alu)
         {
             $idalum=$alu->id;
@@ -60,9 +69,10 @@ class AlumnoDiarioController extends Controller
         $diario=Diario::select('*')->where('ALU_id','=',$idalum)
         ->join('notas','notas.id','=','diarios.NOT_id')
         ->get();
-        
+       
 
         return view('alumnos.diario.create')
+        ->with('user',$user)
         ->with('diario',$diario)
         ->with('alumno',$alumno);
         
@@ -80,8 +90,8 @@ class AlumnoDiarioController extends Controller
         { 
             $file=$request->file('file');
             $nombre = 'diario_'.time().'.'.$file->getClientOriginalExtension();   
-            #$path=public_path().'/files/documentos/';
-            #$file->move($path, $nombre);
+            $path=public_path().'/files/documentos/';
+            $file->move($path, $nombre);
             #dd($file);
         }
         else
@@ -118,7 +128,8 @@ class AlumnoDiarioController extends Controller
         $diario->NOT_id=$idnotaa;
         $diario->ALU_id=$idalum;
         $diario->save();
-        dd("yes");
+        flash('La nota fue agregada correctamente', 'info')->important();
+        return redirect()->route('alumno.diario.index');
     }
 
     /**
@@ -129,7 +140,27 @@ class AlumnoDiarioController extends Controller
      */
     public function show($id)
     {
-        //
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
+
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
+        foreach ($alumno as $alu)
+        {
+            $idalum=$alu->id;
+        }
+
+
+        $diario=Diario::select('*')->where('NOT_id','=',$id)->get();
+        $nota=Nota::select('*')->where('id','=',$id)->get();
+        
+        $archivo="archivo.pdf";
+        return view('alumnos.diario.show')
+        ->with('nota',$nota)
+        ->with('user',$user)
+        ->with('archivo',$archivo)
+        ->with('diario',$diario)
+        ->with('alumno',$alumno);
     }
 
     /**
@@ -140,21 +171,20 @@ class AlumnoDiarioController extends Controller
      */
     public function edit($id)
     {
-        $user = Auth::user()->id;
-        $foto = Auth::user()->foto;
+       $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
 
-        $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
 
         $diario = Diario::select('*')->where('NOT_id','=',$id)->get();
         $nota = Nota::select('*')->where('id','=',$id)->get();
         
         return view('alumnos.diario.edit')
+        ->with('user',$user)
         ->with('diario',$diario)
         ->with('nota',$nota)
         ->with('alumno',$alumno);
-       
-
-
        
     }
 
@@ -174,6 +204,10 @@ class AlumnoDiarioController extends Controller
             $nombre = 'documento_'.time().'.'.$file->getClientOriginalExtension();   
             $path=public_path().'/files/documentos/';
             $file->move($path, $nombre);
+        }
+        else
+        {
+            $nombre="archivo.pdf";
         }
         
         $diario = Diario::select('*')->where('id','=',$id)->get();
@@ -197,7 +231,8 @@ class AlumnoDiarioController extends Controller
         $diario->DIA_fecha=$fecha;
         $diario->save();
 
-        dd("si jalo");
+        flash('Los datos fueron modificados correctamente', 'info')->important();
+        return redirect()->route('alumno.diario.index');
         
     }
 
@@ -214,18 +249,17 @@ class AlumnoDiarioController extends Controller
 
     public function descargadiario($id)
     {
+      
+
         $nota = Nota::select('*')->where('id','=',$id)->get();
         foreach ($nota as $docs)
         {
             $nombre=$docs->NOT_archivo;
         }
-
-        $headers = array(
-              'Content-Type: application/pdf',
-            );
+       # dd($nombre);
         $path=public_path().'/files/documentos/'.$nombre;
         
-        return response()->file($path,$headers);
+        return response()->download($path);
 
     }
     

@@ -73,9 +73,23 @@
     margin: 10px;
     border-radius: 5px;
   }
-  #link
+   #link
   {
     text-decoration: none;
+  }
+  #shower{
+    position: relative;
+    left: 60%;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .7s;
+  }
+  #shower:hover{
+    background: #5cb85c;
+  }
+  .bb{
+    height: 40px;
+    border-radius: 50%;
   }
   table{
     width: 100%;
@@ -106,8 +120,27 @@
           <div class="panel-heading">Datos personales</div>
           <div class="panel-body">
             <div class="thumbnail">
-              <br />
-              <img id="imgperfil" src="http://www.gamesforchange.org/g4cwp/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="...">
+               <br />
+               @foreach ($user as $use)
+              <img id="imgperfil" src="/files/documentos/{{ $use->foto }} " alt="...">
+              
+              <span id="shower" class="label label-default">editar foto <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
+              <br>
+
+            <!-- Formulario de imagen -->
+              <div class="cla" style="display:none;">
+                 {{Form::open(['route'=>['alumno.update.updatefoto',$use->id],'method'=>'PUT','files'=>'true'])}}
+                <div class="form-group">
+                  {!! Form::file('file',['class'=>'form-control','onchange'=>'previewFile()','required']) !!}
+                </div> 
+                <center>
+                  <button  id="hider" class="btn btn-danger bb" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <button class="btn btn-success bb" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                </center>
+                {!! Form::close() !!}
+              @endforeach
+              </div>
+              <!-- Fin formulario de imagen -->
               <div class="caption">
                 @foreach ($alumno as $alumnos)
                 <center>
@@ -152,18 +185,18 @@
                     <td>{{ $alumnos->ALU_semestre }}</td>
                   </tr>
                 </table>
-                <p>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                 <p>
+                  <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
+                    <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-default">Default <span class="glyphicon glyphicon-star" aria-hidden="true"></span></span>
+                 <!--
+                  <a href="{{ route('alumno.perfil.show', $alumnos->id) }}" id="link">
+                    <span class="label label-success">ver perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                  <a href="#" id="link">
-                    <span class="label label-primary">editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
-                  </a>
+                  -->
                 </p>
                 </center>
+
                 @endforeach
               </div>
             </div>
@@ -178,12 +211,15 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-12">
+              
                 <table>
                   <tr>
                     <td><label>Diario</label></td>
                     <td></td>
                     <td><label>Bitacora</label></td>
                   </tr>
+
+                  
                   @foreach($diario as $dia)
                   <tr>
                     <td>
@@ -198,17 +234,24 @@
                     <td class="pandig">
                       <span class="list-group-item">
                         <h4 class="list-group-item-heading">{{ $dia->NOT_nombre }}</h4>
-                        <p>{{ $dia->NOT_id }}</p>
+                        
                         <p style="text-align: right;" class="list-group-item-text">
-                          <a href="{{ route('alumno.descargadiario.descarga', $dia->id) }}">| Descargar |</a>
+                          @if($dia->NOT_archivo=="archivo.pdf")
+
+                          @else
+                            <a href="{{ route('alumno.descargadiario.descarga', $dia->NOT_id) }}">| Descargar |</a>
+                          @endif
+
+                          
                           <a href="{{ route('alumno.diario.edit', $dia->id) }}">| Editar |</a>
-                          <a href="">| Ver |</a>
+                          <a href="{{ route('alumno.diario.show', $dia->id) }}">| Ver |</a>
                         </p>
                       </span>
                       </a>
                     </td>
                   </tr>
                   @endforeach
+                  
                 </table>
               </div>
             </div>
@@ -220,6 +263,30 @@
 
 <script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
 <script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript">
+  function previewFile() {
+  var preview = document.querySelector('img');
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
 
+  reader.onloadend = function () {
+    preview.src = reader.result;
+  }
+
+  if (file) {
+    reader.readAsDataURL(file);
+  } else {
+    preview.src = "";
+  }
+}
+</script>
+<script>
+$( "#hider" ).click(function() {
+  $( ".cla" ).hide("swing");
+  });
+$( "#shower" ).click(function() {
+  $( ".cla" ).show("slow");
+});
+</script>
 </body>
 </html>

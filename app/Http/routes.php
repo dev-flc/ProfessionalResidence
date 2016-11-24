@@ -11,9 +11,12 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
+Route::resource('/','InicioController');
 
 
 
@@ -21,6 +24,7 @@ Route::group(['middleware'=>['web']], function (){
 	
 	Route::resource('quienessomos','QuienessomosController');
 	Route::resource('contactanos','ContactanosController');
+	Route::resource('registro','RegistroController');
 	
 });
 
@@ -80,14 +84,35 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
 		]);
 });
 
+#inicio asesores
 Route::group(['prefix'=>'asesor','middleware'=>['asesor','auth']], function(){
-#Route::group(['prefix'=>'asesor'], function(){
 
 Route::resource('alumnos','AsesorAlumnosController');
 
+Route::put('escuelaa/{id}',[
+		'uses' => 'AsesorAlumnosController@escuelaa',
+		'as' => 'asesor.alumno.escuelaa'
+		]);
+
+Route::get('descargaanteproyecto/{id}',[
+	'uses' => 'AsesorAlumnosController@descargaanteproyecto',
+	'as' => 'asesor.alumno.descargaanteproyecto'
+	]);
+
+Route::put('comentariodocumento/{id}',[
+		'uses' => 'AsesorAlumnosController@comentariodocumento',
+		'as' => 'asesor.alumno.comentariodocumento'
+		]);
+
+Route::get('ver/{id}',[
+	'uses' => 'AsesorAlumnosController@ver',
+	'as' => 'asesor.alumno.ver'
+	]);
 });
 
+#fin asesores
 
+#inicio alumnos
 Route::group(['prefix'=>'alumno','middleware'=>['alumno','auth']], function(){
 Route::resource('perfil','PerfilController');
 
@@ -97,6 +122,16 @@ Route::get('descarga/{id}',[
 	'uses' => 'AlumnoEsquemaController@descarga',
 	'as' => 'alumno.descarga.descarga'
 	]);
+
+Route::put('comentdocument/{id}',[
+		'uses' => 'AlumnoEsquemaController@comentdocument',
+		'as' => 'alumno.esquema.comentdocument'
+		]);
+
+Route::put('updatefoto/{id}',[
+		'uses' => 'PerfilController@updatefoto',
+		'as' => 'alumno.update.updatefoto'
+		]);
 
 Route::resource('ensayo','AlumnoEnsayoController');
 
