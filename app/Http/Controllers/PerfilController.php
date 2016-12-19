@@ -10,11 +10,11 @@ use Residence\Models\Alumno;
 use Residence\User;
 use Auth;
 use Residence\Models\Asesor;
+use Residence\Models\Tutor;
 use Residence\Models\Director;
 use Residence\Models\Estatus;
 use Residence\Models\Escuela;
 use Residence\Models\Pivot;
-use Residence\Models\Tutor;
 use Residence\Models\Direccion;
 use Laracasts\Flash\Flash;
 
@@ -112,6 +112,7 @@ class PerfilController extends Controller
      */
     public function edit($id)
     {
+
         $iduser = Auth::user()->id;
         
         $user= User::select('*')->where('id','=',$iduser)->get();
@@ -127,9 +128,12 @@ class PerfilController extends Controller
         }
 
         $direccion = Direccion::select('*')->where('id','=',$iddireccion)->get();
+       $tutor = Tutor::select('*')->where('id','=',$idtutor)->get();
+
         return view('alumnos.perfil.edit')
         ->with('user',$user)
         ->with('alumno',$alumno)
+        ->with('tutor',$tutor)
         ->with('direccion',$direccion);
 
     }
@@ -163,7 +167,7 @@ class PerfilController extends Controller
         
     }
 
-      public function updatefoto(Request $request, $id)
+    public function updatefoto(Request $request, $id)
     {
         
 
@@ -178,7 +182,8 @@ class PerfilController extends Controller
             $alumno=User::find($id);
             $alumno->foto=$nombre;
             $alumno->save();
-            dd('yes');
+            flash('Los datos fueron modificados correctamente', 'info')->important();
+        return redirect()->route('alumno.perfil.index');dd('yessdsd');
         }
         else
         {
@@ -197,4 +202,47 @@ class PerfilController extends Controller
     {
         
     }
+
+
+    
+
+    public function updatedirecc(Request $request, $id)
+    {
+        $direcciones= Direccion::find($id);
+        $direcciones->DIR_calle=$request->calle;
+        $direcciones->DIR_numero=$request->numero;
+        $direcciones->DIR_estado=$request->estado;
+        $direcciones->DIR_ciudad=$request->ciudad;
+        $direcciones->DIR_colonia=$request->colonia;
+        $direcciones->DIR_cp=$request->cp;
+        $direcciones->save();
+
+          flash('Los datos fueron modificados correctamente', 'info')->important();
+        return redirect()->route('alumno.perfil.index');
+    }
+
+    public function updatetutor(Request $request, $id)
+    {
+
+
+    $tuto= Tutor::find($id);
+    $tuto->TUT_nombre =$request->nombre;
+    $tuto->TUT_apellido_p=$request->ap;
+    $tuto->TUT_apellido_m=$request->am;
+    $tuto->TUT_correo=$request->email;
+    $tuto->TUT_tel=$request->tel;
+    $tuto->TUT_cel=$request->cel; 
+    $tuto->save();
+
+    flash('Los datos fueron modificados correctamente', 'info')->important();
+        return redirect()->route('alumno.perfil.index');
+
+
+    }
+
+
+
+
+
+
 }

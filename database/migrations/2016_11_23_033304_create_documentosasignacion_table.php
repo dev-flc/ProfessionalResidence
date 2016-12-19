@@ -14,8 +14,8 @@ class CreateDocumentosasignacionTable extends Migration
     {
         Schema::create('documentosasignacion', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('DOCS_nombre');
-            $table->date('DOCS_fecha');
+            $table->string('DOCS_nombre')->nullable();
+            $table->date('DOCS_fecha')->nullable();
         });
     }
 

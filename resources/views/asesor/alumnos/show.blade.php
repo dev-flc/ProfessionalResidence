@@ -204,7 +204,7 @@
             <div class="panel-body">
                 <div class="list-group">
                 @foreach($diario as $dia)
-                    <a href="#" class="list-group-item colordiario">
+                    <a href="{{ route('asesor.alumno.verdiairio', $dia->id) }}" class="list-group-item colordiario">
                         <h4 class="list-group-item-heading">{!! $dia->DIA_fecha !!}</h4>
                         <p class="list-group-item-text">{!! $dia->DIA_nombre !!}</p>
                     </a>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Residence\Http\Requests;
 use Residence\Models\Alumno;
+use Residence\User;
 use Residence\Models\Escuela;
 use Residence\Models\Asesor;
 use Residence\Models\Pivot;
@@ -16,6 +17,7 @@ use Residence\Models\Nota;
 use Residence\Models\Esquema;
 use Residence\Models\Comentariodocumento;
 use Residence\Models\Diario;
+use Residence\Models\Direccion;
 
 use Laracasts\Flash\Flash;
 
@@ -30,32 +32,23 @@ class AsesorAlumnosController extends Controller
     {
         
         $user = Auth::user()->id;
-        #$user=11;
         $asesor = Asesor::select('*')->where('USU_id','=',$user)->get();
         foreach ($asesor as $userr)
         {
             $idd=$userr->id;
         }
-        #dd($idd);
-
+        $userr=User::select('*')->where('id','=',$user)->get();
         $pivot=Pivot::select('*')->where('ASE_id','=',$idd)
         ->join('alumnos','alumnos.id','=','alumnos_asesores.ALU_id')
         ->join('asesores','asesores.id','=','alumnos_asesores.ASE_id')
         ->join('users','users.id','=','alumnos_asesores.ALU_id')
         ->get();
 
-       /* 
-        foreach ($pivot as $uss)
-        {
-            echo $uss->ESQ_id;
-            if($uss->ESQ_id==null){
-                echo "string";
-            }
-        }
-        */
-        #dd($pivot);
-        return View('asesor.alumnos.index')->with('pivot',$pivot)->with('asesor',$asesor);
-       # return View('asesor.alumnos.index');
+        return View('asesor.alumnos.index')
+        ->with('userr',$userr)
+        ->with('pivot',$pivot)
+        ->with('asesor',$asesor);
+
     }
 
     /**
@@ -85,6 +78,22 @@ class AsesorAlumnosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function verdiairio($id)
+    {
+
+        $diario = Diario::select('*')->where('id','=',$id)->get();
+        foreach ($diario as $di)
+        {
+            $dia=$di->NOT_id;
+        }
+        $nota = Nota::select('*')->where('id','=',$dia)->get();
+
+        return View('asesor.alumnos.verdiario')
+        ->with('nota',$nota)
+        ->with('diario',$diario);
+    }
+
 
     public function ver($id)
     {
@@ -172,7 +181,23 @@ class AsesorAlumnosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = Auth::user()->id;
+        
+        $userr = User::select('*')->where('id','=',$user)->get();
+        $asesor = Asesor::select('*')->where('USU_id','=',$user)->get();
+       foreach ($asesor as $as) {
+           $iddireccion=$as->DIR_id;
+       }
+        
+       $direccion=Direccion::select('*')->where('id','=',$iddireccion)->get();
+       $asesor=Asesor::select('*')->where('id','=',$id)->get();
+       
+
+        return View('asesor.alumnos.edit')
+        ->with('userr',$userr)   
+        ->with('asesor',$asesor)   
+        ->with('direccion',$direccion);
+
     }
 
     /**
@@ -271,4 +296,69 @@ $user = Auth::user()->id;
 
     }
 
+public function descargadiarioasesor($id)
+    {
+      
+        $nota = Nota::select('*')->where('id','=',$id)->get();
+        foreach ($nota as $docs)
+        {
+            $nombre=$docs->NOT_archivo;
+        }
+       # dd($nombre);
+        $path=public_path().'/files/documentos/'.$nombre;
+        
+        return response()->download($path);
+
+    }
+
+     public function updatefotoasesor(Request $request, $id)
+    {
+        
+         if($request->file('file'))
+        { 
+            $file=$request->file('file');
+            $nombre = 'documento_'.time().'.'.$file->getClientOriginalExtension();   
+            $path=public_path().'/files/documentos/';
+            $file->move($path, $nombre);
+
+            $alumno=User::find($id);
+            $alumno->foto=$nombre;
+            $alumno->save();
+            dd('yes');
+        }
+        else
+        {
+            $nombre="foto.png";
+        }
+        
+        
+    }
+
+    
+     public function updatedir(Request $request, $id)
+    {
+
+        $direcciones= Direccion::find($id);
+        $direcciones->DIR_calle=$request->calle;
+        $direcciones->DIR_numero=$request->numero;
+        $direcciones->DIR_estado=$request->estado;
+        $direcciones->DIR_ciudad=$request->ciudad;
+        $direcciones->DIR_colonia=$request->colonia;
+        $direcciones->DIR_cp=$request->cp;
+        $direcciones->save();
+        
+        flash('Direccion  modificada correctamente', 'success')->important();
+        return redirect()->route('asesor.alumnos.index');
+    }
+
+    
+     public function updateuserr(Request $request, $id)
+    {
+#dd('yes');
+        #$direcciones= Direccion::find($id);
+        
+        
+        flash('Direccion  modificada correctamente', 'success')->important();
+        return redirect()->route('asesor.alumnos.index');
+    }
 }

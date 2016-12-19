@@ -58,7 +58,10 @@ class User extends Authenticatable
     {
         return $this->type === 'presidente';
     }
-
+    public function subdirectorlogin()
+    {
+        return $this->type === 'subdirector';
+    }
     public function asesorlogin()
     {
         return $this->type === 'asesor';

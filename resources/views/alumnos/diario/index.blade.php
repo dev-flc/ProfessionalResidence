@@ -20,11 +20,11 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ route('alumno.perfil.index') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
+                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Anteproyecto</a>
                 </li>
                 @foreach($alumno as $al)
                 @if($al->ALU_semestre==8)
-                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Ensayo</a>
+                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
                 </li>
                 @endif
                 @endforeach
@@ -138,17 +138,34 @@
                   <button class="btn btn-success bb" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                 </center>
                 {!! Form::close() !!}
-              @endforeach
+             @endforeach
               </div>
               <!-- Fin formulario de imagen -->
+
               <div class="caption">
                 @foreach ($alumno as $alumnos)
                 <center>
                 <h3>
                   {{ $alumnos->ALU_nombre }}
                 </h3>
+
+
+
                 <p>{{ $alumnos->ALU_apellido_p }} {{ $alumnos->ALU_apellido_m }}</p>
                 <table class="table">
+                @if($alumnos->ALU_nombre=="")
+                <tr>
+                  <td>
+                    
+                    <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
+                    <button class="btn btn-danger">
+                    Completar informacion <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </button>
+                  </a>
+
+                  </td>
+                </tr>
+                @else
                   <tr>
                     <td>
                       <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> 
@@ -179,24 +196,30 @@
                   </tr>
                   <tr>
                     <td>
-                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                      <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
                       Semestre:
                     </td>
                     <td>{{ $alumnos->ALU_semestre }}</td>
                   </tr>
-                </table>
-                 <p>
+                <tr>
+                <td></td>
+                  <td>
+                    <p>
                   <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
                     <span class="label label-primary">Editar perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
                   </a>
-                 <!--
-                  <a href="{{ route('alumno.perfil.show', $alumnos->id) }}" id="link">
-                    <span class="label label-success">ver perfil <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
-                  </a>
-                  -->
+                  
                 </p>
-                </center>
+                  </td>
+                </tr>
+                @endif
+                </table>
 
+
+
+
+
+                </center>
                 @endforeach
               </div>
             </div>

@@ -57,6 +57,7 @@
 					<span id="izq"><strong>Alumno: </strong><span class="label label-primary">{{ $alu->ALU_nombre }} {{ $alu->ALU_apellido_p }}  {{ $alu->ALU_apellido_m }}</span></span>
 					@endforeach
 					</p>
+					<a id="izq" href="#" data-toggle="modal" data-target="#myModal">Cometar <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
   				@endforeach
   			</div>
   		</div>

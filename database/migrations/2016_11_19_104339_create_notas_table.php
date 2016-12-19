@@ -14,9 +14,9 @@ class CreateNotasTable extends Migration
     {
         Schema::create('notas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('NOT_nombre');
-            $table->longText('NOT_descripcion');
-            $table->string('NOT_archivo');
+            $table->string('NOT_nombre')->nullable();
+            $table->longText('NOT_descripcion')->nullable();
+            $table->string('NOT_archivo')->nullable();
             $table->timestamps();
         });
     }

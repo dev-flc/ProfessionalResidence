@@ -12,31 +12,19 @@
         <div class="item active">
           <img src="../../img/slyder/slider7.jpg" alt="...">
           <div class="container">
-            <div class="carousel-caption">
-              <h1>Registrate Ahora.</h1>
-              <p>Toda la información es estrictamente confidencial, con el davido uso exclusivo para el seguimiento de los alumnos<code>file://</code>.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Registrarme</a></p>
-            </div>
+            
           </div>
         </div>
         <div class="item">
           <img src="../../img/slyder/slider1.jpg" alt="...">
           <div class="container">
-            <div class="carousel-caption">
-              <h1>Quienes Somos..?.</h1>
-              <p>Somos una institucion .</p>
-              <p><a class="btn btn-lg btn-danger" href="#" role="button">Ver Información</a></p>
-            </div>
+            
           </div>
         </div>
         <div class="item">
           <img src="../../img/slyder/slider3.jpg" alt="...">
           <div class="container">
-            <div class="carousel-caption">
-              <h1>Contactanos.</h1>
-              <p>Nos interesa tu opinion y sugerencia estamos para atender tus dudas.</p>
-              <p><a class="btn btn-lg btn-success" href="#" role="button">Contactar</a></p>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -52,41 +40,61 @@
  <div class="container-fluid mision">
    <div class="row">
    <br>
+   <style type="text/css">
+     #mm
+     {
+      font-size: 25px;
+      text-align: justify;
+      color: rgb(144, 148, 151);
+     }
+     .asesores
+     {
+      background: rgb(52, 152, 219);
+      margin: 0px;
+      width: 100%;
+     }
+     h1{
+      color: #FFF;
+     }
+     .img-asesor
+     {
+      -webkit-box-shadow: 0px 0px 21px 0px rgba(255,255,255, 1);
+-moz-box-shadow:    0px 0px 21px 0px rgba(255,255,255, 1);
+box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
+     }
+   </style>
+
+
         <div class="col-sm-6">
-        <center><h4>Misión</h4></center>
-        <p>holaholaholaholaholaholaholaholaholaholaholaholaholahol
-        dsdsdsd
-        dsdsdsdsd
-        fffff
-        ggggg
-        ddddd
-        sssss
-        ffff</p>
+        <center><h2>Misión</h2></center>
+        <p id="mm" >La Escuela Normal Urbana Federal "Prof. Rafael Ramirez" es reconocida por la alta aceptación de sus egresados en instituciones de nivel superior y en el entorno social, derivada de la constante actualización del programa educativo, de profesores certificados en su disciplina y en docencia y de la evaluación permanente a los mismos, avalados por procesos de certificación.</p>
         </div>
         <div class="col-sm-6">
-        <center><h4>Visión</h4></center>
-        <p>hholahola
-        sdsdsd
-        sdsdsdsd
-        sd</p>
+        <center><h2>Visión</h2></center>
+        <p  id="mm">Formar una comunidad estudiantil en continuo crecimiento de libertad responsable y capacidades cognitivas, que permitan el desarrollo de sus potencialidades, valores, habilidades, aptitudes y cualidades físicas, para acceder al nivel profesional y a su entorno social.</p>
         </div>
    </div>
    <br />
    </div>
 
-   <div class="container marketing">
+   <div class="container asesores">
     <center><h1>Asesores</h1></center><br>
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
       @foreach ($asesor as $ase)
+       @if($ase->ASE_nombre=="pendiente")
+
+          @else
         <div class="col-lg-3">
+         
           <center>
-          <img class="img-circle" src="../../img/estudiantes7.jpg" alt="Generic placeholder image" width="140" height="140">
+          <img  class="img-circle img-asesor"id="imgperfil" src="/files/documentos/{{ $ase->foto }} " alt="Generic placeholder image" width="140" height="140">
           <h2>{{ $ase->ASE_nombre }}</h2>
           <h4>{{ $ase->ASE_apellido_p }} {{ $ase->ASE_apellido_m }}</h4>
           </center>
         </div><!-- /.col-lg-3 -->
+        @endif
         @endforeach
         
         
@@ -107,12 +115,14 @@
             <br />
             <br />
             <br />
-            <br />
+ 
             <center>
             <style type="text/css">
               .btn-tamano{
-                height: 80px;
+                height: 160px;
+                width: 160px;
                 margin: 5px;
+                border-radius: 50%;
               }
             </style>
             <table>
@@ -121,27 +131,27 @@
                 <button type="button" class="btn btn-tamano btn-primary">
                   <span class="fa fa-graduation-cap" aria-hidden="true">
                   Egresados
-                  <span class="badge">1042</span></span>  
+                  <span class="badge">3042</span></span>  
                 </button>
                 </td>
                  <td>
                 <button type="button" class="btn btn-tamano btn-success">
                   <span class="fa fa-book" aria-hidden="true">
-                  Ensayos
+                  Esquemas
                   <span class="badge">402</span></span>  
                 </button>
                 </td>
                  <td>
                 <button type="button" class="btn btn-tamano btn-danger">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">
-                  Primary
+                  Escuelas
                   <span class="badge">42</span></span>  
                 </button>
                 </td>
                  <td>
                 <button type="button" class="btn btn-tamano btn-info">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">
-                  Primary
+                  Asesores
                   <span class="badge">42</span></span>  
                 </button>
                 </td>

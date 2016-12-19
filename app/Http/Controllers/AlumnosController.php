@@ -9,7 +9,19 @@ use Residence\Http\Requests;
 #use Auth;
 use Residence\Models\Alumno;
 use Residence\Models\Asesor;
+use Residence\Models\Pivot;
 use Residence\User;
+use Residence\Models\Tutor;
+
+
+use Residence\Models\Esquema;
+
+use Residence\Models\Seguimiento;
+use Residence\Models\Anteproyecto;
+use Residence\Models\Documento;
+use Residence\Models\Documentoasignado;
+use Residence\Models\Seguimientoasignado;
+use Residence\Models\Seguito;
 use Residence\Models\Estatus;
 use Residence\Models\Escuela;
 use Residence\Models\Direccion;
@@ -26,14 +38,59 @@ class AlumnosController extends Controller
     public function index(Request $request)
     {  
 
-#    $user = Auth::user();
 
+/*
+     $aaa=Alumno::Buscador($request->matricula)
+     ->join('users','users.id','=','alumnos.USU_id')->paginate(8);
+     */
+#$aaa=Alumno::where( 'USU_id' , '=' ,User::get('id')) ->paginate(8);
+      $aaa=Alumno::Buscador($request->matricula)
+      ->join('users','users.id','=','alumnos.USU_id')
+    ->select(
+        'alumnos.id',
+        'alumnos.ALU_nombre',
+        'alumnos.ALU_apellido_p',
+        'alumnos.ALU_apellido_m',
+        'alumnos.ALU_sexo',
+        'alumnos.ALU_tel',
+        'alumnos.ALU_cel',
+        'alumnos.ALU_matricula',
+        'alumnos.ALU_semestre',
+        'alumnos.ALU_periodo',
+        'users.foto'
+        )
+    
+    ->orderBy('id', 'desc')
+    ->paginate(8);
+    $i=1;
+
+     return View('admin.alumnos.index')
+     ->with('aaa',$aaa)
+     ->with('i',$i);
    
-    #$aaa =Alumno::Buscador($request->matricula)->select('*')->join('users','users.id','=','alumnos.USU_id')->paginate(5);
-     $aaa=Alumno::Buscador($request->matricula)->paginate(5);
-     return View('admin.alumnos.index')->with('aaa',$aaa);
+
     }
 
+     public function list(Request $request)
+    {  
+
+
+        $aaa=Pivot::Buscador($request->matricula)
+        
+        ->join('alumnos','alumnos.id','=','alumnos_asesores.ALU_id')
+        ->join('asesores','asesores.id','=','alumnos_asesores.ASE_id')
+        ->join('users','users.id','=','alumnos_asesores.ALU_id')
+        ->paginate(9);
+        
+        $asesores=Asesor::all();
+
+
+     return View('admin.alumnos.list')
+     ->with('asesores',$asesores)
+     ->with('aaa',$aaa);
+    }
+
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -53,42 +110,120 @@ class AlumnosController extends Controller
      */
     public function store(Request $request)
     {    
-        $direcciones=new Direccion;
-        $direcciones->DIR_calle=($request->calle);
-        $direcciones->DIR_numero=($request->numero);
-        $direcciones->DIR_estado=($request->estado);
-        $direcciones->DIR_ciudad=($request->ciudad);
-        $direcciones->DIR_colonia=($request->colonia);
-        $direcciones->DIR_cp=($request->cp);
-        $direcciones->save();
-        $iddireccion = Direccion::find($direcciones->id);
+       $ant=new Anteproyecto;
+        $ant->ANT_nombre="";
+        $ant->ANT_descripcion="";
+        $ant->EST_id=1;
+        $ant->save();
+        $idnota= Anteproyecto::find($ant->id);
+        $idante=$idnota->id;  #id anteproyecto nuevo
 
-        $user=new User;
-        $user->name=($request->nombreuser);
-        $user->email=($request->correo);
-        $user->password=bcrypt($request->pass);
-        $user->foto="user.png";
-        $user->type="alumno";
-        $user->save();
-        $iduser= User::find($user->id);
+        
+        $docs=Documentoasignado::all();
+        foreach ($docs as $dos)
+        {
+            $name=$dos->DOCS_nombre;
+            $date=$dos->DOCS_fecha;
+            $documentos=new Documento;
+            $documentos->DOC_nombre=$name;
+            $documentos->DOC_descripcion="";
+            $documentos->DOC_fecha=$date; 
+            $documentos->DOC_archivo="archivo.pdf"; 
+            $documentos->ANT_id=$idante;
+            $documentos->EST_id=9;
+            $documentos->save();
+
+        }
+       
+       $esquema=new Esquema;
+       $esquema->ESQ_nombre="";
+       $esquema->ESQ_descripcion="";
+       $esquema->EST_id=1;
+       $esquema->save();
+       $idesquema=Esquema::find($esquema->id);
+       $ides=$idesquema->id;# id del esquema registrado
+
+       $segs= Seguimientoasignado::all();
+       foreach ($segs as $se)
+       {
+        $nom=$se->SEGS_nombre;
+        $fec=$se->SEGS_fecha;
+        $seguimiento=new Seguimiento;
+        $seguimiento->SEG_nombre=$nom;
+        $seguimiento->SEG_descripcion="";
+        $seguimiento->SEG_fecha=$fec;
+        $seguimiento->SEG_archivo="archivo.pdf";
+        $seguimiento->ESQ_id=$ides;
+        $seguimiento->EST_id=9;
+        $seguimiento->save();
+
+       
+       }
+       
+            #nuevo tutor
+            $tutor=new Tutor;
+            $tutor->TUT_nombre="";
+            $tutor->TUT_apellido_p="";
+            $tutor->TUT_apellido_m="";
+            $tutor->TUT_correo="";
+            $tutor->TUT_tel="";
+            $tutor->TUT_cel="";
+            $tutor->save();
+            $idtutor=Tutor::find($tutor->id);
+            $tutorid=$idtutor->id;
+       
+
+            #nueva direccion
+            $direcciones=new Direccion;
+            $direcciones->DIR_calle=($request->calle);
+            $direcciones->DIR_numero=($request->numero);
+            $direcciones->DIR_estado=($request->estado);
+            $direcciones->DIR_ciudad=($request->ciudad);
+            $direcciones->DIR_colonia=($request->colonia);
+            $direcciones->DIR_cp=($request->cp);
+            $direcciones->save();
+            $iddireccion = Direccion::find($direcciones->id);
 
 
+            #nuevo usuario
+            $user=new User;
+            $user->name=($request->nombreuser);
+            $user->email=($request->correo);
+            $user->password=bcrypt($request->pass);
+            $user->foto="foto.png";
+            $user->type="alumno";
+            $user->save();
+            $iduser= User::find($user->id);
+            
 
-        $escuela= new Alumno;
-        $escuela->ALU_nombre=($request->nombre);     
-        $escuela->ALU_apellido_p=($request->apellidop);
-        $escuela->ALU_apellido_m=($request->apellidom);
-        $escuela->ALU_sexo=($request->sex);
-        $escuela->ALU_tel=($request->telefono);
-        $escuela->ALU_cel=($request->celular);
-        $escuela->ALU_matricula=($request->matricula);
-        $escuela->ALU_semestre=($request->semestre); 
+            $alumno=new Alumno;
+            $alumno->ALU_nombre=($request->nombre);   
+            $alumno->ALU_apellido_p=($request->apellidop);
+            $alumno->ALU_apellido_m=($request->apellidom);
+            $alumno->ALU_sexo=($request->sex);
+            $alumno->ALU_tel=($request->telefono);
+            $alumno->ALU_cel=($request->celular);
+            $alumno->ALU_matricula=($request->matricula);
+            $alumno->ALU_semestre=($request->semestre); 
+            $alumno->ALU_periodo=($request->periodo); 
+            $alumno->EST_id=1;
+            $alumno->USU_id=($iduser->id);
+            $alumno->TUT_id=$tutorid;
+            $alumno->DIR_id=($iddireccion->id); 
+            $alumno->ESC_id=($request->escuelaid);
+            $alumno->ANT_id=$idante;
+            $alumno->ESQ_id=$ides;
+            $alumno->save();
 
-        $escuela->EST_id=1;
-        $escuela->USU_id=($iduser->id);
-        $escuela->DIR_id=($iddireccion->id);  
-        $escuela->ESC_id=($request->escuelaid);
-        $escuela->save();           
+            $idalu= Alumno::find($alumno->id);
+            $alumid=$idalu->id;
+
+            $pivot=new Pivot;
+            $pivot->ALU_id=$alumid;
+            $pivot->ASE_id=1;
+            $pivot->ALAS_tipo="asesor";
+            $pivot->save();
+        
         
         flash('Alumno Registrado correctamente', 'info')->important();
         return redirect()->route('admin.alumnos.index');
@@ -102,17 +237,54 @@ class AlumnosController extends Controller
      */
     public function show($id)
     {
-        $alum = Alumno::select('*')
-       ->join('estatus','estatus.id','=','alumnos.EST_id')
-       ->join('users','users.id','=','alumnos.USU_id')
-       ->join('tutores','tutores.id','=','alumnos.Tid')
-       ->join('direcciones','direcciones.id','=','alumnos.id')
-       ->join('escuelas','escuelas.id','=','alumnos.id')
-       ->join('anteproyectos','anteproyectos.id','=','alumnos.id')
-       ->join('esquemas','esquemas.id','=','alumnos.id')
-       ->join('alumnos_asesores','esquemas.ALU_id','=','alumnos.id')
-       ->findOrFail($id);
+    
+       
+       $alumno = Alumno::select('*')->where('id','=',$id)->get();
+
+        foreach ($alumno as $usuu)
+        {
+            $idalum=$usuu->USU_id;
+        }
+
+        $usuario=User::select('*')->where('id','=',$idalum)->get();
+        
+       
+        
+        
+
+
+        return view('admin.alumnos.show')
+        ->with('usuario',$usuario)
+        ->with('alumno',$alumno);
     }
+
+    public function asignar($id)
+    {
+        #dd($id);
+
+        $alumno = Alumno::select('*')->where('id','=',$id)->get();
+      
+      foreach ($alumno as $usuu)
+        {
+            $iduser=$usuu->USU_id;
+        }   
+       $usuario=User::select('*')->where('id','=',$iduser)->get();
+        
+        
+
+       
+        #$asesores=Asesor::all();
+       $asesores=Asesor::all();
+        #$asesores=Pivot::all();
+
+
+
+        return view('admin.alumnos.listasesor')
+        ->with('asesores',$asesores)
+        ->with('usuario',$usuario)
+        ->with('alumno',$alumno); 
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -216,4 +388,24 @@ class AlumnosController extends Controller
         $userr->delete();
         return redirect()->route('admin.alumnos.index');
     }
+
+
+public function updateasesorr(Request $request, $id)
+    {
+        
+        $alumno = Pivot::select('*')->where('ALU_id','=',$id)->where('ALAS_tipo','=','asesor')->get();
+         foreach ($alumno as $alu)
+        {
+            $iduser=$alu->id;
+        }
+        
+        $userr = Pivot::find($iduser);
+        $userr->ASE_id=$request->asesor;
+        $userr->save();
+        
+        flash('asesor asignado correctamente', 'info')->important();
+        return redirect()->route('admin.alumnos.list');
+    }
+   
+
 }

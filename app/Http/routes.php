@@ -33,6 +33,21 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
 
 /*alumnos  */
 	Route::resource('alumnos','AlumnosController');
+	
+	Route::resource('presidente','AdminPresidenteController');
+	Route::resource('secretario','AdminSecretarioController');
+	Route::resource('esquema','EsquemasController');
+
+	Route::get('verdiairio/{id}',[
+	'uses' => 'EsquemasController@veresquema',
+	'as' => 'admin.esquema.veresquema'
+	]);
+	
+
+	Route::get('list',[
+	'uses' => 'AlumnosController@list',
+	'as' => 'admin.alumnos.list'
+	]);
 
 	Route::get('alumnos/{id}/destroy',[
 		'uses' => 'AlumnosController@destroy',
@@ -43,10 +58,17 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
 		'uses' => 'AlumnosController@updateestatus',
 		'as' => 'admin.alumnos.updateestatus'
 		]);
-
+Route::get('asignar/{id}',[
+		'uses' => 'AlumnosController@asignar',
+		'as' => 'admin.alumnos.asignar'
+		]);
 	Route::put('escuelas/{id}',[
 		'uses' => 'AlumnosController@updateescuelas',
 		'as' => 'admin.alumnos.updateescuelas'
+		]);
+	Route::put('updateasesorr/{id}',[
+		'uses' => 'AlumnosController@updateasesorr',
+		'as' => 'admin.alumnos.updateasesorr'
 		]);
 
 	Route::put('direction/{id}',[
@@ -72,6 +94,7 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
 		]);
 	/* Asesores */
 	Route::resource('asesores','AsesoresController');
+	
 
 	Route::put('users/{id}',[
 		'uses' => 'AsesoresController@updateuser',
@@ -82,6 +105,54 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
 		'uses' => 'AsesoresController@updatedirecciones',
 		'as' => 'admin.asesores.updatedirecciones'
 		]);
+
+	#perfil
+	Route::resource('perfil','AdminperfilController');
+	Route::resource('perfilsub','AdminsubperfilController');
+	
+	Route::put('direccion/{id}',[
+		'uses' => 'AdminPresidenteController@updatedireccion',
+		'as' => 'admin.presidente.updatedireccion'
+		]);
+
+	Route::put('updateuserpresidente/{id}',[
+		'uses' => 'AdminPresidenteController@updateuserpresidente',
+		'as' => 'admin.presidente.updateuserpresidente'
+		]);
+
+	Route::get('presidente/{id}/destroy',[
+		'uses' => 'AdminPresidenteController@destroy',
+		'as' => 'admin.presidente.destroy'
+		]);
+
+	Route::put('updateusersecretario/{id}',[
+		'uses' => 'AdminSecretarioController@updateusersecretario',
+		'as' => 'admin.secretario.updateusersecretario'
+		]);
+
+	Route::get('secretario/{id}/destroy',[
+		'uses' => 'AdminSecretarioController@destroy',
+		'as' => 'admin.secretario.destroy'
+		]);
+	
+	Route::put('direccionn/{id}',[
+		'uses' => 'AdminSecretarioController@updatedireccion',
+		'as' => 'admin.secretario.updatedireccion'
+		]);
+
+
+
+	Route::put('updateuserperfil/{id}',[
+		'uses' => 'AdminperfilController@updateuserperfil',
+		'as' => 'admin.perfil.updateuserperfil'
+		]);
+
+	Route::put('direccion/{id}',[
+		'uses' => 'AdminperfilController@updatedireccion',
+		'as' => 'admin.perfil.updatedireccion'
+		]);
+
+
 });
 
 #inicio asesores
@@ -92,6 +163,16 @@ Route::resource('alumnos','AsesorAlumnosController');
 Route::put('escuelaa/{id}',[
 		'uses' => 'AsesorAlumnosController@escuelaa',
 		'as' => 'asesor.alumno.escuelaa'
+		]);
+
+Route::put('updateuserr/{id}',[
+		'uses' => 'AsesorAlumnosController@updateuserr',
+		'as' => 'asesor.user.updateuserr'
+		]);
+
+Route::put('updatedir/{id}',[
+		'uses' => 'AsesorAlumnosController@updatedir',
+		'as' => 'asesor.escuelas.updatedir'
 		]);
 
 Route::get('descargaanteproyecto/{id}',[
@@ -108,8 +189,23 @@ Route::get('ver/{id}',[
 	'uses' => 'AsesorAlumnosController@ver',
 	'as' => 'asesor.alumno.ver'
 	]);
+
+Route::get('verdiairio/{id}',[
+	'uses' => 'AsesorAlumnosController@verdiairio',
+	'as' => 'asesor.alumno.verdiairio'
+	]);
 });
 
+Route::get('descargadiarioasesor/{id}',[
+	'uses' => 'AsesorAlumnosController@descargadiarioasesor',
+	'as' => 'asesor.alumno.descargadiarioasesor'
+	]);
+
+
+Route::put('updatefotoasesor/{id}',[
+		'uses' => 'AsesorAlumnosController@updatefotoasesor',
+		'as' => 'alumno.update.updatefotoasesor'
+		]);
 #fin asesores
 
 #inicio alumnos
@@ -133,6 +229,19 @@ Route::put('updatefoto/{id}',[
 		'as' => 'alumno.update.updatefoto'
 		]);
 
+Route::put('updatedirecc/{id}',[
+		'uses' => 'PerfilController@updatedirecc',
+		'as' => 'alumno.update.updatedirecc'
+		]);
+
+
+Route::put('updatetutor/{id}',[
+		'uses' => 'PerfilController@updatetutor',
+		'as' => 'alumno.update.updatetutor'
+		]);
+
+
+
 Route::resource('ensayo','AlumnoEnsayoController');
 
 Route::get('descargaensayo/{id}',[
@@ -140,7 +249,30 @@ Route::get('descargaensayo/{id}',[
 	'as' => 'alumno.descargaensayo.descarga'
 	]);
 
+Route::put('updateensayo/{id}',[
+		'uses' => 'AlumnoEnsayoController@updateensayo',
+		'as' => 'alumno.update.updateensayo'
+		]);
+
+
+Route::get('verensayo/{id}',[
+	'uses' => 'AlumnoEnsayoController@verensayo',
+	'as' => 'alumno.show.verensayo'
+	]);
+
 Route::resource('diario','AlumnoDiarioController');
+
+Route::get('vereanteproyecto/{id}',[
+	'uses' => 'AlumnoDiarioController@vereanteproyecto',
+	'as' => 'alumno.anteproyecto.vereanteproyecto'
+	]);
+
+Route::put('updateanteproyecto/{id}',[
+		'uses' => 'AlumnoDiarioController@updateanteproyecto',
+		'as' => 'alumno.update.updateanteproyecto'
+		]);
+
+
 
 Route::get('descargadiario/{id}',[
 	'uses' => 'AlumnoDiarioController@descargadiario',
@@ -155,11 +287,11 @@ Route::get('descargadiario/{id}',[
 Route::resource('escuelas','EscuelasController');
 
 Route::resource('/general','GeneralController');
-
+/*
 Route::get('admin/auth/login', [
 	'uses' => 'Auth\AuthController@showLoginForm',
 	'as'=> 'admin.auth.login']);
-
+*/
 Route::post('admin/auth/login', [
 	'uses' => 'Auth\AuthController@login',
 	'as'=> 'admin.auth.login']);

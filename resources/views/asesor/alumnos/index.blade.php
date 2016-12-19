@@ -4,57 +4,89 @@
 
 @section('submenu')
 <style type="text/css">
-	.glyphicon { margin-right:10px; }
-	.panell { padding:0px; }
-	.panell table tr td { padding-left: 15px }
-	.panell .table {margin-bottom: 0px; }
     #imglist{
         width: 40px;
         height: 40px;
         border-radius: 50%
     }
-</style>
- 
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+    #imgperfil{
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
 
-                        <h4 class="panel-title"> 
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                            <span class="glyphicon glyphicon-folder-close">
-                            </span>Diario</a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse">
-                        <div class="panel-body panell">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://www.jquery2dotnet.com">Diario</a>
-                                    </td>  
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.jquery2dotnet.com">Vitacora</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">Nueva nota</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">Commentarios</a>
-                                        <span class="badge">42</span>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
+        -webkit-box-shadow: 0px 0px 0px 5px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 0px 5px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 0px 5px rgba(0,0,0,0.75);
+
+    }
+    .caption{
+        background: rgb(229, 231, 233);
+        border-radius: 10px;
+    }
+    #link{
+        text-decoration: none;
+    }
+    #shower{
+        text-decoration: none;
+        position: relative;
+        left: 70%;
+    }
+</style>
+    @foreach($userr as $usee)
+    <div class="thumbnail">
+    <br>
+      <img id="imgperfil" src="/files/documentos/{{ $usee->foto }} " alt="...">
+      <a id="shower" href="#"><span class="label label-primary">Editar <span class="glyphicon glyphicon-camera" aria-hidden="true"></span></span></a>
+        <br><br>
+         <!-- Formulario de imagen -->
+              <div class="cla" style="display:none;">
+                 {{Form::open(['route'=>['alumno.update.updatefotoasesor',$usee->id],'method'=>'PUT','files'=>'true'])}}
+                <div class="form-group">
+                  {!! Form::file('file',['class'=>'form-control','onchange'=>'previewFile()','required']) !!}
+                </div> 
+                <center>
+                  <button  id="hider" class="btn btn-danger bb" type="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                  <button class="btn btn-success bb" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                </center>
+                {!! Form::close() !!}
+              </div>
+              <!-- Fin formulario de imagen -->      
+      @endforeach
+
+
+
+
+
+      @foreach ($asesor as $asee)
+      <div class="caption">
+        <center>
+        <h3>{{ $asee->ASE_nombre }}</h3>
+        <p>{{ $asee->ASE_apellido_p }} {{ $asee->ASE_apellido_m }}</p>
+        
+        <table class="table table-hover">
+            <tr>
+                <td><strong>Telefono:</strong></td>
+                <td> {{ $asee->ASE_tel}} </td>
+            </tr>
+            <tr>
+                <td><strong>Celular:</strong></td>
+                <td> {{ $asee->ASE_tel}} </td>
+            </tr>
+            <tr>
+                <td><strong>Correo</strong></td>
+                <td> {{$usee->email}} </td>
+            </tr>
+            <tr>
+                <td><strong>Tipo</strong></td>
+                <td> {{$usee->type}} </td>
+            </tr>
+        </table>
+
+        <p><a id="link" href="{{ route('asesor.alumnos.edit', $asee->id) }}"><span class="label label-primary">Editar <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span></a></p>
+        </center>
+      </div>
+    </div>
+    @endforeach
 
 @endsection
 
@@ -101,3 +133,4 @@
   </div>
 </div>
 @endsection
+

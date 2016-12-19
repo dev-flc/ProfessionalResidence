@@ -245,3 +245,16 @@ UPDATE `residence`.`documentos` SET `DOC_nombre`='anteproyecto 1' WHERE `id`='9'
 
 INSERT INTO `residence`.`documentosasignacion` (`id`, `DOCS_nombre`, `DOCS_fecha`) VALUES ('1', 'anteproyecto 1', '2016-03-19');
 INSERT INTO `residence`.`documentosasignacion` (`id`, `DOCS_nombre`, `DOCS_fecha`) VALUES ('2', 'anteproyecto 2', '2016-03-19');
+
+
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='1';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='2';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='3';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='4';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='5';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='6';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='7';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='8';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='9';
+UPDATE `residence`.`notas` SET `NOT_archivo`='archivo.pdf' WHERE `id`='10';
+UPDATE `residence`.`notas` SET `NOT_descripcion`='\nLos niños juegan en el patio, los \nadultos conversan acaloradamente \nsobre temas divergentes. Las mascotas\nlos observan atónitos, no comprenden \nla razón de aquella discusión. Sacuden \nla cabeza en signo reprobatorio. \n\nSe dirigen al patio, se reúnen con los \nniños, estos ríen, corren junto a ellos. \nSe embarran, caen, se levantan y vuelven\na caer. Mientras los adultos siguen enfrascados\nen sus desavenencias, ellos son felices. ' WHERE `id`='1';

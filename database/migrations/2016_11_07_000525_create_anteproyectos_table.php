@@ -14,8 +14,8 @@ class CreateAnteproyectosTable extends Migration
     {
         Schema::create('anteproyectos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ANT_nombre');
-            $table->longText('ANT_descripcion');
+            $table->string('ANT_nombre')->nullable();
+            $table->longText('ANT_descripcion')->nullable();
             $table->integer('EST_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('EST_id')->references('id')->on('estatus');

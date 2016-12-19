@@ -7,7 +7,7 @@
   
   <link rel="icon" href="../../img/ENUF.png">
   <link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/navbarinicio.css') }}">
+  
   {!!Html::style('css/index.css')!!}
 </head>
 <body>
@@ -92,22 +92,23 @@
   <!--<p class="pull-right"><a href="registrarme">Registrarme </a></p>-->
 </div>
 
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Iniciar Sesión</h4>
       </div>
       <div class="modal-body">
         {!! Form::open(['route'=>'admin.auth.login', 'method'=>'POST']) !!}
   <div class="form-group">
-  {!! Form::email('email',null,['class'=>'form-control','placeholder'=>'ejemplo@gmail.com']) !!}
+  {!! Form::email('email',null,['class'=>'form-control','placeholder'=>'ejemplo@gmail.com','required']) !!}
   </div>
 
   <div class="form-group">
-  {!! Form::password('password',['class'=>'form-control','placeholder'=>'***']) !!}
+  {!! Form::password('password',['class'=>'form-control','placeholder'=>'***','required']) !!}
   </div>
   <div class="form-group">
   
@@ -115,7 +116,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         {!! Form::submit('Acceder',['class'=>'btn btn-primary']) !!}
         {!! Form::close() !!}
       </div>
@@ -125,4 +126,15 @@
 </body>
 <script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
   <script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
+
+@if($dato==1)
+ <script type="text/javascript">
+   $(document).ready(function()
+   {
+      $("#myModal").modal("show");
+   });
+</script>
+@endif
+
+  
 </html>

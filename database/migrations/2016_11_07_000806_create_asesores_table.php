@@ -14,11 +14,11 @@ class CreateAsesoresTable extends Migration
     {
         Schema::create('asesores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ASE_nombre');
-            $table->string('ASE_apellido_p');
-            $table->string('ASE_apellido_m');
-            $table->string('ASE_tel');
-            $table->string('ASE_cel');
+            $table->string('ASE_nombre')->nullable();
+            $table->string('ASE_apellido_p')->nullable();
+            $table->string('ASE_apellido_m')->nullable();
+            $table->string('ASE_tel')->nullable();
+            $table->string('ASE_cel')->nullable();
             $table->integer('DIR_id')->unsigned()->nullable();; 
             $table->integer('USU_id')->unsigned()->nullable();; 
             $table->timestamps();

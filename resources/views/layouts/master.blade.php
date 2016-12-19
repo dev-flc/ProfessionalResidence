@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>@yield('title')</title>
 	{!!Html::style('css/app.css')!!}
-  {!!Html::style('css/navbar.css')!!}
+
   {!!Html::style('css/font-awesome.min.css')!!}
   {!!Html::script('js/jquery-1.12.3.min.js')!!}
   {!!Html::script('js/bootstrap.min.js')!!}

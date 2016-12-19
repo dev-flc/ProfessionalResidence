@@ -14,12 +14,12 @@ class CreateTutoresTable extends Migration
     {
         Schema::create('tutores', function(Blueprint $table){
             $table->increments('id');
-            $table->string('TUT_nombre',45);
-            $table->string('TUT_apellido_p',45);
-            $table->string('TUT_apellido_m',45);
-            $table->string('TUT_correo',50);
-            $table->string('TUT_tel',14);
-            $table->string('TUT_cel',14);
+            $table->string('TUT_nombre',45)->nullable();
+            $table->string('TUT_apellido_p',45)->nullable();
+            $table->string('TUT_apellido_m',45)->nullable();
+            $table->string('TUT_correo',50)->nullable();
+            $table->string('TUT_tel',14)->nullable();
+            $table->string('TUT_cel',14)->nullable();
             $table->timestamps();
         });
         

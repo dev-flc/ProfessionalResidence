@@ -14,11 +14,11 @@ class CreatePresidentesTable extends Migration
     {
         Schema::create('presidentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('PRE_nombre');
-            $table->string('PRE_apellido_p');
-            $table->string('PRE_apellido_m');
-            $table->string('PRE_tel');
-            $table->string('PRE_cel');
+            $table->string('PRE_nombre')->nullable();
+            $table->string('PRE_apellido_p')->nullable();
+            $table->string('PRE_apellido_m')->nullable();
+            $table->string('PRE_tel')->nullable();
+            $table->string('PRE_cel')->nullable();
             $table->integer('DIR_id')->unsigned()->nullable(); 
             $table->integer('USU_id')->unsigned()->nullable();
             $table->timestamps();

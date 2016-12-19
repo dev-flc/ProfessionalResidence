@@ -11,4 +11,9 @@ class Pivot extends Model
     [
     	'ALU_id','ASE_id','ALAS_tipo'
     ];
+    #Buscador
+    public function scopeBuscador($query, $matricula)
+    {
+        return $query-> where('ALU_matricula', 'LIKE', "%$matricula%");
+    }
 }

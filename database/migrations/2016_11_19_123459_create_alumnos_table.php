@@ -14,15 +14,15 @@ class CreateAlumnosTable extends Migration
     {
         Schema::create('alumnos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ALU_nombre');
-            $table->string('ALU_apellido_p');
-            $table->string('ALU_apellido_m');
-            $table->string('ALU_sexo');
-            $table->string('ALU_tel');
-            $table->string('ALU_cel');
-            $table->string('ALU_matricula');
-            $table->string('ALU_semestre');
-            $table->string('ALU_periodo');
+            $table->string('ALU_nombre')->nullable();
+            $table->string('ALU_apellido_p')->nullable();
+            $table->string('ALU_apellido_m')->nullable();
+            $table->string('ALU_sexo')->nullable();
+            $table->string('ALU_tel')->nullable();
+            $table->string('ALU_cel')->nullable();
+            $table->string('ALU_matricula')->nullable();
+            $table->string('ALU_semestre')->nullable();
+            $table->string('ALU_periodo')->nullable();
             $table->integer('EST_id')->unsigned()->nullable();
             $table->integer('USU_id')->unsigned()->nullable();
             $table->integer('TUT_id')->unsigned()->nullable();
@@ -49,6 +49,7 @@ class CreateAlumnosTable extends Migration
 
             $table->foreign('ALU_id')->references('id')->on('alumnos');
             $table->foreign('ASE_id')->references('id')->on('asesores');
+            $table->timestamps();
         });
     }
 

@@ -389,16 +389,15 @@ h3{
                                 {!! Form::number('cp',$alum->DIR_cp,['class'=>'form-control','required'])!!}
                             </div>
                         </div>  
-                        <style type="text/css">
-                            
-                        </style>
+                    
                         <div class="panel-footer">
                             <div class="form-group">
                                 {{ Form::button('<span class="glyphicon glyphicon-remove"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
                             </div>
+                            {!! Form::close() !!}
                         </div>
                         </div>
-                        {!! Form::close() !!}
+                        
                     </div>
 <!-- Direccion Final-->
 <!-- Asesores inicio-->

@@ -8,14 +8,19 @@ use Residence\Http\Requests;
 
 use Residence\Models\Alumno;
 use Residence\Models\Diario;
+use Residence\Models\Asesor;
 use Residence\Models\Nota;
 use Residence\Models\Esquema;
+use Residence\Models\Tutor;
+use Residence\Models\Pivot;
 use Residence\Models\Seguimiento;
 use Residence\Models\Anteproyecto;
 use Residence\Models\Documento;
+use Residence\Models\Direccion;
 use Residence\Models\Documentoasignado;
 use Residence\Models\Seguimientoasignado;
 use Residence\Models\Seguito;
+use Residence\Http\Requests\Login;
 
 use Residence\User;
 use Auth;
@@ -50,21 +55,16 @@ class RegistroController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Login $request)
     {
         
-       
+      
         $contra=$request->contra;
         $verifica=$request->verifica;
-
-        #dd($contra,$verifica);
-
-       # dd($user,$contra,$verifica,$nombre);
-
         if($contra==$verifica)
         {
             
-             $ant=new Anteproyecto;
+        $ant=new Anteproyecto;
         $ant->ANT_nombre="se requiere nombre";
         $ant->ANT_descripcion="se requiere descripción";
         $ant->EST_id=1;
@@ -90,8 +90,8 @@ class RegistroController extends Controller
         }
        
        $esquema=new Esquema;
-       $esquema->ESQ_nombre="se requiere nombre del esquema";
-       $esquema->ESQ_descripcion="se requiere descripcion del esquema";
+       $esquema->ESQ_nombre="Ingrese el nombre de sus esquema";
+       $esquema->ESQ_descripcion="Ingrese la descripcion de su esquema";
        $esquema->EST_id=1;
        $esquema->save();
        $idesquema=Esquema::find($esquema->id);
@@ -113,6 +113,33 @@ class RegistroController extends Controller
 
        
        }
+       
+            #nuevo tutor
+            $tutor=new Tutor;
+            $tutor->TUT_nombre="";
+            $tutor->TUT_apellido_p="";
+            $tutor->TUT_apellido_m="";
+            $tutor->TUT_correo="";
+            $tutor->TUT_tel="";
+            $tutor->TUT_cel="";
+            $tutor->save();
+            $idtutor=Tutor::find($tutor->id);
+            $tutorid=$idtutor->id;
+       
+
+            #nueva direccion
+            $di=new Direccion;
+            $di->DIR_calle="";
+            $di->DIR_numero="";
+            $di->DIR_estado="";
+            $di->DIR_ciudad="";
+            $di->DIR_colonia="";
+            $di->DIR_cp="";
+            $di->save();
+            $iddir=Direccion::find($di->id);
+            $dired=$iddir->id;
+
+
             #nuevo usuario
             $user=new User;
             $user->name=$request->nombre;
@@ -124,31 +151,39 @@ class RegistroController extends Controller
             $iduser= User::find($user->id);
             $idusuario=$iduser->id;
             $nameuser=$iduser->name;
+            $useremail=$iduser->email;
             
 
             $alumno=new Alumno;
-            $alumno->ALU_nombre="falta dato";
-            $alumno->ALU_apellido_p="falta dato";
-            $alumno->ALU_apellido_m="falta dato";
+            $alumno->ALU_nombre="";
+            $alumno->ALU_apellido_p="";
+            $alumno->ALU_apellido_m="";
             $alumno->ALU_semestre=7;
-            $alumno->ALU_periodo="falta dato";
+            $alumno->ALU_periodo="";
             $alumno->EST_id=1;
             $alumno->USU_id=$idusuario;
+            $alumno->TUT_id=$tutorid;
+            $alumno->DIR_id=$dired;
             $alumno->ESC_id=1;
-            $alumno->ESQ_id=$ides;
             $alumno->ANT_id=$idante;
+            $alumno->ESQ_id=$ides;
             $alumno->save();
+
+            $idalu= Alumno::find($alumno->id);
+            $alumid=$idalu->id;
+
+            $pivot=new Pivot;
+            $pivot->ALU_id=$alumid;
+            $pivot->ASE_id=1;
+            $pivot->ALAS_tipo="asesor";
+            $pivot->save();
+
             
-            flash('El registro fue realizado correctamente', 'danger')->important();
+            flash('El registro fue realizado correctamente', 'success')->important();
             return view('create')
-            ->with('nameuser',$nameuser);
-        }
-        else
-        {
-        #dd('soy el else');
-        flash('Los datos fueron modificados correctamente', 'danger')->important();
-        return redirect()->route('registro.index');
+            ->with('useremail',$useremail);
         } 
+
     }
 
     /**

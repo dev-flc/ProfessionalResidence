@@ -14,10 +14,10 @@ class CreateDirectoresTable extends Migration
     {
         Schema::create('directores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('DI_nombre');
-            $table->string('DI_apellido_p');
-            $table->string('DI_apellido_m');
-            $table->string('DI_correo');
+            $table->string('DI_nombre')->nullable();
+            $table->string('DI_apellido_p')->nullable();
+            $table->string('DI_apellido_m')->nullable();
+            $table->string('DI_correo')->nullable();
             $table->timestamps();
         });
     }

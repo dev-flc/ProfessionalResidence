@@ -17,9 +17,14 @@ class InicioController extends Controller
      */
     public function index()
     {
+        $asesor=Asesor::select('*')
+        ->join('users','users.id','=','asesores.USU_id')->get();
+        $dato=0;
 
-        $asesor=Asesor::all();
-    return view('welcome')->with('asesor',$asesor);
+        
+    return view('welcome')
+    ->with('asesor',$asesor)
+    ->with('dato',$dato);
     }
 
     /**

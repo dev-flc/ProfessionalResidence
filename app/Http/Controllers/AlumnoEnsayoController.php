@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Residence\Http\Requests;
 use Residence\Models\Alumno;
 use Residence\Models\Esquema;
+use Residence\Models\Anteproyecto;
 use Residence\Models\Seguimiento;
 use Residence\User;
 use Residence\Http\Controllers\Response;
@@ -21,6 +22,7 @@ class AlumnoEnsayoController extends Controller
      */
     public function index()
     {
+
         $totaldocumentos=0;
         $iduser = Auth::user()->id;
         
@@ -174,5 +176,42 @@ class AlumnoEnsayoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function updateensayo(Request $request, $id)
+    {
+          
+        $esquema=Esquema::find($id);
+        $esquema->ESQ_nombre=$request->nombre;                   
+        $esquema->ESQ_descripcion=$request->descripcion;                    
+        $esquema->save();
+
+        flash('Ensayo modificado correctamente', 'success')->important();
+        return redirect()->route('alumno.ensayo.index');
+      
+    }
+
+
+    public function verensayo($id)
+    {
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
+
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
+        foreach ($alumno as $alu)
+        {
+            $idesquema=$alu->ESQ_id;
+        }
+
+        $esquema=Esquema::select('*')->where('id','=',$idesquema)->get();
+
+      
+        
+        return view('alumnos.ensayo.show')
+        ->with('alumno',$alumno)
+        ->with('user',$user)
+        ->with('esquema',$esquema);
+        
     }
 }

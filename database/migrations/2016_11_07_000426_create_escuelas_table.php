@@ -14,8 +14,8 @@ class CreateEscuelasTable extends Migration
     {
         Schema::create('escuelas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ESC_nombre');
-            $table->string('ESC_clave');
+            $table->string('ESC_nombre')->nullable();
+            $table->string('ESC_clave')->nullable();
             $table->integer('DIR_id')->unsigned()->nullable();
             $table->integer('DI_id')->unsigned()->nullable();
             $table->timestamps();

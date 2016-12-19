@@ -10,16 +10,15 @@ class CreateSecretariosTable extends Migration
      *
      * @return void
      */
-    
     public function up()
     {
         Schema::create('secretarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('SEC_nombre');
-            $table->string('SEC_apellido_p');
-            $table->string('SEC_apellido_m');
-            $table->string('SEC_tel');
-            $table->string('SEC_cel');
+            $table->string('SEC_nombre')->nullable();
+            $table->string('SEC_apellido_p')->nullable();
+            $table->string('SEC_apellido_m')->nullable();
+            $table->string('SEC_tel')->nullable();
+            $table->string('SEC_cel')->nullable();
             $table->integer('DIR_id')->unsigned()->nullable();
             $table->integer('USU_id')->unsigned()->nullable();
             $table->timestamps();

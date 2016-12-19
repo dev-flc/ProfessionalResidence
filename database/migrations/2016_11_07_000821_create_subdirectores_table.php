@@ -14,11 +14,11 @@ class CreateSubdirectoresTable extends Migration
     {
         Schema::create('subdirectores', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('SUB_nombre');
-            $table->string('SUB_apellido_p');
-            $table->string('SUB_apellido_m');
-            $table->string('SUB_tel');
-            $table->string('SUB_cel');
+            $table->string('SUB_nombre')->nullable();
+            $table->string('SUB_apellido_p')->nullable();
+            $table->string('SUB_apellido_m')->nullable();
+            $table->string('SUB_tel')->nullable();
+            $table->string('SUB_cel')->nullable();
             $table->integer('DIR_id')->unsigned()->nullable(); 
             $table->integer('USU_id')->unsigned()->nullable(); 
             $table->timestamps();

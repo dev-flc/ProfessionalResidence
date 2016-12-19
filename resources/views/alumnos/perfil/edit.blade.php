@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>inicio</title>
+  <title>editar inf</title>
   <link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
 
 </head>
@@ -21,11 +21,11 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ route('alumno.perfil.index') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
+                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>Anteproyecto</a>
                 </li>
                 @foreach($alumno as $al)
                 @if($al->ALU_semestre==8)
-                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Ensayo</a>
+                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Enquema</a>
                 </li>
                 @endif
                 @endforeach
@@ -246,20 +246,135 @@
           <div class="col-sm-3"></div>
           <div class="col-sm-9">
             <div class="panel panel-default">
-          <div class="panel-heading">Datos personales</div>
+          <div class="panel-heading">Direccion</div>
           <div class="panel-body">
             <div class="row">
-              <div class="col-sm-12">
-                <table border="1">
-                  <tr>
-                    <td>assas</td>
-                    <td>asas</td>
-                  </tr>
-                </table>
-              </div>
+            <div class="container-fluid">
+              @foreach ($direccion as $dir)
+                 {{Form::open(['route'=>['alumno.update.updatedirecc',$dir->id],'method'=>'PUT'])}}
+                            <div class="form-group">
+                                {!! Form::label('calle','Calle') !!}
+                                {!! Form::text('calle',$dir->DIR_calle,['class'=>'form-control','required'])!!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('numero','numero') !!}
+                                {!! Form::number('numero',$dir->DIR_numero,['class'=>'form-control','required'])!!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('estado','Estado') !!}
+                                {!! Form::select('estado',[
+                                ''=>'seleccione una estado',
+                                'Aguascalientes'=>'Aguascalientes',
+                                'Baja California'=>'Baja California',
+                                'Baja California Sur'=>'Baja California Sur',
+                                'Campeche'=>'Campeche',
+                                'Chiapas'=>'Chiapas',
+                                'Chihuahua'=>'Chihuahua',
+                                'Coahuila'=>'Coahuila',
+                                'Colima'=>'Colima',
+                                'Distrito Federal'=>'Distrito Federal',
+                                'Durango'=>'Durango',
+                                'Estado de México'=>'Estado de México',
+                                'Guanajuato'=>'Guanajuato',
+                                'Guerrero'=>'Guerrero',
+                                'Hidalgo'=>'Hidalgo',
+                                'Jalisco'=>'Jalisco',
+                                'Michoacán'=>'Michoacán',
+                                'Morelos'=>'Morelos',
+                                'Nayarit'=>'Nayarit',
+                                'Nuevo Leon'=>'Nuevo Leon',
+                                'Oaxaca'=>'Oaxaca',
+                                'Puebla'=>'Puebla',
+                                'Queretaro'=>'Queretaro',
+                                'Quintana Roo'=>'Quintana Roo',
+                                'San Luis Potosi'=>'San Luis Potosi',
+                                'Sinaloa'=>'Sinaloa',
+                                'Sonora'=>'Sonora',
+                                'Tabasco'=>'Tabasco',
+                                'Tamaulipas'=>'Tamaulipas',
+                                'Tlaxcala'=>'Tlaxcala',
+                                'Veracruz'=>'Veracruz',
+                                'Yucatán'=>'Yucatán',
+                                'Zacatecas'=>'Zacatecas',]
+                                ,$dir->DIR_estado,['class'=>'form-control']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('ciudad','Ciudad') !!}
+                                {!! Form::text('ciudad',$dir->DIR_ciudad,['class'=>'form-control','required'])!!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('colonia','Colonia') !!}
+                                {!! Form::text('colonia',$dir->DIR_colonia,['class'=>'form-control','required'])!!}
+                            </div>
+                             <div class="form-group">
+                                {!! Form::label('cp','Codigo postal') !!}
+                                {!! Form::number('cp',$dir->DIR_cp,['class'=>'form-control','required'])!!}
+                            </div>
+                        </div>  
+                    
+                        <div class="panel-footer">
+                            <div class="form-group">
+                                {{ Form::button('<span class="glyphicon glyphicon-remove"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+
+              @endforeach
             </div>
+            </div>
+
           </div>
+
+                      <div class="panel panel-default">
+                        <div class="panel-heading">Tutor</div>
+                        <div class="panel-body">
+                            @foreach ($tutor as $tu)
+                              {{Form::open(['route'=>['alumno.update.updatetutor',$tu->id],'method'=>'PUT','files'=>'true'])}}
+
+                                <div class="form-group">
+                                  {!! Form::label('nombre','Nombre') !!}
+                                  {!! Form::text('nombre',$tu->TUT_nombre,['class'=>'form-control','required'])!!}
+                                </div>
+
+                                <div class="form-group">
+                                  {!! Form::label('nombre','Apellido paterno') !!}
+                                  {!! Form::text('ap',$tu->TUT_apellido_p,['class'=>'form-control','required'])!!}
+                                </div>
+
+                                <div class="form-group">
+                                  {!! Form::label('nombre','Apellido materno') !!}
+                                  {!! Form::text('am',$tu->TUT_apellido_m,['class'=>'form-control','required'])!!}
+                                </div>
+
+                                <div class="form-group">
+                                  {!! Form::label('nombre','Correo') !!}
+                                  {!! Form::email('email',$tu->TUT_correo,['class'=>'form-control','required'])!!}
+                                </div>
+
+                                <div class="form-group">
+                                  {!! Form::label('nombre','Telefono') !!}
+                                  {!! Form::text('tel',$tu->TUT_tel,['class'=>'form-control','required'])!!}
+                                </div>
+
+                                <div class="form-group">
+                                  {!! Form::label('nombre','celular') !!}
+                                  {!! Form::text('cel',$tu->TUT_cel,['class'=>'form-control','required'])!!}
+                                </div>
+          
+                          <div class="panel-footer">
+                            <div class="form-group">
+                                {{ Form::button('<span class="glyphicon glyphicon-remove"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+
+              @endforeach
+
+                        </div>
+                      </div>
+        
         </div>
+
       </div> 
           </div>
     </div><!-- fin row -->

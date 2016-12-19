@@ -28,7 +28,11 @@ class Asesor
         }
         elseif($this->auth->user()->presidende())
         {
-             return redirect()->route('admin.alumnos.index');
+             return redirect()->route('admin.perfil.index');
+        }
+         elseif($this->auth->user()->subdirectorlogin())
+        {
+             return redirect()->route('admin.perfil.index');
         }
         elseif($this->auth->user()->alumnologin())
         {

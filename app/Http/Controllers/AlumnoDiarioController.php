@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Residence\Http\Requests;
 use Residence\Models\Alumno;
 use Residence\Models\Diario;
+use Residence\Models\Anteproyecto;
 use Residence\Models\Nota;
 use Residence\User;
 use Auth;
@@ -263,5 +264,44 @@ class AlumnoDiarioController extends Controller
 
     }
     
+
+    public function vereanteproyecto($id)
+    {
+       
+       
+       
+        $iduser = Auth::user()->id;
+        
+        $user= User::select('*')->where('id','=',$iduser)->get();
+
+        $alumno = Alumno::select('*')->where('USU_id','=',$iduser)->get();
+        foreach ($alumno as $alu)
+        {
+            $idesquema=$alu->ANT_id;
+        }
+
+        $esquema=Anteproyecto::select('*')->where('id','=',$idesquema)->get();
+
+        return view('alumnos.esquema.showesquema')
+        ->with('alumno',$alumno)
+        ->with('user',$user)
+        ->with('esquema',$esquema);
+        
+        
+    }
+
+
+     public function updateanteproyecto(Request $request, $id)
+    {
+          
+        $esquema=Anteproyecto::find($id);
+        $esquema->ANT_nombre=$request->nombre;                   
+        $esquema->ANT_descripcion=$request->descripcion;                    
+        $esquema->save();
+
+        flash('Anteproyecto modificado correctamente', 'success')->important();
+        return redirect()->route('alumno.esquema.index');
+      
+    }
   
 }

@@ -18,11 +18,11 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ route('alumno.perfil.index') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
+                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Anteproyecto</a>
                 </li>
                 @foreach($alumno as $al)
                 @if($al->ALU_semestre==8)
-                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Ensayo</a>
+                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
                 </li>
                 @endif
                 @endforeach
@@ -187,13 +187,17 @@
       <!-- container inicio -->
       <div class="col-sm-9">  
         <div class="panel panel-default">
-          <div class="panel-heading">Ensayo</div>
+          <div class="panel-heading">Esquema</div>
           <div class="panel-body">
             <div class="panel panel-default">
               <div class="panel-body">
                 @foreach ($esquema as $ant)
                 <label>nombre:</label><p>{{ $ant->ESQ_nombre }}</p>
                 <label>descripcion:</label><p>{{ $ant->ESQ_descripcion }}</p>
+                
+                <a href="{{ route('alumno.show.verensayo', $ant->id) }}" id="link">
+                    <span class="label label-primary">Editar  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></span>
+                  </a>
                 @endforeach
               </div>
             </div>

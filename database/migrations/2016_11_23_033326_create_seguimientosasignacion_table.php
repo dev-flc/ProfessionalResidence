@@ -14,8 +14,8 @@ class CreateSeguimientosasignacionTable extends Migration
     {
         Schema::create('seguitosasignacion', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('SEGS_nombre');
-            $table->date('SEGS_fecha');
+            $table->string('SEGS_nombre')->nullable();
+            $table->date('SEGS_fecha')->nullable();
         });
     }
 

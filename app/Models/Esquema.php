@@ -29,4 +29,10 @@ class Esquema extends Model
     {
         return $this->belongsTo('Residence\Models\Alumno');
     }
+
+    #Buscador
+    public function scopeBuscador($query, $nombre)
+    {
+        return $query-> where('ESQ_nombre', 'LIKE', "%$nombre%");
+    }
 }

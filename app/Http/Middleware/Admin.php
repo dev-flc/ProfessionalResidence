@@ -28,6 +28,10 @@ class Admin
         {
             return $next($request);
         }
+        elseif($this->auth->user()->subdirectorlogin())
+        {
+           return $next($request);
+        }
         elseif($this->auth->user()->asesorlogin())
         {
             return redirect()->route('asesor.alumnos.index');

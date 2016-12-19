@@ -12,7 +12,7 @@
 <!-- Buscador inicio -->
 {!! Form::open(['route'=>'admin.alumnos.index', 'method'=>'GET','class'=>'navbar-form pull-center']) !!}
 <div class="input-group">
-    {!! Form::text('matricula',null,['class'=>'form-control', 'placeholder'=>'buscar','aria-describedby'=>'search']) !!}
+    {!! Form::text('matricula',null,['class'=>'form-control', 'placeholder'=>'Ingrese matricula','aria-describedby'=>'search']) !!}
     <span class="input-group-btn" >
         <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button></button>
     </span>
@@ -38,6 +38,9 @@
 #linkk{
     text-decoration: none;
 }
+.divalum{
+    height: 280px;
+}
 </style>
 <div class="panel panel-menu">
             <div class="panel-heading">
@@ -51,15 +54,19 @@
                 </div>          
             </div>
             <div class="panel-body">
+            
             <div class="row">
-@foreach($aaa as $user)
-    <div class="col-sm-3">
-       <div class="thumbnail">
-        <img id="imagenn" src="http://easymove.pl/wp-content/uploads/2016/01/empty_profile2.png" alt="...">
-        
+ @foreach($aaa as $user)
+   
+
+    <div class="col-sm-3 ">
+       <div class="thumbnail divalum">
+    
+        <img id="imagenn" src="/files/documentos/{{ $user->foto }} " alt="...">
+    <br>
+       
         <div class="caption">
         <center>
-            
             <p> {{ $user->ALU_nombre }}</p>
             <small>Apellidos{{ $user->ALU_apellido_p }} {{ $user->ALU_apellido_m }}</small>
             <br />
@@ -73,14 +80,18 @@
                 <a id="linkk" href="{{ route('admin.alumnos.edit', $user->id) }}">
                     <span class="label label-success">Editar</span>
                 </a> 
+                <!--
                 <a id="linkk" href="{{ route('admin.alumnos.show', $user->id) }}">
                     <span class="label label-primary">Ver Perfil</span>
                 </a> 
+                -->
             </p>
         </center>
         </div>
         </div>
     </div> 
+
+
 @endforeach
 </div>
 <center>	

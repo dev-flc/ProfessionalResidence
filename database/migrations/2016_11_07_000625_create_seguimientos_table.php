@@ -14,9 +14,9 @@ class CreateSeguimientosTable extends Migration
     {
         Schema::create('seguimientos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('SEG_nombre');
+            $table->string('SEG_nombre')->nullable();
             $table->longText('SEG_descripcion')->nullable();
-            $table->date('SEG_fecha');
+            $table->date('SEG_fecha')->nullable();
             $table->date('SEG_fecha_entrega')->nullable();
             $table->time('SEG_hora_entrega')->nullable();
             $table->string('SEG_archivo')->nullable();

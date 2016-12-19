@@ -66,6 +66,10 @@
                                 {!! Form::label('semestre','Semestre ') !!}<strong> *</strong>
       							{!! Form::select('semestre',[''=>'Seleccione un semestre','7'=>'7','8'=>'8'],null,['class'=>'form-control']) !!}
                             </div>
+                <div class="form-group">
+                {!! Form::label('periodo','Periodo ') !!}<strong> *</strong><br>
+                {{ Form::radio('periodo', 'Agosto-Diciembre', true) }} Agosto-Diciembre  {{ Form::radio('periodo', 'Marzo-Julio') }} Marzo-Julio
+              </div>
                             <div class="panel-footer">
                 				<div class="form-group">
                      				<a href="#director" class="btn btn-primary pull-right" role="tab" data-toggle="tab">
