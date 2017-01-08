@@ -32,7 +32,7 @@ class ActaController extends Controller
      */
     public function index()
     {
-        //
+        // hpla
     }
 
     /**
