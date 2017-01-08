@@ -27,6 +27,11 @@
 
                 <li><a href="{{ route('admin.alumnos.list') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Asignar asesores</a>
                 </li>
+                <li><a href="{{ route('admin.revisores.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Asignar revisores</a>
+                </li>
+                <li><a href="{{ route('admin.plan.index') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Plan de trabajo</a>
+                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

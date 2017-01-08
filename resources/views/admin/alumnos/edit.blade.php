@@ -2,7 +2,7 @@
 
 @section('title', 'alumno')
 
-@section('titulo', 'Alumno'.' '. $alum-> ALU_nombre)
+@section('titulo', 'Alumno'.' '. $alumno-> ALU_nombre)
 @section('buttonlink')
 
 @endsection
@@ -164,47 +164,7 @@ h3{
 </style>
 
 <div class="container-fluid">
-	<div class="row">
-        <div class="wizard">
-            <div class="wizard-inner">
-                <div class="connecting-line"></div>
-                <ul class="nav nav-tabs" role="tablist">
-
-                    <li role="presentation" class="active">
-                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
-                           
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li role="presentation">
-                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon-home"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    <li role="presentation" >
-                        <a href="#otro" data-toggle="tab" aria-controls="otro" role="tab" title="otro">
-                            <span class="round-tab">
-                                <i class="glyphicon glyphicon glyphicon-map-marker"></i>
-                            </span>
-                        </a>
-                    </li>
-
-                    
-                </ul>
-            </div>
+	
 
             <div >
                 <div class="tab-content">
@@ -214,20 +174,20 @@ h3{
 						    <h3 class="panel-title">Informacion personal</h3>
 						  </div>
 						  <div class="panel-body">
-						{{Form::open(['route'=>['admin.alumnos.update',$alum->id],'method'=>'PUT'])}}
+						{{Form::open(['route'=>['admin.alumnos.update',$alumno->id],'method'=>'PUT'])}}
 							<div class="form-group">
 								{!! Form::label('nombre','Nombre') !!}
-								{!! Form::text('nombre',$alum->ALU_nombre,['class'=>'form-control','required'])!!}
+								{!! Form::text('nombre',$alumno->ALU_nombre,['class'=>'form-control','required'])!!}
 							</div>
 
 							<div class="form-group">
 								{!! Form::label('apellidop','Apellido paterno') !!}
-								{!! Form::text('apellidop',$alum->ALU_apellido_p,['class'=>'form-control','required'])!!}
+								{!! Form::text('apellidop',$alumno->ALU_apellido_p,['class'=>'form-control','required'])!!}
 							</div>
 
 							<div class="form-group">
 								{!! Form::label('apellidom','Apellido materno') !!}
-								{!! Form::text('apellidom',$alum->ALU_apellido_m,['class'=>'form-control','placeholder'=>'Requiere apellido materno','required'])!!}
+								{!! Form::text('apellidom',$alumno->ALU_apellido_m,['class'=>'form-control','placeholder'=>'Requiere apellido materno','required'])!!}
 							</div>
 
 							<div class="form-group">
@@ -237,22 +197,26 @@ h3{
 
 							<div class="form-group">
 								{!! Form::label('telefono','Telefono') !!}
-								{!! Form::number('telefono',$alum->ALU_tel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
+								{!! Form::number('telefono',$alumno->ALU_tel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
 							</div>
 
 							<div class="form-group">
 								{!! Form::label('celular','Celular') !!}
-								{!! Form::number('celular',$alum->ALU_cel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
+								{!! Form::number('celular',$alumno->ALU_cel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
 							</div>
 
 							<div class="form-group">
 								{!! Form::label('matricula','matricula') !!}
-								{!! Form::number('matricula',$alum->ALU_matricula,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!} 
+								{!! Form::number('matricula',$alumno->ALU_matricula,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!} 
 							</div>
                             
                             <div class="form-group">
                                 {!! Form::label('semestre','semestre') !!}
                                 {!! Form::select('semestre',['7'=>'7','8'=>'8'],null,['class'=>'form-control']) !!}
+                            </div>
+                            <div class="form-group">
+                            {!! Form::label('periodo','Periodo ') !!}<strong> *</strong><br>
+                            {{ Form::radio('periodo', 'Agosto-Diciembre', true) }} Agosto-Diciembre  {{ Form::radio('periodo', 'Enero-Agosto') }} Enero-Agosto
                             </div>
 						</div>	
 						<div class="panel-footer foo">
@@ -263,17 +227,18 @@ h3{
 						</div>
 						{!! Form::close() !!}
                     </div>
-                    <div class="tab-pane" role="tabpanel" id="step2">
+                   
+                   <!--
 						<div class="panel panel-default">
 						  <div class="panel-heading">
 						    <h3 class="panel-title">estatus</h3>
 						  </div>
 						  <div class="panel-body">
-						{{Form::open(['route'=>['admin.alumnos.updateestatus',$alum->EST_id],'method'=>'PUT'])}}
+						{{Form::open(['route'=>['admin.alumnos.updateestatus',$estatus->EST_id],'method'=>'PUT'])}}
 							<div class="form-group">
-							<h3>Estatus | {{$alum->EST_estatus}}</h3><br><br>
+							<h3>Estatus | {{$estatus->EST_estatus}}</h3><br><br>
 								{!! Form::label('estatus','Cambiar estatus') !!}
-								{!! Form::select('estatus',['aceptado'=>'aceptado','denegado'=>'denegado'],$alum->EST_estatus,['class'=>'form-control']) !!}
+								{!! Form::select('estatus',['aceptado'=>'aceptado','denegado'=>'denegado'],$estatus->EST_estatus,['class'=>'form-control']) !!}
 							</div>
 						</div>	
 						<style type="text/css">
@@ -286,38 +251,13 @@ h3{
 						</div>
 						</div>
 						{!! Form::close() !!}
+                        -->
                     </div>
 
 
 
 
-                    <div class="tab-pane" role="tabpanel" id="step3">
-                        <div class="panel panel-default">
-						  <div class="panel-heading">
-						    <h3 class="panel-title">Datos Escuela</h3>
-						  </div>
-						  <div class="panel-body">
-						{{Form::open(['route'=>['admin.alumnos.updateescuelas',$alum->ESC_id],'method'=>'PUT'])}}
-							<div class="form-group">
-								{!! Form::label('nombre','Nombre') !!}
-								{!! Form::text('nombre',$alum->ESC_nombre,['class'=>'form-control','placeholder'=>'Requiere nombre de escuela','required'])!!}
-							</div>
-							<div class="form-group">
-								{!! Form::label('clave','clave') !!}
-								{!! Form::number('clave',$alum->ESC_clave,['class'=>'form-control','placeholder'=>'Requiere clave','required'])!!}
-							</div>
-						</div>	
-						<style type="text/css">
-							
-						</style>
-						<div class="panel-footer">
-							<div class="form-group">
-								{{ Form::button('<span class="glyphicon glyphicon-remove"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
-							</div>
-						</div>
-						</div>
-						{!! Form::close() !!}
-                    </div>
+                
 
 
 
@@ -329,14 +269,14 @@ h3{
                             <h3 class="panel-title">Direccion</h3>
                           </div>
                           <div class="panel-body">
-                        {{Form::open(['route'=>['admin.alumnos.updatedirecciones',$alum->id],'method'=>'PUT'])}}
+                        {{Form::open(['route'=>['admin.alumnos.updatedirecciones',$direccion->id],'method'=>'PUT'])}}
                             <div class="form-group">
                                 {!! Form::label('calle','Calle') !!}
-                                {!! Form::text('calle',$alum->DIR_calle,['class'=>'form-control','required'])!!}
+                                {!! Form::text('calle',$direccion->DIR_calle,['class'=>'form-control','required'])!!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('numero','numero') !!}
-                                {!! Form::number('numero',$alum->DIR_numero,['class'=>'form-control','required'])!!}
+                                {!! Form::number('numero',$direccion->DIR_numero,['class'=>'form-control','required'])!!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('estado','Estado') !!}
@@ -374,25 +314,25 @@ h3{
                                 'Veracruz'=>'Veracruz',
                                 'Yucatán'=>'Yucatán',
                                 'Zacatecas'=>'Zacatecas',]
-                                ,$alum->DIR_estado,['class'=>'form-control']) !!}
+                                ,$direccion->DIR_estado,['class'=>'form-control']) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('ciudad','Ciudad') !!}
-                                {!! Form::text('ciudad',$alum->DIR_ciudad,['class'=>'form-control','required'])!!}
+                                {!! Form::text('ciudad',$direccion->DIR_ciudad,['class'=>'form-control','required'])!!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('colonia','Colonia') !!}
-                                {!! Form::text('colonia',$alum->DIR_colonia,['class'=>'form-control','required'])!!}
+                                {!! Form::text('colonia',$direccion->DIR_colonia,['class'=>'form-control','required'])!!}
                             </div>
                              <div class="form-group">
                                 {!! Form::label('cp','Codigo postal') !!}
-                                {!! Form::number('cp',$alum->DIR_cp,['class'=>'form-control','required'])!!}
+                                {!! Form::number('cp',$direccion->DIR_cp,['class'=>'form-control','required'])!!}
                             </div>
                         </div>  
                     
                         <div class="panel-footer">
                             <div class="form-group">
-                                {{ Form::button('<span class="glyphicon glyphicon-remove"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
+                                {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
                             </div>
                             {!! Form::close() !!}
                         </div>
@@ -400,36 +340,7 @@ h3{
                         
                     </div>
 <!-- Direccion Final-->
-<!-- Asesores inicio-->
 
-                    <div class="tab-pane" role="tabpanel" id="complete">
-                        <!-- Direccion  Inicio-->
-                    <div class="tab-pane" role="tabpanel" id="otro">
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">Asesores</h3>
-                          </div>
-                          <div class="panel-body">
-                        {{Form::open(['route'=>['admin.alumnos.updateestatus',$alum->id],'method'=>'PUT'])}}
-                            <div class="form-group">
-                                {!! Form::label('calle','Asesor principal') !!}
-                                {!! Form::text('calle',$alum->DIR_calle,['class'=>'form-control','required'])!!}
-                            </div>
-
-
-                        
-
-                        </div>  
-                     
-                        <div class="panel-footer">
-                            <div class="form-group">
-                                {{ Form::button('<span class="glyphicon glyphicon-remove"></span> Guardar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
-                            </div>
-                        </div>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
-<!-- Asesores Final-->
                     </div>
                     <div class="clearfix"></div>
                 </div>

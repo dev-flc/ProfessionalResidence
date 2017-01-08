@@ -102,6 +102,6 @@ class AdminsubperfilController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd("admin");
     }
 }

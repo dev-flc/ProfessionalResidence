@@ -71,4 +71,5 @@ class Alumno extends Model
     {
         return $query-> where('ALU_matricula', 'LIKE', "%$matricula%");
     }
+   
 }

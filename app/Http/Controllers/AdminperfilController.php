@@ -34,7 +34,7 @@ class AdminperfilController extends Controller
         $idd = Auth::user()->id;
         $type = Auth::user()->type;
                 $idfull=$idd;
-        
+        $iddir="";
         if($type=="subdirector")
         {
             $presidente= Subdirector::select('*')->where('USU_id','=',$idd)->get();
@@ -251,6 +251,6 @@ class AdminperfilController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd("asesores");
     }
 }

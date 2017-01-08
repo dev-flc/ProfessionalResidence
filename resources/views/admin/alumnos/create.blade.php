@@ -7,14 +7,8 @@
 <div class="panel panel-primary">
   <div class="panel-heading">Nuevo registro</div>
   <div class="panel-body">
-	<ul class="nav nav-tabs" role="tablist">
- 		<li role="presentation" class="active"><a href="#escuela" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Alumno</a></li>
-  		<li role="presentation"><a href="#director" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Usuario</a></li>
-  		<li role="presentation"><a href="#direccion" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Dirección</a></li>
-      <li role="presentation"><a href="#final" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Escuela</a></li>
-	</ul><br>
-	<div class="tab-content">
-		<!-- inicio escuela -->
+	
+	
 		<style type="text/css">
 			strong{
 				color: red;
@@ -68,14 +62,11 @@
                             </div>
                 <div class="form-group">
                 {!! Form::label('periodo','Periodo ') !!}<strong> *</strong><br>
-                {{ Form::radio('periodo', 'Agosto-Diciembre', true) }} Agosto-Diciembre  {{ Form::radio('periodo', 'Marzo-Julio') }} Marzo-Julio
+                {{ Form::radio('periodo', 'Agosto-Diciembre', true) }} Agosto-Diciembre  {{ Form::radio('periodo', 'Enero-Agosto') }} Enero-Agosto
               </div>
                             <div class="panel-footer">
                 				<div class="form-group">
-                     				<a href="#director" class="btn btn-primary pull-right" role="tab" data-toggle="tab">
-                     				Siguiente
-                     				<span class="glyphicon glyphicon-chevron-right"></span>
-                     				</a>
+                     			
                 				</div><br>
             				</div>
 						</div>	
@@ -117,10 +108,7 @@
   			</div>
   			<div class="panel-footer">
                 				<div class="form-group">
-                     				<a href="#direccion" class="btn btn-primary pull-right" role="tab" data-toggle="tab">
-                     				Siguiente
-                     				<span class="glyphicon glyphicon-chevron-right"></span>
-                     				</a>
+                     				
                 				</div><br>
             				</div>
   			</div>
@@ -129,7 +117,7 @@
   		
   		<div role="tabpanel" class="tab-pane" id="direccion">
   			<div class="panel panel-default">
-  			<div class="panel-heading">Dirección Asesor</div>
+  			<div class="panel-heading">Dirección Alumno</div>
   			<div class="panel-body">
 				
                 <div class="form-group">
@@ -192,7 +180,11 @@
                 </div>
   			</div>
   			<div class="panel-footer">
-                
+                <div class="form-group">
+                    {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
+                    </div><br>
+        {!! Form::close() !!}
+                    
             </div>
   			</div>
   			
@@ -216,10 +208,9 @@
         <div class="panel-footer">
                         <div class="form-group">
                     {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
-                </div><br>
+                    </div><br>
                     </div>
         </div>
-        {!! Form::close() !!}
       </div>
 	</div>
 

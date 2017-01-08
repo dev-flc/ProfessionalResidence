@@ -46,17 +46,22 @@
         </thead>
         <tbody>
          	@foreach($asesor as $asesores)
+            @if($asesores->ASE_nombre=="pendiente")
+
+            @else
+
 			<tr>
                 <td><center>{{ $asesores->ASE_nombre }}</center></td>
 				<td><center>{{ $asesores->ASE_apellido_p }}  {{ $asesores->ASE_apellido_m }}</center></td>
                 <td><center>{{ $asesores->ASE_tel }}</center></td>
                 <td><center>{{ $asesores->ASE_cel }}</center></td>				
 				<td><center>
-				<a href="{{ route('admin.asesores.destroy', $asesores->id) }}" onclick="return confirm('¿esta seguro que quiere eliminar este usuario..?')" class="btn btn-danger">Eliminar</a>  
+				<a href="{{ route('admin.asesores.destroy', $asesores->id) }}" onclick="return confirm('¿esta seguro que quiere eliminar este usuarioo..?')" class="btn btn-danger">Eliminar</a>  
 
 				<a href="{{ route('admin.asesores.edit', $asesores->id) }}" class="btn btn-primary">Editar</a>
 				</center></td>
 			</tr>
+            @endif
 		@endforeach
         </tbody>
         </table>

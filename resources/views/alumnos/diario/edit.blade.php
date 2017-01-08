@@ -100,6 +100,10 @@
     @include('flash::message')
   </div>
   <div class="container-fluid">
+
+<h1>Bienvenido</h1>
+
+
     <div class="row">
       <!-- perfil fito -->
       <div class="col-sm-3">

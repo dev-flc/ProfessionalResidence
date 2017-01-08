@@ -16,6 +16,7 @@ class CreateSeguimientosasignacionTable extends Migration
             $table->increments('id');
             $table->string('SEGS_nombre')->nullable();
             $table->date('SEGS_fecha')->nullable();
+            $table->timestamps();
         });
     }
 

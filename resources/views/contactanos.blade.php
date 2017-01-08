@@ -119,6 +119,7 @@
 <div class="container-fluid fondoformu">
 <br />
 <div class="row">
+<!--
    	<form>
     <div class="col-sm-6">
     	<input type="text" class="ip1" name="nombre" placeholder="Nombre *">
@@ -149,6 +150,7 @@
     	<input type="submit" class="enviar" value="Enviar">
     </div>	
     </form>
+    -->
 
     </div>
     <br />

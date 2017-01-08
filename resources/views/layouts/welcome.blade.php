@@ -91,7 +91,18 @@
   <center><br /><p>&copy; Escuela Normal Urbana Federal Profesor Rafael Ramirez. &middot; 2016 </p>
   <!--<p class="pull-right"><a href="registrarme">Registrarme </a></p>-->
 </div>
-
+<style type="text/css">
+  .modal-dialog
+  {
+    width: 300px;
+  }
+  #imagenn
+  {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+</style>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -102,6 +113,11 @@
         <h4 class="modal-title" id="myModalLabel">Iniciar Sesión</h4>
       </div>
       <div class="modal-body">
+      <center>
+      <img id="imagenn" src="/img/users.png " alt="...">
+      <br>
+      <br>
+      </center>
         {!! Form::open(['route'=>'admin.auth.login', 'method'=>'POST']) !!}
   <div class="form-group">
   {!! Form::email('email',null,['class'=>'form-control','placeholder'=>'ejemplo@gmail.com','required']) !!}
@@ -127,14 +143,7 @@
 <script  src="{{ asset('plugin/jquery/jquery-3.1.1.js') }}"></script>
   <script  src="{{ asset('plugin/bootstrap/js/bootstrap.min.js') }}"></script>
 
-@if($dato==1)
- <script type="text/javascript">
-   $(document).ready(function()
-   {
-      $("#myModal").modal("show");
-   });
-</script>
-@endif
+
 
   
 </html>

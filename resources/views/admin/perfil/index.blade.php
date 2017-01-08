@@ -208,7 +208,7 @@
                 </button>
             </a>
 
-             <a id="link" href="">
+             <a id="link" href="{{ route('admin.esquema.index') }}">
                 <button class="btn btn-success btn-menu">
                     <p><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
                     Esqeumas</p>
@@ -237,6 +237,13 @@
                     <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     Asignar asesor</p>
                     <p><span class="badge">{{ $al }}</span></p>
+                </button>
+            </a>
+
+            <a id="link" href="{{ route('admin.plan.index') }}">
+                <button class="btn btn-primary btn-menu">
+                    <p><span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                    Plan de trabajo</p>
                 </button>
             </a>
 

@@ -43,9 +43,9 @@ class CreateAlumnosTable extends Migration
 
         Schema::create('alumnos_asesores', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('ALU_id')->unsigned();
-            $table->integer('ASE_id')->unsigned();
-            $table->string('ALAS_tipo');
+            $table->integer('ALU_id')->unsigned()->nullable();
+            $table->integer('ASE_id')->unsigned()->nullable();
+            $table->string('ALAS_tipo')->nullable();
 
             $table->foreign('ALU_id')->references('id')->on('alumnos');
             $table->foreign('ASE_id')->references('id')->on('asesores');

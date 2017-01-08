@@ -14,7 +14,7 @@
           <div class="container">
             
           </div>
-        </div>
+        </div>         
         <div class="item">
           <img src="../../img/slyder/slider1.jpg" alt="...">
           <div class="container">
@@ -54,7 +54,7 @@
       width: 100%;
      }
      h1{
-      color: #FFF;
+      color: #FFF; 
      }
      .img-asesor
      {
@@ -67,7 +67,7 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
 
         <div class="col-sm-6">
         <center><h2>Misión</h2></center>
-        <p id="mm" >La Escuela Normal Urbana Federal "Prof. Rafael Ramirez" es reconocida por la alta aceptación de sus egresados en instituciones de nivel superior y en el entorno social, derivada de la constante actualización del programa educativo, de profesores certificados en su disciplina y en docencia y de la evaluación permanente a los mismos, avalados por procesos de certificación.</p>
+        <p id="mm" >Formar profesores de calidad, para contribuir al mejoramiento de la práctica docente, competencias y desarrollo de las habilidades intelectuales básicas, que permitan responder a las características, intereses y necesidades de los educandos, ampliando los conocimientos y la tecnología, para actuar con iniciativa, eficacia e innovación en las diversas situaciones del entorno social.</p>
         </div>
         <div class="col-sm-6">
         <center><h2>Visión</h2></center>
@@ -80,7 +80,7 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
    <div class="container asesores">
     <center><h1>Asesores</h1></center><br>
 
-      <!-- Three columns of text below the carousel -->
+      <!-- Three columns of text below the carousel --> 
       <div class="row">
       @foreach ($asesor as $ase)
        @if($ase->ASE_nombre=="pendiente")
@@ -89,7 +89,7 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
         <div class="col-lg-3">
          
           <center>
-          <img  class="img-circle img-asesor"id="imgperfil" src="/files/documentos/{{ $ase->foto }} " alt="Generic placeholder image" width="140" height="140">
+          <img  class="img-circle " id="imgperfil" src="/files/documentos/{{ $ase->foto }} " alt="Generic placeholder image" width="140" height="140">
           <h2>{{ $ase->ASE_nombre }}</h2>
           <h4>{{ $ase->ASE_apellido_p }} {{ $ase->ASE_apellido_m }}</h4>
           </center>
@@ -125,38 +125,39 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
                 border-radius: 50%;
               }
             </style>
+            <!--
             <table>
               <tr>
                 <td>
-                <button type="button" class="btn btn-tamano btn-primary">
+                <button type="button" class="btn btn-tamano btn-primary img-asesor">
                   <span class="fa fa-graduation-cap" aria-hidden="true">
                   Egresados
                   <span class="badge">3042</span></span>  
                 </button>
                 </td>
                  <td>
-                <button type="button" class="btn btn-tamano btn-success">
+                <button type="button" class="btn btn-tamano btn-success img-asesor">
                   <span class="fa fa-book" aria-hidden="true">
                   Esquemas
                   <span class="badge">402</span></span>  
                 </button>
                 </td>
                  <td>
-                <button type="button" class="btn btn-tamano btn-danger">
+                <button type="button" class="btn btn-tamano btn-danger img-asesor">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">
                   Escuelas
                   <span class="badge">42</span></span>  
                 </button>
                 </td>
                  <td>
-                <button type="button" class="btn btn-tamano btn-info">
+                <button type="button" class="btn btn-tamano btn-info img-asesor">
                   <span class="glyphicon glyphicon-align-left" aria-hidden="true">
                   Asesores
                   <span class="badge">42</span></span>  
                 </button>
                 </td>
               </tr>
-            </table>
+            </table>-->
             </center> 
             </div>
           </div>
@@ -166,7 +167,9 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">Generacion. <span class="text-muted">2001.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead">LA generacion 2001, fue reconocida y destaco ante todo como una generacion
+          responsable, comprometidad y sagaz en el anvito educativo y laboral durante su instancia 
+          en la institucion.</p>
         </div>
         <div class="col-md-5">
           <img class="featurette-image img-responsive center-block" src="../../img/estudiantes7.jpg" alt="Generic placeholder image">
@@ -180,20 +183,21 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
         </div>
         <div class="col-md-7">
           <h2 class="featurette-heading">Generación <span class="text-muted">2005.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead">A lo largo de su historia, la Escuela Normal Urbana Federal que ha contibuido de manera importante en el avance de la formacion de profesores de calidad asi como tambien capacitados en tecnologia educativa.</p>
         </div>
       </div>
 <hr class="featurette-divider">
       <div class="row featurette">
         <div class="col-md-6">
           <h2 class="featurette-heading">Generación <span class="text-muted">2015.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <p class="lead">Por las sus aulas han pasado personajes importantes cuyo aporte y dedicacion profesional han resultado de mucha importancia para la institucion.</p>
         </div>
         <div class="col-md-6">
           <img class="featurette-image img-responsive center-block" src="../../img/estudiantes4.jpg">
-        </div>
+        </div> 
       </div>
     </div><!-- /.container -->
     <br />
+
 
 @endsection

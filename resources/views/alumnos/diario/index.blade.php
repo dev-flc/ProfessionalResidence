@@ -113,11 +113,16 @@
     @include('flash::message')
   </div>
   <div class="container-fluid">
+    
+<h1>Bienvenido</h1>
+
+  </div>
+  <div class="container-fluid">
     <div class="row">
       <!-- perfil fito -->
       <div class="col-sm-3">
         <div class="panel panel-default">
-          <div class="panel-heading">Datos personales</div>
+          <div class="panel-heading">Datos personales sds</div>
           <div class="panel-body">
             <div class="thumbnail">
                <br />

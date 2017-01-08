@@ -133,7 +133,6 @@ class AsesorAlumnosController extends Controller
 
     public function show($id)
     {
-        
         $alum = Alumno::select('*')
        ->join('users','users.id','=','alumnos.USU_id')      
        ->findOrFail($id);
@@ -276,7 +275,7 @@ $user = Auth::user()->id;
      */
     public function destroy($id)
     {
-        //
+        dd("admin");
     }
 
   public function descargaanteproyecto($id)

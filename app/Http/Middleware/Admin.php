@@ -40,6 +40,10 @@ class Admin
         {
              return redirect()->route('alumno.perfil.index');
         }
+        elseif($this->auth->user()->secretariologin())
+        {
+             return redirect()->route('secretario.perfil.index');
+        }
         
     }
 }

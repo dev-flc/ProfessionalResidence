@@ -6,14 +6,10 @@
 <div class="panel panel-primary">
 <div class="panel-heading">Nuevo Registro</div>
 <div class="panel-body">
-<ul class="nav nav-tabs" role="tablist">
- 	<li role="presentation" class="active"><a href="#escuela" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Escuela</a></li>
-  	<li role="presentation"><a href="#director" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Director</a></li>
-  	<li role="presentation"><a href="#direccion" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>Dirección</a></li>
-</ul>
+
 <br>
 <div class="tab-content">
-<div role="tabpanel" class="tab-pane active" id="escuela">
+
 <div class="panel panel-default">
   	<div class="panel-heading">Datos de la Escuela</div>
   	<div class="panel-body">
@@ -28,8 +24,8 @@
 		</div>
   	</div>
 </div>
-</div>
-<div role="tabpanel" class="tab-pane" id="director">
+
+
 <div class="panel panel-default">
   	<div class="panel-heading">Datos Director</div>
   	<div class="panel-body">

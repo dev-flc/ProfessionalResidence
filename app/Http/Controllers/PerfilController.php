@@ -200,7 +200,7 @@ class PerfilController extends Controller
      */
     public function destroy($id)
     {
-        
+        dd("jas");
     }
 
 

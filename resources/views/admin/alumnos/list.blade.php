@@ -56,6 +56,10 @@
                 </div>          
             </div>
             <div class="panel-body">
+           
+@if($aaa=="")
+
+@else
 <table class="table table-hover">
      <tr>
          <th><center>Nombre</center></th>
@@ -126,6 +130,7 @@
 {!! $aaa->render()!!}
 </center>
 
+@endif
 </div>
 </div>
 <style type="text/css">
@@ -138,7 +143,9 @@
 
 
 
+@if($aaa=="")
 
+@else
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -180,5 +187,6 @@
     </div>
   </div>
 </div>
+@endif
 
 @endsection

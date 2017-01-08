@@ -92,12 +92,25 @@ class EscuelasController extends Controller
      */
     public function edit($id)
     {
-        $escuelas =Escuela::Select('*')
-        ->join('directores','directores.id','=','escuelas.DI_id')
-        ->join('direcciones','direcciones.id','=','escuelas.DIR_id')
-        ->findOrFail($id);
-        #dd($escuelas);
-       return view('admin.escuelas.edit')->with('escuelas', $escuelas);
+        #dd("yo editare");
+        $escuelas=Escuela::select('*')->where('id','=',$id)->get();
+
+        foreach ($escuelas as $esc)
+        {
+            $iddir=$esc->DIR_id;
+            $iddi=$esc->DI_id;
+        }
+
+    
+        $escuelass=Escuela::find($id);
+        $direccion=Direccion::find($iddir);
+        $director=Director::find($iddi);
+
+       return view('admin.escuelas.edit')
+       ->with('escuelass', $escuelass)
+       ->with('direccion', $direccion)
+       ->with('director', $director);
+
     }
 
     /**
@@ -109,23 +122,38 @@ class EscuelasController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $escuela= Escuela::find($id);
         $escuela ->ESC_nombre=$request->nombre;
         $escuela ->ESC_clave=$request->clave;
         #dd($escuelas);
         $escuela->save();
 
-         $escuelas =Escuela::Select('*')
-        ->join('directores','directores.id','=','escuelas.DI_id')
-        ->join('direcciones','direcciones.id','=','directores.id')
-        ->findOrFail($id);
-        #dd($escuelas);
-        flash('Escuela modificado correctamente', 'info')->important();
-        return view('admin.escuelas.edit')->with('escuelas', $escuelas);
+         
+        $escuelas=Escuela::select('*')->where('id','=',$id)->get();
+
+        foreach ($escuelas as $esc)
+        {
+            $iddir=$esc->DIR_id;
+            $iddi=$esc->DI_id;
+        }
+
+    
+        $escuelass=Escuela::find($id);
+        $direccion=Direccion::find($iddir);
+        $director=Director::find($iddi);
+        flash('Escuela modificada correctamente :)', 'success')->important();
+
+       return view('admin.escuelas.edit')
+       ->with('escuelass', $escuelass)
+       ->with('direccion', $direccion)
+       ->with('director', $director);
     }
 
     public function updatedirectores(Request $request, $id)
     {
+        
+
         $directores= Director::find($id);
         $directores->DI_nombre=$request->nombre;
         $directores->DI_apellido_p=$request->apellidop;
@@ -134,14 +162,8 @@ class EscuelasController extends Controller
         #dd($directores);
         $directores->save();
 
-         $escuelas =Escuela::Select('*')
-        ->join('directores','directores.id','=','escuelas.DI_id')
-        ->join('direcciones','direcciones.id','=','directores.id')
-        ->findOrFail($id);
-        #dd($escuelas);
-        flash('Datos del director  modificados correctamente', 'info')->important();
-
-        return view('admin.escuelas.edit')->with('escuelas', $escuelas);
+        flash('Datos de director actualizados correctamente', 'success')->important();
+        return redirect()->route('admin.escuelas.index');
         
     }
     
@@ -157,14 +179,9 @@ class EscuelasController extends Controller
         #dd($direcciones);
         $direcciones->save();
 
+        flash('Drireccion de la escuela actualizada correctamente', 'success')->important();
+        return redirect()->route('admin.escuelas.index');
 
-         $escuelas =Escuela::Select('*')
-        ->join('directores','directores.id','=','escuelas.DI_id')
-        ->join('direcciones','direcciones.id','=','directores.id')
-        ->findOrFail($id);
-        #dd($escuelas);
-        flash('Direccion Modidificada correctamente', 'info')->important();
-        return view('admin.escuelas.edit')->with('escuelas', $escuelas);
         
     }
 
@@ -176,8 +193,32 @@ class EscuelasController extends Controller
      */
     public function destroy($id)
     {
+        
+       
+
+
         $escuelas = Escuela::find($id);
+        $iddirector=$escuelas->DI_id;
+        $iddir=$escuelas->DIR_id;
+        #dd($iddirector,$iddir);
+        $director= Director::find($iddirector);
+        $direccion=Direccion::find($iddir);
+
+
         $escuelas->delete();
+        $director->delete();
+        $direccion->delete();
         return redirect()->route('admin.escuelas.index');
     }
 }
+
+
+
+
+
+
+
+
+
+
+

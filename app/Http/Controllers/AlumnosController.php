@@ -37,13 +37,6 @@ class AlumnosController extends Controller
      */
     public function index(Request $request)
     {  
-
-
-/*
-     $aaa=Alumno::Buscador($request->matricula)
-     ->join('users','users.id','=','alumnos.USU_id')->paginate(8);
-     */
-#$aaa=Alumno::where( 'USU_id' , '=' ,User::get('id')) ->paginate(8);
       $aaa=Alumno::Buscador($request->matricula)
       ->join('users','users.id','=','alumnos.USU_id')
     ->select(
@@ -64,6 +57,7 @@ class AlumnosController extends Controller
     ->paginate(8);
     $i=1;
 
+
      return View('admin.alumnos.index')
      ->with('aaa',$aaa)
      ->with('i',$i);
@@ -73,15 +67,14 @@ class AlumnosController extends Controller
 
      public function list(Request $request)
     {  
-
-
-        $aaa=Pivot::Buscador($request->matricula)
-        
+       
+        $aaa=Pivot::Buscador($request->matricula)       
         ->join('alumnos','alumnos.id','=','alumnos_asesores.ALU_id')
         ->join('asesores','asesores.id','=','alumnos_asesores.ASE_id')
         ->join('users','users.id','=','alumnos_asesores.ALU_id')
         ->paginate(9);
-        
+
+       
         $asesores=Asesor::all();
 
 
@@ -98,6 +91,7 @@ class AlumnosController extends Controller
      */
     public function create()
     {
+        #dd("create");
         $escuela=Escuela::all();
         return view('admin.alumnos.create')->with('escuela',$escuela);
     }
@@ -110,10 +104,12 @@ class AlumnosController extends Controller
      */
     public function store(Request $request)
     {    
-       $ant=new Anteproyecto;
+        #dd("yes");
+        
+        $ant=new Anteproyecto;
         $ant->ANT_nombre="";
         $ant->ANT_descripcion="";
-        $ant->EST_id=1;
+        $ant->EST_id=2;
         $ant->save();
         $idnota= Anteproyecto::find($ant->id);
         $idante=$idnota->id;  #id anteproyecto nuevo
@@ -130,7 +126,7 @@ class AlumnosController extends Controller
             $documentos->DOC_fecha=$date; 
             $documentos->DOC_archivo="archivo.pdf"; 
             $documentos->ANT_id=$idante;
-            $documentos->EST_id=9;
+            $documentos->EST_id=1;
             $documentos->save();
 
         }
@@ -138,7 +134,7 @@ class AlumnosController extends Controller
        $esquema=new Esquema;
        $esquema->ESQ_nombre="";
        $esquema->ESQ_descripcion="";
-       $esquema->EST_id=1;
+       $esquema->EST_id=5;
        $esquema->save();
        $idesquema=Esquema::find($esquema->id);
        $ides=$idesquema->id;# id del esquema registrado
@@ -154,12 +150,12 @@ class AlumnosController extends Controller
         $seguimiento->SEG_fecha=$fec;
         $seguimiento->SEG_archivo="archivo.pdf";
         $seguimiento->ESQ_id=$ides;
-        $seguimiento->EST_id=9;
+        $seguimiento->EST_id=2;
         $seguimiento->save();
 
        
        }
-       
+            
             #nuevo tutor
             $tutor=new Tutor;
             $tutor->TUT_nombre="";
@@ -171,7 +167,7 @@ class AlumnosController extends Controller
             $tutor->save();
             $idtutor=Tutor::find($tutor->id);
             $tutorid=$idtutor->id;
-       
+            
 
             #nueva direccion
             $direcciones=new Direccion;
@@ -210,17 +206,18 @@ class AlumnosController extends Controller
             $alumno->USU_id=($iduser->id);
             $alumno->TUT_id=$tutorid;
             $alumno->DIR_id=($iddireccion->id); 
-            $alumno->ESC_id=($request->escuelaid);
+            #$alumno->ESC_id=1;
             $alumno->ANT_id=$idante;
             $alumno->ESQ_id=$ides;
             $alumno->save();
-
+            
             $idalu= Alumno::find($alumno->id);
             $alumid=$idalu->id;
 
+
             $pivot=new Pivot;
             $pivot->ALU_id=$alumid;
-            $pivot->ASE_id=1;
+            #$pivot->ASE_id=null;
             $pivot->ALAS_tipo="asesor";
             $pivot->save();
         
@@ -294,7 +291,22 @@ class AlumnosController extends Controller
      */
     public function edit($id)
     {
+
        
+       $alumno=Alumno::find($id);
+    
+            $iduser=$alumno->USU_id;
+            $idesta=$alumno->EST_id;
+            $iddir=$alumno->DIR_id;
+           # $idesc=$alumno->ESC_id;
+
+       $usuario=User::find($iduser);
+       $estatus=Estatus::find($idesta);
+       $direccion=Direccion::find($iddir);
+      # $escuela=Escuela::find($idesc);
+        
+      
+/*
        $alum = Alumno::select('*')
        ->join('estatus','estatus.id','=','alumnos.EST_id')
        ->join('users','users.id','=','alumnos.USU_id')
@@ -307,7 +319,14 @@ class AlumnosController extends Controller
        ->findOrFail($id); 
         
         #dd($alum);
-       return view('admin.alumnos.edit')->with('alum', $alum);
+
+        */
+       return view('admin.alumnos.edit')
+       ->with('alumno', $alumno)
+       ->with('usuario', $usuario)
+       ->with('estatus', $estatus)
+       ->with('direccion', $direccion);
+      # ->with('escuela', $escuela);
         
     }
 
@@ -329,6 +348,8 @@ class AlumnosController extends Controller
         $alumno->ALU_cel=($request->celular);
         $alumno->ALU_matricula=($request->matricula);
         $alumno->ALU_semestre=($request->semestre);
+        $alumno->ALU_periodo=($request->periodo); 
+
         $alumno->save();
         flash('Alumno Modificado Correctamente', 'info')->important();
         return redirect()->route('admin.alumnos.index');
@@ -352,6 +373,7 @@ class AlumnosController extends Controller
 
     public function updateescuelas(Request $request, $id)
     {
+        dd("jds");
         $escuela= Escuela::find($id);
         $escuela ->ESC_nombre=$request->nombre;
         $escuela ->ESC_clave=$request->clave;
@@ -363,6 +385,8 @@ class AlumnosController extends Controller
     
     public function updatedirecciones(Request $request, $id)
     {
+        #dd($id,$request->calle,$request->numero,$request->estado,$request->ciudad,$request->colonia,$request->cp);
+
         $direcciones= Direccion::find($id);
         $direcciones->DIR_calle=$request->calle;
         $direcciones->DIR_numero=$request->numero;
@@ -384,8 +408,50 @@ class AlumnosController extends Controller
      */
     public function destroy($id)
     {
-        $userr = Alumno::find($id);
-        $userr->delete();
+        #dd("kjaslklas");
+
+
+
+        $alumno = Alumno::find($id);
+        $idusuario=$alumno->USU_id;
+        $idtutor=$alumno->TUT_id;
+        $iddir=$alumno->DIR_id;
+        $idescuela=$alumno->ESC_id;
+        $idante=$alumno->ANT_id;
+        $idesquema=$alumno->ESQ_id;
+
+        $asesores = Pivot::select('*')->where('ALU_id','=',$id)->where('ALAS_tipo','=','asesor')->get();
+        foreach ($asesores as $ase)
+        {
+            $idasesor=$ase->id;
+            $asesor = Pivot::find($idasesor);
+            $asesor->delete();
+        }
+       
+
+        $revisores = Pivot::select('*')->where('ALU_id','=',$id)->where('ALAS_tipo','=','revisores')->get();
+        foreach ($revisores as $re)
+        {
+            $idrevisor=$re->id;
+            $revisor = Pivot::find($idrevisor);
+            $revisor->delete();
+        }
+
+        $user = User::find($idusuario);
+        $tutor = Tutor::find($idtutor);
+        $direccion=Direccion::find($iddir);
+        $anteproyecto = Anteproyecto::find($idante);
+        $esquema = Esquema::find($idesquema);
+
+        
+        $alumno->delete();
+        $user->delete();
+        $tutor->delete();
+        $direccion->delete();
+        $anteproyecto->delete();
+        $esquema->delete();
+
+        flash('Alumnos eliminado correctamente', 'success')->important();
         return redirect()->route('admin.alumnos.index');
     }
 

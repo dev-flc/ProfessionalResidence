@@ -41,5 +41,9 @@ class Alumno
         {
              return redirect()->route('admin.perfil.index');
         }
+        elseif($this->auth->user()->secretariologin())
+        {
+             return redirect()->route('secretario.perfil.index');
+        }
     }
 }

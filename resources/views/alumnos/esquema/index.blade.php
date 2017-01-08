@@ -242,7 +242,7 @@
                           <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Fecha entrega: 
                         </td>
                         <td>
-                          <span class="label label-default">
+                          <span class="label label-primary">
                             {{ $docs->DOC_fecha }}
                           </span>
                         </td>

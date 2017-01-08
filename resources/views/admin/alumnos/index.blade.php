@@ -41,6 +41,11 @@
 .divalum{
     height: 280px;
 }
+.noexisten
+{
+    font-size: 35px;
+    color: #777;
+}
 </style>
 <div class="panel panel-menu">
             <div class="panel-heading">
@@ -54,7 +59,11 @@
                 </div>          
             </div>
             <div class="panel-body">
-            
+            <center>
+                @if($aaa!="")
+                <p class="noexisten">No hay alumnos resgistrados :(</p>
+                @endif
+            </center>
             <div class="row">
  @foreach($aaa as $user)
    
@@ -68,13 +77,13 @@
         <div class="caption">
         <center>
             <p> {{ $user->ALU_nombre }}</p>
-            <small>Apellidos{{ $user->ALU_apellido_p }} {{ $user->ALU_apellido_m }}</small>
+            <small>{{ $user->ALU_apellido_p }} {{ $user->ALU_apellido_m }}</small>
             <br />
             <small>matricula: {{ $user->ALU_matricula }}</small>
             
             <p>
                 <a id="linkk" href="{{ route('admin.alumnos.destroy', $user->id) }}"
-                onclick="return confirm('¿esta seguro que quiere eliminar este usuario..?')"
+                onclick="return confirm('¿esta seguro que quiere eliminar este alumno?\n \n SE ELIMINARAN LOS SIGUIENTES DATOS: \n - Dirección \n - Esquema \n - Ensayo \n - Tutor \n - Usuario \n - Documentos \n - Seguimeintos \n - Asesor \n - Revisores \n -Diario')"
                 >
                     <span class="label label-danger">Eliminar</span></a> 
                 <a id="linkk" href="{{ route('admin.alumnos.edit', $user->id) }}">
@@ -94,7 +103,7 @@
 
 @endforeach
 </div>
-<center>	
+<center>  
 {!! $aaa->render()!!}
 </center>
 

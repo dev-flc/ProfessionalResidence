@@ -57,8 +57,9 @@ class RegistroController extends Controller
      */
     public function store(Login $request)
     {
+
         
-      
+     
         $contra=$request->contra;
         $verifica=$request->verifica;
         if($contra==$verifica)
@@ -71,24 +72,31 @@ class RegistroController extends Controller
         $ant->save();
         $idnota= Anteproyecto::find($ant->id);
         $idante=$idnota->id;  #id anteproyecto nuevo
+         
 
-        
+          
         $docs=Documentoasignado::all();
         foreach ($docs as $dos)
         {
+
             $name=$dos->DOCS_nombre;
+
             $date=$dos->DOCS_fecha;
+
             $documentos=new Documento;
             $documentos->DOC_nombre=$name;
             $documentos->DOC_descripcion="ingrese descripcion";
             $documentos->DOC_fecha=$date; 
             $documentos->DOC_archivo="archivo.pdf"; 
             $documentos->ANT_id=$idante;
-            $documentos->EST_id=9;
+            $documentos->EST_id=1;
             $documentos->save();
 
-        }
+
        
+
+        }
+
        $esquema=new Esquema;
        $esquema->ESQ_nombre="Ingrese el nombre de sus esquema";
        $esquema->ESQ_descripcion="Ingrese la descripcion de su esquema";
@@ -96,7 +104,6 @@ class RegistroController extends Controller
        $esquema->save();
        $idesquema=Esquema::find($esquema->id);
        $ides=$idesquema->id;# id del esquema registrado
-
        $segs= Seguimientoasignado::all();
        foreach ($segs as $se)
        {
@@ -108,7 +115,7 @@ class RegistroController extends Controller
         $seguimiento->SEG_fecha=$fec;
         $seguimiento->SEG_archivo="archivo.pdf";
         $seguimiento->ESQ_id=$ides;
-        $seguimiento->EST_id=9;
+        $seguimiento->EST_id=1;
         $seguimiento->save();
 
        
@@ -228,6 +235,6 @@ class RegistroController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd("kjas");
     }
 }

@@ -1,6 +1,6 @@
 @extends('admin.templates.main')
 
-@section('title', 'Escuelas')
+@section('title', 'Presidente')
 
 @section('content')
 <!-- Nav tabs -->

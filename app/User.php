@@ -70,4 +70,8 @@ class User extends Authenticatable
     {
         return $this->type === 'alumno';
     }
+    public function secretariologin()
+    {
+        return $this->type === 'secretario';
+    }
 }

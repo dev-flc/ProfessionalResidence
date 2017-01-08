@@ -50,13 +50,16 @@
           <li><a href="{{ route('admin.asesores.index') }}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Asesores  </a>
           </li>
 
-          <li><a href="{{ route('admin.esquema.index') }}" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquemas  </a>
+          <li><a href="{{ route('admin.esquema.index') }}" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquemas </a>
           </li>
 
           <li><a href="{{ route('admin.secretario.index') }}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Secretario   </a>
           </li>
 
           <li><a href="{{ route('admin.alumnos.list') }}" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Asignar asesores   </a>
+          </li>
+
+          <li><a href="{{ route('admin.plan.index') }}" ><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Asignar asesores   </a>
           </li>
 
           <!--<li><a href="#" ><span class="glyphicon glyphicon-book" aria-hidden="true"></span> proyectos  </a></li>-->

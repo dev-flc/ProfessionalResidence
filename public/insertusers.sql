@@ -73,7 +73,7 @@ $lk->save();
 
 $gl = new  Residence\User;
 $gl->name="ariana";
-$gl->email="ariana@gmail.com";    
+$gl->email="admin@gmail.com";    
 $gl->password=bcrypt("123");
 $gl->foto="foto.png";
 $gl->type="subdirector";

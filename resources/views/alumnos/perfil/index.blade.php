@@ -118,8 +118,18 @@
   }
   
 </style>
-  <div class="container-fluid">
+
+   <div class="container-fluid">
     @include('flash::message')
+ @foreach ($alumno as $alumnos)
+     @if($alumnos->ALU_nombre=="")
+    <div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>Bienvenido!</strong> Para tener una mejor experiencia porfavor complete su información. <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link" ><span class="label label-success">Completar mi informacion <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></span></a>
+</div>
+  @endif
+@endforeach
+
   </div>
   <div class="container-fluid">
     <div class="row">
@@ -168,7 +178,7 @@
                     
                     <a href="{{ route('alumno.perfil.edit', $alumnos->id) }}" id="link">
                     <button class="btn btn-danger">
-                    Completar informacion <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    Completar información <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </button>
                   </a>
 

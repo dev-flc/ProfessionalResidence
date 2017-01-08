@@ -29,7 +29,7 @@ class AdminSecretarioController extends Controller
         }
         if($iduser=="")
         {
-            return View('admin.create.create');
+            return View('admin.secretario.create');
         }
         else{
        $user= User::select('*')->where('id','=',$iduser)->get();
@@ -39,8 +39,7 @@ class AdminSecretarioController extends Controller
         }
         $dir= Direccion::select('*')->where('id','=',$iddir)->get();
 
-
-        return View('admin.secretario.index')
+       return View('admin.secretario.index')
         ->with('foto',$foto)
         ->with('dir',$dir)
         ->with('presidente',$presidente);
@@ -175,7 +174,7 @@ class AdminSecretarioController extends Controller
 
      
 
-     Flash::warning('El presidente'.$user->name.'fue eliminado correctamente');
+     Flash::warning('El secretario'.$user->name.'fue eliminado correctamente');
      return redirect()->route('admin.secretario.index');
     }
 

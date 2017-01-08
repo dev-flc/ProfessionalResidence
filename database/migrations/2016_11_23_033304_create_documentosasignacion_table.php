@@ -16,6 +16,7 @@ class CreateDocumentosasignacionTable extends Migration
             $table->increments('id');
             $table->string('DOCS_nombre')->nullable();
             $table->date('DOCS_fecha')->nullable();
+            $table->timestamps();
         });
     }
 

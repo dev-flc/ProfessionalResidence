@@ -8,6 +8,8 @@ use Residence\Http\Requests;
 use Residence\Models\Asesor;
 use Residence\Models\Direccion;
 use Residence\User;
+use Laracasts\Flash\Flash;
+
 
 class AsesoresController extends Controller
 {
@@ -18,7 +20,7 @@ class AsesoresController extends Controller
      */
     public function index(Request $request)
     {
-        $asesor = Asesor::Buscador($request->nombre)->orderBy('id', 'ASC')->paginate(2);
+        $asesor = Asesor::Buscador($request->nombre)->orderBy('id', 'DEC')->paginate(6);
         return View('admin.asesores.index')->with('asesor',$asesor);
     }
 
@@ -156,14 +158,34 @@ class AsesoresController extends Controller
     }
     
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
+
     public function destroy($id)
     {
-        //
+       
+        
+       $as= Asesor::select('*')->where('id','=',$id)->get();
+        
+
+        foreach ($as as $ase)
+        {
+            $iddirr=$ase->DIR_id;
+            $iduserr=$ase->USU_id;
+
+        }
+
+        $asesordelete=Asesor::find($id);
+        $asesordelete->delete();
+
+        $user=User::find($iduserr);
+        $user->delete();
+
+        $dir=Direccion::find($iddirr);
+        $dir->delete();
+
+     
+
+     Flash::warning('El asesor fue eliminado correctamente');
+     return redirect()->route('admin.asesores.index');
     }
 }

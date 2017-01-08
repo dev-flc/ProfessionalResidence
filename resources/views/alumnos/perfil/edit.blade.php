@@ -221,7 +221,7 @@
               
               <div class="form-group">
                 {!! Form::label('periodo','Periodo') !!}<br>
-                {{ Form::radio('periodo', 'Agosto-Diciembre',true) }} Agosto-Diciembre  {{ Form::radio('periodo', 'Enero-Marzo') }} Enero-Marzo
+                {{ Form::radio('periodo', 'Agosto-Diciembre',true) }} Agosto-Diciembre  {{ Form::radio('periodo', 'Enero-Agosto') }} Enero-Agosto
               </div>
 
               <div class="form-group">

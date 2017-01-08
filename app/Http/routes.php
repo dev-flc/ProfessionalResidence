@@ -33,7 +33,45 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
 
 /*alumnos  */
 	Route::resource('alumnos','AlumnosController');
+
 	
+	Route::resource('revisores','RevisoresController');
+
+
+	Route::resource('plan','PlandetrabajoController');
+	
+	Route::get('ante/{id}/destroy',[
+		'uses' => 'PlandetrabajoController@destroy',
+		'as' => 'admin.plan.destroy'
+		]);
+
+	Route::get('esquema/{id}/destroy',[
+		'uses' => 'PlandetrabajoController@destroyesquema',
+		'as' => 'admin.plan.destroyesquema'
+		]);
+
+	Route::get('createesquema/',[
+	'uses' => 'PlandetrabajoController@createesquema',
+	'as' => 'admin.plan.createesquema'
+	]);
+
+	Route::post('esquemas/',[
+		'uses' => 'PlandetrabajoController@storee',
+		'as' => 'admin.plan.storee'
+		]);
+
+	Route::put('upesquema/{id}',[
+		'uses' => 'PlandetrabajoController@upesquema',
+		'as' => 'admin.plan.upesquema'
+		]);
+
+	Route::get('editesquema/{id}',[
+		'uses' => 'PlandetrabajoController@editesquema',
+		'as' => 'admin.plan.editesquema'
+		]);
+
+
+
 	Route::resource('presidente','AdminPresidenteController');
 	Route::resource('secretario','AdminSecretarioController');
 	Route::resource('esquema','EsquemasController');
@@ -43,13 +81,13 @@ Route::group(['prefix'=>'admin','middleware'=>['admin','auth']], function(){
 	'as' => 'admin.esquema.veresquema'
 	]);
 	
-
+	
 	Route::get('list',[
 	'uses' => 'AlumnosController@list',
 	'as' => 'admin.alumnos.list'
 	]);
 
-	Route::get('alumnos/{id}/destroy',[
+	Route::get('alumnoss/{id}/destroy',[
 		'uses' => 'AlumnosController@destroy',
 		'as' => 'admin.alumnos.destroy'
 		]);
@@ -62,7 +100,7 @@ Route::get('asignar/{id}',[
 		'uses' => 'AlumnosController@asignar',
 		'as' => 'admin.alumnos.asignar'
 		]);
-	Route::put('escuelas/{id}',[
+	Route::put('escuelass/{id}',[
 		'uses' => 'AlumnosController@updateescuelas',
 		'as' => 'admin.alumnos.updateescuelas'
 		]);
@@ -79,12 +117,12 @@ Route::get('asignar/{id}',[
 /* escuelas */
 	Route::resource('escuelas','EscuelasController');
 	
-	Route::put('directores/{id}',[
+	Route::put('directoresescuela/{id}',[
 		'uses' => 'EscuelasController@updatedirectores',
 		'as' => 'admin.escuelas.updatedirectores'
 		]);
 
-	Route::put('direccion/{id}',[
+	Route::put('direccionnn/{id}',[
 		'uses' => 'EscuelasController@updatedirecciones',
 		'as' => 'admin.escuelas.updatedirecciones'
 		]);
@@ -105,6 +143,12 @@ Route::get('asignar/{id}',[
 		'uses' => 'AsesoresController@updatedirecciones',
 		'as' => 'admin.asesores.updatedirecciones'
 		]);
+
+	Route::get('asesoress/{id}/destroy',[
+		'uses' => 'AsesoresController@destroy',
+		'as' => 'admin.asesores.destroy'
+		]);
+
 
 	#perfil
 	Route::resource('perfil','AdminperfilController');
@@ -154,6 +198,30 @@ Route::get('asignar/{id}',[
 
 
 });
+
+
+Route::group(['prefix'=>'secretario','middleware'=>['secretario','auth']], function(){
+
+Route::resource('perfil','SecretarioPerfilController');
+Route::resource('acta','ActaController');
+
+
+Route::get('actapdf/{id}',[
+	'uses' => 'ActaController@actapdf',
+	'as' => 'secretario.pdf.actapdf'
+	]);
+
+Route::put('updateusersecretario/{id}',[
+		'uses' => 'SecretarioPerfilController@updateusersecretario',
+		'as' => 'secretario.perfil.updateusersecretario'
+		]);
+
+Route::put('updatedireccionn/{id}',[
+		'uses' => 'SecretarioPerfilController@updatedireccion',
+		'as' => 'secretario.perfil.updatedireccion'
+		]);
+
+	});
 
 #inicio asesores
 Route::group(['prefix'=>'asesor','middleware'=>['asesor','auth']], function(){
@@ -284,7 +352,7 @@ Route::get('descargadiario/{id}',[
 
 #Route::auth();
 #Route::get('/home', 'HomeController@index');
-Route::resource('escuelas','EscuelasController');
+#Route::resource('escuelas','EscuelasController');
 
 Route::resource('/general','GeneralController');
 /*

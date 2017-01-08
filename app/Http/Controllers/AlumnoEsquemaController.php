@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Residence\Http\Requests;
 use Residence\Models\Alumno;
+use Residence\Models\Esquema;
 use Residence\Models\Anteproyecto;
 use Residence\Models\Documento;
 use Residence\Models\Comentariodocumento;

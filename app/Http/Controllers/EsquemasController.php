@@ -105,6 +105,6 @@ class EsquemasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd("kjas");
     }
 }

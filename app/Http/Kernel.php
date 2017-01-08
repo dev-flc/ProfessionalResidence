@@ -52,6 +52,7 @@ class Kernel extends HttpKernel
         'admin' => \Residence\Http\Middleware\Admin::class,
         'asesor' => \Residence\Http\Middleware\Asesor::class,
         'alumno' => \Residence\Http\Middleware\Alumno::class,
+        'secretario' => \Residence\Http\Middleware\Secretario::class,
 
     ];
 }

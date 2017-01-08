@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>inicio</title>
+  <title>Anteproyecto</title>
   <link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
 
 </head>
@@ -96,6 +96,8 @@
   .inputt
   {
     border: none;
+    font-size: 20px;
+    color:rgb(52, 152, 219);
   }
 </style>
   <div class="container-fluid">
@@ -188,17 +190,17 @@
       <!-- container inicio -->
       <div class="col-sm-9">  
         <div class="panel panel-default">
-          <div class="panel-heading">Panel heading without title</div>
+          <div class="panel-heading">Mi documento</div>
           <div class="panel-body">
             <!-- inicio formulario-->
             {{Form::open(['route'=>['alumno.esquema.update',$documento->id],'method'=>'PUT','files'=>true])}}
               <div class="form-group">
-                {!! Form::label('nombre','nombre') !!}
-                {!! Form::text('nombre',$documento->DOC_nombre,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!}
+                {!! Form::label('nombre','nombre') !!}<br>
+                {!! Form::text('nombre',$documento->DOC_nombre,['class'=>'inputt','placeholder'=>'nombre','reloady',' readonly'])!!}
               </div>
               <div class="form-group">
-                {!! Form::label('fecha','fecha Entrega') !!}
-                {!! Form::text('fecha',$documento->DOC_fecha,['class'=>'form-control inputt','placeholder'=>'nombre','reloady',' readonly'])!!} 
+                {!! Form::label('fecha','fecha de entrega') !!}<br>
+                {!! Form::text('fecha',$documento->DOC_fecha,['class'=>'inputt','placeholder'=>'nombre','reloady',' readonly'])!!} 
               </div>
               <div class="form-group">
                 {!! Form::label('file','Archivo') !!}
@@ -210,7 +212,9 @@
               </div>
           </div>
           <div class="modal-footer">
+            <a href="{{ route('alumno.esquema.index') }}">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </a>
             {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}     
           </div>
           {!! Form::close() !!}
