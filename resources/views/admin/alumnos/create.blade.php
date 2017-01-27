@@ -33,7 +33,7 @@
 
 							<div class="form-group">
 								{!! Form::label('apellidom','Apellido materno ') !!}<strong> *</strong>
-								{!! Form::text('apellidom',null,['class'=>'form-control','placeholder'=>'Requiere apellido materno','required'])!!}
+								{!! Form::text('apellidom',null,['class'=>'form-control','required'])!!}
 							</div>
 
 							<div class="form-group">
@@ -43,22 +43,22 @@
 
 							<div class="form-group">
 								{!! Form::label('telefono','Telefono') !!}
-								{!! Form::number('telefono',null,['class'=>'form-control','placeholder'=>'Requiere telefono'])!!}
+								{!! Form::number('telefono',null,['class'=>'form-control'])!!}
 							</div>
 
 							<div class="form-group">
 								{!! Form::label('celular','Celular') !!}
-								{!! Form::number('celular',null,['class'=>'form-control','placeholder'=>'Requiere telefono'])!!}
+								{!! Form::number('celular',null,['class'=>'form-control'])!!}
 							</div>
 
 							<div class="form-group">
 								{!! Form::label('matricula','Matricula ') !!}<strong> *</strong>
-								{!! Form::number('matricula',null,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
+								{!! Form::number('matricula',null,['class'=>'form-control','required'])!!}
 							</div>
                             
                             <div class="form-group">
                                 {!! Form::label('semestre','Semestre ') !!}<strong> *</strong>
-      							{!! Form::select('semestre',[''=>'Seleccione un semestre','7'=>'7','8'=>'8'],null,['class'=>'form-control']) !!}
+      							{!! Form::select('semestre',['7'=>'7','8'=>'8'],null,['class'=>'form-control']) !!}
                             </div>
                 <div class="form-group">
                 {!! Form::label('periodo','Periodo ') !!}<strong> *</strong><br>
@@ -122,11 +122,11 @@
 				
                 <div class="form-group">
                 {!! Form::label('calle','Calle') !!}
-                {!! Form::text('calle',null,['class'=>'form-control','required'])!!}
+                {!! Form::text('calle',null,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('numero','numero') !!}
-                    {!! Form::number('numero',null,['class'=>'form-control','required'])!!}
+                    {!! Form::number('numero',null,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                         {!! Form::label('estado','Estado') !!}
@@ -168,15 +168,15 @@
                 </div>
                 <div class="form-group">
                     {!! Form::label('ciudad','Ciudad') !!}
-                    {!! Form::text('ciudad',null,['class'=>'form-control','required'])!!}
+                    {!! Form::text('ciudad',null,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('colonia','Colonia') !!}
-                    {!! Form::text('colonia',null,['class'=>'form-control','required'])!!}
+                    {!! Form::text('colonia',null,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('cp','Codigo postal') !!}
-                    {!! Form::number('cp',null,['class'=>'form-control','required'])!!}
+                    {!! Form::number('cp',null,['class'=>'form-control'])!!}
                 </div>
   			</div>
   			<div class="panel-footer">
@@ -191,27 +191,7 @@
   		</div>
   		<!-- fin direcciones -->
 
-      <div role="tabpanel" class="tab-pane" id="final">
-        <div class="panel panel-default">
-        <div class="panel-heading">Datos Usuario</div>
-        <div class="panel-body">
-          <div class="form-group">
-            {!! Form::label('type','Escuela') !!}<br />
-            <select class="form-control" name="escuelaid">
-              <option value="">Seleccione una escuela</option>
-              @foreach($escuela as $escuelas)
-                <option value="{{ $escuelas->id }}">{{ $escuelas->ESC_nombre }}</option>
-              @endforeach
-            </select>             
-          </div> 
-        </div>
-        <div class="panel-footer">
-                        <div class="form-group">
-                    {{ Form::button('<span class="glyphicon glyphicon-ok"></span> Registrar', array('class'=>'btn btn-success pull-right', 'type'=>'submit')) }}
-                    </div><br>
-                    </div>
-        </div>
-      </div>
+    
 	</div>
 
  </div>

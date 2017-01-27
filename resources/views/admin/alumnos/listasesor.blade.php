@@ -74,7 +74,20 @@
         </div>
         </div>
 		    </div>
-        <div class="col-sm-8"><br><br><br><br><br>
+        <div class="col-sm-8">
+        <center>
+          @if($asesorasignado==1)
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             <strong>Falta asignar asesor </strong> {{ $nombreasesor }}
+          </div>
+          @else 
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Asesor asignado: </strong> {{ $nombreasesor }}
+          </div>
+          @endif
+        </center>
         <div class="panel panel-default">
   <div class="panel-heading">Lista de asesores</div>
   <div class="panel-body">

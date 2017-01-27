@@ -23,6 +23,8 @@ use Residence\Models\Documentoasignado;
 use Residence\Models\Seguimientoasignado;
 use Residence\Models\Seguito;
 use Residence\Models\Estatus;
+use Residence\Models\Nota;
+use Residence\Models\Diario;
 use Residence\Models\Escuela;
 use Residence\Models\Direccion;
 use BrianFaust\SweetFlash;
@@ -37,6 +39,8 @@ class AlumnosController extends Controller
      */
     public function index(Request $request)
     {  
+
+       
       $aaa=Alumno::Buscador($request->matricula)
       ->join('users','users.id','=','alumnos.USU_id')
     ->select(
@@ -68,16 +72,22 @@ class AlumnosController extends Controller
      public function list(Request $request)
     {  
        
+       
         $aaa=Pivot::Buscador($request->matricula)       
         ->join('alumnos','alumnos.id','=','alumnos_asesores.ALU_id')
-        ->join('asesores','asesores.id','=','alumnos_asesores.ASE_id')
-        ->join('users','users.id','=','alumnos_asesores.ALU_id')
+        #->join('asesores','asesores.id','=','alumnos_asesores.ASE_id')
+        #->join('users','users.id','=','alumnos_asesores.ALU_id')
         ->paginate(9);
-
-       
+        
+        #$aaa=Pivot::all();
+        #dd($aaa);
+        
         $asesores=Asesor::all();
+    
 
 
+
+        #dd($asesores);
      return View('admin.alumnos.list')
      ->with('asesores',$asesores)
      ->with('aaa',$aaa);
@@ -126,7 +136,7 @@ class AlumnosController extends Controller
             $documentos->DOC_fecha=$date; 
             $documentos->DOC_archivo="archivo.pdf"; 
             $documentos->ANT_id=$idante;
-            $documentos->EST_id=1;
+            $documentos->EST_id=2;
             $documentos->save();
 
         }
@@ -269,6 +279,25 @@ class AlumnosController extends Controller
         
         
 
+         $miasesor = Pivot::select('*')->where('ALU_id','=',$id)->get();
+        foreach ($miasesor as $re)
+        {
+            $idasesor=$re->ASE_id;
+        }
+        if($idasesor==null)
+        {
+            $asesorasignado=1;
+            $nombreasesor=":)";
+        }
+        else
+        {
+            $ase=Asesor::find($idasesor);
+            $asesorasignado=2;
+            $nombreasesor=$ase->ASE_nombre;
+
+        }      
+        
+        #dd($asesorasignado);
        
         #$asesores=Asesor::all();
        $asesores=Asesor::all();
@@ -279,7 +308,9 @@ class AlumnosController extends Controller
         return view('admin.alumnos.listasesor')
         ->with('asesores',$asesores)
         ->with('usuario',$usuario)
-        ->with('alumno',$alumno); 
+        ->with('alumno',$alumno)
+        ->with('nombreasesor',$nombreasesor)
+        ->with('asesorasignado',$asesorasignado); 
     }
 
 
@@ -408,9 +439,6 @@ class AlumnosController extends Controller
      */
     public function destroy($id)
     {
-        #dd("kjaslklas");
-
-
 
         $alumno = Alumno::find($id);
         $idusuario=$alumno->USU_id;
@@ -420,30 +448,73 @@ class AlumnosController extends Controller
         $idante=$alumno->ANT_id;
         $idesquema=$alumno->ESQ_id;
 
+        # dd($idusuario);
+          
+
         $asesores = Pivot::select('*')->where('ALU_id','=',$id)->where('ALAS_tipo','=','asesor')->get();
         foreach ($asesores as $ase)
         {
+
             $idasesor=$ase->id;
             $asesor = Pivot::find($idasesor);
             $asesor->delete();
         }
        
 
-        $revisores = Pivot::select('*')->where('ALU_id','=',$id)->where('ALAS_tipo','=','revisores')->get();
+        $revisores = Pivot::select('*')->where('ALU_id','=',$id)->where('ALAS_tipo','=','revisor')->get();
         foreach ($revisores as $re)
         {
+            
+            dd("no entro");
+
             $idrevisor=$re->id;
             $revisor = Pivot::find($idrevisor);
             $revisor->delete();
+
         }
 
         $user = User::find($idusuario);
         $tutor = Tutor::find($idtutor);
         $direccion=Direccion::find($iddir);
+
+        $documento=Documento::select('*')->where('ANT_id','=',$idante)->get();
+        foreach( $documento as $doc)
+        {
+            $iddoc=$doc->id;
+            $documentos=Documento::find($iddoc);
+            $documentos->delete();
+
+        }
+
+        $seguimiento=Seguimiento::select('*')->where('ESQ_id','=',$idesquema)->get();
+        foreach( $seguimiento  as $seg)
+        {
+            #dd("fjkdf");
+            $idseg=$seg->id;
+            #dd($idseg);
+            $seguimientos=Seguimiento::find($idseg);
+            $seguimientos->delete();
+        }
+
+
         $anteproyecto = Anteproyecto::find($idante);
         $esquema = Esquema::find($idesquema);
 
+        $diario=Diario::select('*')->where('ALU_id','=',$id)->get();
         
+        foreach ( $diario as $dia )
+        {
+            
+            $idnota=$dia->NOT_id;
+            $iddiario=$dia->id;
+        
+            $diarios=Diario::find($iddiario);
+            $diarios->delete(); 
+
+            $nota=Nota::find($idnota);
+            $nota->delete();           
+        }
+    
         $alumno->delete();
         $user->delete();
         $tutor->delete();

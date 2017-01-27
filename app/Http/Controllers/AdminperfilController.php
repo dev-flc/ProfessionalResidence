@@ -77,7 +77,7 @@ class AdminperfilController extends Controller
                    $es++;
                  }
 
-        $see=Esquema::all();
+        $see=Esquema::select('*')->where('EST_id','=',6)->get();
         $se=0; 
         foreach ($see as $s) {
                    $se++;

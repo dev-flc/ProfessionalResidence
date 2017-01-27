@@ -197,7 +197,7 @@
       <!-- container inicio -->
       <div class="col-sm-9">  
         <div class="panel panel-default">
-          <div class="panel-heading">Nueva notaa</div>
+          <div class="panel-heading">Editar nota</div>
           <div class="panel-body">
             <div class="row">
               @foreach ($diario as $dia)

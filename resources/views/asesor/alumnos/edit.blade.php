@@ -168,7 +168,7 @@ box-shadow: 0px 0px 0px 5px rgba(0,0,0,0.75);
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">Datos personales</div>
+  <div class="panel-heading">Datos personaledss</div>
   <div class="panel-body">
     @foreach($asesor as $asee )
     {{Form::open(['route'=>['asesor.user.updateuserr',$asee->id],'method'=>'PUT'])}}
@@ -190,7 +190,7 @@ box-shadow: 0px 0px 0px 5px rgba(0,0,0,0.75);
             {!! Form::number('tel',$asee->ASE_tel,['class'=>'form-control','required'])!!}
         </div> 
         <div class="form-group">
-            {!! Form::label('cel','Celilar') !!}
+            {!! Form::label('cel','Celular') !!}
             {!! Form::number('cel',$asee->ASE_cel,['class'=>'form-control','required'])!!}
         </div> 
    

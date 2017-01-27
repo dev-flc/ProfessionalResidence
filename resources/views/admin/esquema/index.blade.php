@@ -1,7 +1,7 @@
 @extends('admin.templates.main')
 
-@section('title', 'Esquemas')
-@section('titulo', 'Esquemas')
+@section('title', 'Ensayos')
+@section('titulo', 'Ensayos')
 @section('buttonlink')
 
 
@@ -30,6 +30,14 @@
                 </div>          
             </div>
             <div class="panel-body">
+            <center>
+                @if($i==0)
+                   <div class="alert alert-danger alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <strong>Lo sentimos!</strong> no hay ensayos terminados.
+                    </div>
+                @endif
+            </center>
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <thead>

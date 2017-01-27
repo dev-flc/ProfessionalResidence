@@ -144,7 +144,7 @@ class AlumnoEnsayoController extends Controller
         $documento->SEG_hora_entrega=$horaa;
         $documento->SEG_archivo=$nombre;
         $documento->ESQ_id=$idanteproyecto;
-        $documento->EST_id=10;
+        $documento->EST_id=1;
         $documento->save();
 
         flash('Los datos Fueron agregados correctamente', 'info')->important();

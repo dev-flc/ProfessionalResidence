@@ -17,27 +17,27 @@
   			<div class="panel panel-default">
   			<div class="panel-heading">Datos personales del asesor</div>
   			<div class="panel-body">
-				{{Form::open(['route'=>['admin.presidente.update',$asesores->id],'method'=>'PUT'])}}
+				{{Form::open(['route'=>['admin.presidente.update',$presidente->id],'method'=>'PUT'])}}
                 <div class="form-group">
                 {!! Form::label('nombre','Nombre') !!}
-                {!! Form::text('nombre',$asesores->PRE_nombre,['class'=>'form-control','required'])!!}
+                {!! Form::text('nombre',$presidente->PRE_nombre,['class'=>'form-control','required'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('apellidop','Apellido Paterno') !!}
-                    {!! Form::text('apellidop',$asesores->PRE_apellido_p,['class'=>'form-control','required'])!!}
+                    {!! Form::text('apellidop',$presidente->PRE_apellido_p,['class'=>'form-control','required'])!!}
                 </div>
 
                 <div class="form-group">
                     {!! Form::label('apellidom','Apellido Paterno') !!}
-                    {!! Form::text('apellidom',$asesores->PRE_apellido_m,['class'=>'form-control','required'])!!}
+                    {!! Form::text('apellidom',$presidente->PRE_apellido_m,['class'=>'form-control','required'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('tel','Telefono') !!}
-                    {!! Form::text('tel',$asesores->PRE_tel,['class'=>'form-control','required'])!!}
+                    {!! Form::number('tel',$presidente->PRE_tel,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('cel','Celular') !!}
-                    {!! Form::text('cel',$asesores->PRE_cel,['class'=>'form-control','required'])!!}
+                    {!! Form::number('cel',$presidente->PRE_cel,['class'=>'form-control'])!!}
                 </div>
 
   			</div>
@@ -54,14 +54,14 @@
   			<div class="panel panel-default">
   			<div class="panel-heading">Datos Usuario</div>
   			<div class="panel-body">
-          {{Form::open(['route'=>['admin.presidente.updateuserpresidente',$asesores->USU_id],'method'=>'PUT'])}}
+          {{Form::open(['route'=>['admin.presidente.updateuserpresidente',$user->id],'method'=>'PUT'])}}
                 <div class="form-group">
                 {!! Form::label('nombre','Nombreusuario') !!}
-                {!! Form::text('nombre',$asesores->name,['class'=>'form-control','required'])!!}
+                {!! Form::text('nombre',$user->name,['class'=>'form-control','required'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('correo','Correo') !!}
-                    {!! Form::text('correo',$asesores->email,['class'=>'form-control','required'])!!}
+                    {!! Form::text('correo',$user->email,['class'=>'form-control','required'])!!}
                 </div>
                 <!--
                 <div class="form-group">
@@ -72,7 +72,7 @@
                         'secretario'=>'secretario',
                         'presidente'=>'presidente',
                         'asesor'=>'asesor',],
-                        $asesores->type,['class'=>'form-control']) !!}
+                        $user->type,['class'=>'form-control']) !!}
                 </div> 
                 -->               
                 <div class="form-group">
@@ -95,14 +95,14 @@
   			<div class="panel panel-default">
   			<div class="panel-heading">Dirección Asesor</div>
   			<div class="panel-body">
-				{{Form::open(['route'=>['admin.presidente.updatedireccion',$asesores->DIR_id],'method'=>'PUT'])}}
+          				{{Form::open(['route'=>['admin.presidente.updatedireccion',$direccion->id],'method'=>'PUT'])}}
                 <div class="form-group">
                 {!! Form::label('calle','Calle') !!}
-                {!! Form::text('calle',$asesores->DIR_calle,['class'=>'form-control','required'])!!}
+                {!! Form::text('calle',$direccion->DIR_calle,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('numero','numero') !!}
-                    {!! Form::number('numero',$asesores->DIR_numero,['class'=>'form-control','required'])!!}
+                    {!! Form::number('numero',$direccion->DIR_numero,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                         {!! Form::label('estado','Estado') !!}
@@ -140,19 +140,19 @@
                         'Veracruz'=>'Veracruz',
                         'Yucatán'=>'Yucatán',
                         'Zacatecas'=>'Zacatecas',]
-                        ,$asesores->DIR_estado,['class'=>'form-control']) !!}
+                        ,$direccion->DIR_estado,['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('ciudad','Ciudad') !!}
-                    {!! Form::text('ciudad',$asesores->DIR_ciudad,['class'=>'form-control','required'])!!}
+                    {!! Form::text('ciudad',$direccion->DIR_ciudad,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('colonia','Colonia') !!}
-                    {!! Form::text('colonia',$asesores->DIR_colonia,['class'=>'form-control','required'])!!}
+                    {!! Form::text('colonia',$direccion->DIR_colonia,['class'=>'form-control'])!!}
                 </div>
                 <div class="form-group">
                     {!! Form::label('cp','Codigo postal') !!}
-                    {!! Form::number('cp',$asesores->DIR_cp,['class'=>'form-control','required'])!!}
+                    {!! Form::number('cp',$direccion->DIR_cp,['class'=>'form-control'])!!}
                 </div>
   			</div>
   			<div class="panel-footer">

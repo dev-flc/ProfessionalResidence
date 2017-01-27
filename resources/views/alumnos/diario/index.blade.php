@@ -20,11 +20,11 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ route('alumno.perfil.index') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Anteproyecto</a>
+                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
                 </li>
                 @foreach($alumno as $al)
                 @if($al->ALU_semestre==8)
-                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
+                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Ensayo</a>
                 </li>
                 @endif
                 @endforeach
@@ -57,7 +57,7 @@
 <style type="text/css">
   body
   {
-    background: rgb(229, 231, 233);
+    background: rgb(255,255,255);
   }
   #imgperfil
   {
@@ -69,7 +69,7 @@
   }
   .caption
   {
-    background: rgb(230,230,230);
+    border: 1px solid rgb(174, 214, 241);
     margin: 10px;
     border-radius: 5px;
   }
@@ -108,21 +108,22 @@
   .list-group-item{
     cursor: default;
   }
+  #tex{
+    color: rgb(52, 152, 219);
+  }
 </style>
   <div class="container-fluid">
     @include('flash::message')
   </div>
   <div class="container-fluid">
     
-<h1>Bienvenido</h1>
-
   </div>
   <div class="container-fluid">
     <div class="row">
       <!-- perfil fito -->
       <div class="col-sm-3">
         <div class="panel panel-default">
-          <div class="panel-heading">Datos personales sds</div>
+          
           <div class="panel-body">
             <div class="thumbnail">
                <br />
@@ -173,36 +174,35 @@
                 @else
                   <tr>
                     <td>
-                      <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> 
-                      Matricula:
+                     <p id="tex"> <span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> 
+                      Matricula:</p>
                     </td>
                     <td>{{ $alumnos->ALU_matricula }}</td>
                   </tr>
                   <tr>
                     <td>
-                      <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
-                      Periodo:
+                     <p id="tex"> <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+                      Periodo:</p>
                     </td>
                     <td>{{ $alumnos->ALU_periodo }}</td>
                   </tr>
                   <tr>
                     <td>
-                      <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 
-                      Telefono:
+                     <p id="tex"> <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> 
+                      Telefono:</p>
                     </td>
                     <td>{{ $alumnos->ALU_tel }}</td>
                   </tr>
                   <tr>
                     <td>
-                      <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-                      Celular:
+                     <p id="tex"> <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                      Celular:</p>
                     </td>
                     <td>{{ $alumnos->ALU_cel }}</td>
                   </tr>
                   <tr>
                     <td>
-                      <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-                      Semestre:
+                      <p id="tex"><span class="glyphicon glyphicon-education" aria-hidden="true"></span>Semestre:</p>
                     </td>
                     <td>{{ $alumnos->ALU_semestre }}</td>
                   </tr>
@@ -234,13 +234,80 @@
       <!-- fin perfil foto -->
       <!-- container inicio -->
       <div class="col-sm-9">  
-        <div class="panel panel-default">
+        <div class="panel panel-info">
           <div class="panel-heading"><a id="link" href="{{ route('alumno.diario.create') }}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> nueva nota</a></div>
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-12">
-              
-                <table>
+              <style type="text/css">
+                .diario
+                {
+                  border: 1px solid rgb(174, 214, 241);
+                  transition: .7s;
+                }
+                #linkdiario
+                {
+                  width: 20px;
+                }
+                .imagenprincipal
+                {
+                  transition: .7s;
+                }
+                .diario:hover
+                {
+                  border: 1px solid rgb(171, 235, 198);
+                  border-radius: 10px;
+                }
+                .diario:hover .imagenprincipal
+                {
+                  border-radius: 10px;
+                  background: rgb(171, 235, 198);
+                }
+              </style>
+               @foreach($diario as $dia)
+              <!-- inicio diario-->
+                <div class="diario">
+                  <div class="row">
+
+                    <div class="col-sm-3 ">
+                    <div class="container-fluid imagenprincipal">
+                      <center>
+                        <img  src="/files/documentos/open-book.png" alt="...">  
+                      </center>
+                      </div>
+                    </div>
+                    <div class="col-sm-5">
+                    <h3>Tema:</h3>
+                      <p>{{ $dia->DIA_nombre}}</p>
+                      <p><strong>Fecha y Hora: </strong>{{ $dia->DIA_fecha }}</p>
+                    </div>
+                    <div class="col-sm-4">
+                       <h3>Bitacora</h>
+                      <h4><strong>Titulo:</strong> {{ $dia->NOT_nombre }}</h4>
+                      <p>
+                      <a href="{{ route('alumno.diario.show', $dia->id) }}"> Ver
+                       <img  id="linkdiario" src="/files/documentos/eye.png" alt="..."> |  
+                      </a>
+                       <a href="{{ route('alumno.diario.edit', $dia->id) }}"> Editar
+                        <img  id="linkdiario" src="/files/documentos/pencil.png" alt="...">  
+                      </a>
+                      @if($dia->NOT_archivo=="archivo.pdf")
+
+                      @else
+                       <a href="{{ route('alumno.descargadiario.descarga', $dia->NOT_id) }}">| Descargar 
+                       <img  id="linkdiario" src="/files/documentos/inbox.png" alt="...">
+                      </a>
+                      @endif
+                      </p>
+                    </div>
+                   
+                  </div>
+                  
+                </div>
+                <br>
+              <!-- fin diario -->
+              @endforeach
+                <table border="1">
                   <tr>
                     <td><label>Diario</label></td>
                     <td></td>

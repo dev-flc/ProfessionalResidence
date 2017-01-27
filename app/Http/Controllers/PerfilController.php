@@ -27,6 +27,7 @@ class PerfilController extends Controller
      */
     public function index()
     {
+        #dd("sd");
         $user = Auth::user()->id;
         $iduser = Auth::user()->id;
         
@@ -41,12 +42,13 @@ class PerfilController extends Controller
         }
         
         $tutor=tutor::select('*')->where('id','=',$idtutor)->get();
-        
+        $iddirector=null;
         $escuela=Escuela::select('*')->where('id','=',$idescuela)->get();
         foreach ($escuela as $esc)
         {
             $iddirector=$esc->DI_id;
         }
+
 
         $director=Director::select('*')->where('id','=',$iddirector)->get();
 
@@ -54,16 +56,28 @@ class PerfilController extends Controller
         ->join('asesores','asesores.id','=','alumnos_asesores.ASE_id')
         ->join('users','users.id','=','asesores.USU_id')
         ->get();
+        $a=0;
+        foreach ($asesor as $as)
+        {
+            $a++;
+        }
 
         $revisor=Pivot::select('*')->where('ALU_id','=',$idalumno)->where('ALAS_tipo','=','revisor')
         ->join('asesores','asesores.id','=','alumnos_asesores.ASE_id')
         ->join('users','users.id','=','asesores.USU_id')
         ->get();
+        $b=0;
+        foreach ($revisor as $re)
+        {
+            $b++;
+        }
 
         #dd($revisor);
         return view('alumnos.perfil.index')
         ->with('alumno',$alumno)
         ->with('user',$user)
+        ->with('a',$a)
+        ->with('b',$b)
         ->with('escuela',$escuela)
         ->with('tutor',$tutor)
         ->with('asesor',$asesor)

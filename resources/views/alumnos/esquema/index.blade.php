@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>inicio</title>
+  <title>Anteproyectos</title>
   <link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
 </head>
 <header>
@@ -18,11 +18,11 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ route('alumno.perfil.index') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Anteproyecto</a>
+                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
                 </li>
                 @foreach($alumno as $al)
                 @if($al->ALU_semestre==8)
-                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
+                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Ensayo</a>
                 </li>
                 @endif
                 @endforeach
@@ -248,7 +248,7 @@
                         </td>
                       </tr>
                       <!-- datos subido-->
-                      @if($docs->EST_id==10)
+                      @if($docs->EST_id==1)
                       <tr>
                         <td>
                            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Subido:

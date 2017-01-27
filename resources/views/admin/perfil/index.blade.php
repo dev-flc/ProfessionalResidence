@@ -49,7 +49,7 @@
         width: 100%;
     }
      p{
-        font-size: 20px;
+        font-size: 15px;
     }
     strong
     {
@@ -58,12 +58,13 @@
 
     }
     .list-group-item,span{
-        font-size: 
+        font-size: 20px;
     }
     .alumm
     {
         background: rgb(255,255,255);
         border-radius: 10px;
+        height: 270px;
     }
     .container-menu
     {
@@ -72,9 +73,18 @@
     .btn-menu
     {
         height: 100px;
-        width: 200px;
+        width: 175px;
        /* border-radius: 50%;*/
         margin: 5px;
+        border-radius: 0px;
+        transition: .7s;
+    }
+    .btn-menu:hover{
+         height: 105px;
+        width: 180px;
+        -webkit-box-shadow: 0px 0px 13px 2px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 13px 2px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 13px 2px rgba(0,0,0,0.75);
     }
     #link{
         text-decoration: none;
@@ -180,6 +190,7 @@
           </div>
         <div class="col-sm-9 alumm">
             <div class="container-fluid container-menu">
+            <br>
             <center>
             <a id="link" href="{{ route('admin.alumnos.index') }}">
                 <button class="btn btn-primary btn-menu">
@@ -189,7 +200,7 @@
                 </button>
             </a>
 
-
+           
            
 
              <a id="link" href="{{ route('admin.escuelas.index') }}">
@@ -199,7 +210,7 @@
                     <p><span class="badge">{{ $as }}</span></p>
                 </button>
             </a>
-
+ 
             <a id="link" href="{{ route('admin.asesores.index') }}">
                 <button class="btn btn-danger btn-menu">
                     <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -211,31 +222,38 @@
              <a id="link" href="{{ route('admin.esquema.index') }}">
                 <button class="btn btn-success btn-menu">
                     <p><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                    Esqeumas</p>
+                    Ensayo</p>
                     <p><span class="badge">{{ $se }}</span></p>
                 </button>
             </a>
             @if($type=="subdirector")
             <a id="link" href="{{ route('admin.presidente.index') }}">
                 <button class="btn btn-info btn-menu">
-                    <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <p>
                     Presidente</p>
-                    <p><span class="badge">{{ 1 }}</span></p>
+                    <p><span class="badge"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span></p>
                 </button>
             </a>
             @endif
             <a id="link" href="{{ route('admin.secretario.index') }}">
                 <button class="btn btn-defaul btn-menu">
-                    <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <p>
                     Secretario</p>
-                    <p><span class="badge">{{ 1 }}</span></p>
+                    <p><span class="badge"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span></p>
                 </button>
             </a>
             
-              <a id="link" href="{{ route('admin.asesores.index') }}">
-                <button class="btn btn-info btn-menu">
+              <a id="link" href="{{ route('admin.alumnos.list') }}">
+                <button class="btn btn-success btn-menu">
                     <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     Asignar asesor</p>
+                    <p><span class="badge">{{ $al }}</span></p>
+                </button>
+            </a>
+            <a id="link" href="{{ route('admin.alumnos.list') }}">
+                <button class="btn btn-info btn-menu">
+                    <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    Asignar revisores</p>
                     <p><span class="badge">{{ $al }}</span></p>
                 </button>
             </a>
@@ -249,7 +267,7 @@
 
             </center>
             </div>
-       
+       <br>
         </div>
       
         <div class="col-sm-9 ">

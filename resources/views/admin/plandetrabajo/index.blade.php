@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-primary">
-                  <div class="panel-heading"><a href="{{ route('admin.plan.create') }}" id="li">Anteproyecto <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></div>
+                  <div class="panel-heading"><a href="{{ route('admin.plan.create') }}" id="li">Esquema <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></div>
                   <div class="panel-body">
                     <table class="table">
                     <tr>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="panel panel-primary">
-                  <div class="panel-heading"><a href="{{ route('admin.plan.createesquema') }}" id="li">Esquema <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></div>
+                  <div class="panel-heading"><a href="{{ route('admin.plan.createesquema') }}" id="li">Ensayo <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></div>
                   <div class="panel-body">
                     <table class="table">
                     <tr>

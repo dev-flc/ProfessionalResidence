@@ -17,13 +17,19 @@ class EsquemasController extends Controller
      */
     public function index( Request $request)
     {
+
+
     $esquema=Esquema::Buscador($request->nombre)
+    ->select('*')->where('EST_id','=',6)
     ->orderBy('id', 'asc')
     ->paginate(8);
-    $i=1;
-
-
+    $i=0;
+    foreach ($esquema as $es)
+    {
+        $i++;
+    }
      return View('admin.esquema.index')
+     ->with('i',$i)
      ->with('esquema',$esquema);
     }
 

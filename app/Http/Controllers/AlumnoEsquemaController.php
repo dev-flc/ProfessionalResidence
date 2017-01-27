@@ -132,7 +132,6 @@ class AlumnoEsquemaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
         $user = Auth::user()->id;
 
         $alumno = Alumno::select('*')->where('USU_id','=',$user)->get();
@@ -162,8 +161,10 @@ class AlumnoEsquemaController extends Controller
         $documento->DOC_hora_entrega=$horaa;
         $documento->DOC_archivo=$nombre;
         $documento->ANT_id=$idanteproyecto;
-        $documento->EST_id=10;
+        $documento->EST_id=1;
         $documento->save();
+       # dd("yo merengues");
+
 
         flash('Los datos Fueron agregados correctamente', 'info')->important();
         return redirect()->route('alumno.esquema.index');

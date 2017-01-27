@@ -56,10 +56,9 @@
                 </div>          
             </div>
             <div class="panel-body">
-           
-@if($aaa=="")
 
-@else
+           
+
 <table class="table table-hover">
      <tr>
          <th><center>Nombre</center></th>
@@ -72,27 +71,6 @@
  @foreach($aaa as $user)
     
     @if($user->ALAS_tipo=="asesor")
-       
-        @if($user->ALU_nombre=="") 
-        <tr>
-        <td colspan="5"><center>
-        <span class="label label-danger label-largo">Informacion pendiente  
-                <span class="glyphicon glyphicon-" aria-hidden="true"></span>
-                </span>
-                </td>
-        </center>
-        <td><center>
-           @if($user->ASE_nombre=="pendiente")
-            <a  id="linkk" href="{{ route('admin.alumnos.asignar', $user->id) }}">
-            <span class="label label-danger">
-                Pendiente
-            </a>
-            
-            @endif
-        </td>
-     </tr>
-
-        @else
         <tr>
         <td><center>{{ $user->ALU_nombre }}</center></td>
         <td><center>{{ $user->ALU_apellido_p }} {{ $user->ALU_apellido_m }}</center></td>
@@ -111,7 +89,7 @@
                 
 
                 <a href="{{ route('admin.alumnos.asignar', $user->id) }}">
-                <span class="label label-success">{{ $user->ASE_nombre }}  
+                <span class="label label-success">Asignar
                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </span>
                 </a>
@@ -119,10 +97,9 @@
             @endif
         </td>
      </tr>
-        @endif
-        
 
-
+    @else
+   
      @endif
 @endforeach
  </table>
@@ -130,63 +107,8 @@
 {!! $aaa->render()!!}
 </center>
 
-@endif
+
 </div>
-</div>
-<style type="text/css">
-    .nofile{
-        background: #fff;
-        border: none;
-        color: #fff;
-    }
-</style>
 
-
-
-@if($aaa=="")
-
-@else
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        
-      </div>
-      <div class="modal-body">
- 
-    {{Form::open(['route'=>['admin.alumnos.updateasesorr',$user->id],'method'=>'PUT'])}}
-            <div class="form-group">
-            <input  type="number" class="nofile" id="recipient-name" readonly>
-           
-            <select  name="escuela" class="form-control" required>
-                <option value="">Seleccione un asesor</option>
-                @foreach($asesores as $user)
-    
-                @if($user->ALAS_tipo=="asesor")
-    
-                @elseif($user->ASE_nombre=="pendiente")
-    
-                @else
-                <option value="{!!$user->ASE_nombre !!}">{{ $user->ASE_nombre}}</option>
-                @endif
-    
-                @endforeach     
-    
-            </select>
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success">Asignar <span class="glyphicon glyphicon-ok"></span></button>
-              {!! Form::close() !!}
-      </div>
-      
-    </div>
-  </div>
-</div>
-@endif
 
 @endsection

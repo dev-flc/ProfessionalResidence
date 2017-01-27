@@ -8,6 +8,7 @@
   {!!Html::style('css/font-awesome.min.css')!!}
   {!!Html::script('js/jquery-1.12.3.min.js')!!}
   {!!Html::script('js/bootstrap.min.js')!!}
+  
    <link rel="icon" href="../../img/ENUF.png">
   
 </head>

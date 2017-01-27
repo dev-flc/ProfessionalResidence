@@ -211,12 +211,12 @@
 
               <div class="form-group">
                 {!! Form::label('telefono','Telefono') !!}
-                {!! Form::number('telefono',$alum->ALU_tel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
+                {!! Form::number('telefono',$alum->ALU_tel,['class'=>'form-control'])!!}
               </div>
 
               <div class="form-group">
                 {!! Form::label('celular','Celular') !!}
-                {!! Form::number('celular',$alum->ALU_cel,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!}
+                {!! Form::number('celular',$alum->ALU_cel,['class'=>'form-control'])!!}
               </div>
               
               <div class="form-group">
@@ -226,7 +226,7 @@
 
               <div class="form-group">
                 {!! Form::label('matricula','matricula') !!}
-                {!! Form::number('matricula',$alum->ALU_matricula,['class'=>'form-control','placeholder'=>'Requiere telefono','required'])!!} 
+                {!! Form::number('matricula',$alum->ALU_matricula,['class'=>'form-control','required'])!!} 
               </div>
                 <div class="form-group">
                 {!! Form::label('semestre','semestre') !!}

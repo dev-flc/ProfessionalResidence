@@ -20,11 +20,11 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ route('alumno.perfil.index') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Anteproyecto</a>
+                <li><a href="{{ route('alumno.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
                 </li>
                 @foreach($alumno as $al)
                 @if($al->ALU_semestre==8)
-                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquema</a>
+                <li><a href="{{ route('alumno.ensayo.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Ensayo</a>
                 </li>
                 @endif
                 @endforeach
@@ -251,13 +251,13 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="panel panel-default">
-              <div class="panel-heading">Escuela</div>
+              <div class="panel-heading">Escuela asignada</div>
               <div class="panel-body">
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="container-fluid colorfondoblanco">
                       <br>
-                      <label>Datos Esceula</label>
+                      <label>Datos  de la esceula</label>
                       <table class="table table-hover">
                       @foreach($escuela as $school)
                         <tr>
@@ -275,7 +275,7 @@
                   <div class="col-sm-4">
                     <div class="container-fluid colorfondoblanco">
                       <br>
-                      <label>Director</label>
+                      <label>Director de la escuela</label>
                       
                       <table class="table table-hover">
                       @foreach($director as $di)
@@ -298,7 +298,7 @@
                   <div class="col-sm-4">
                     <div class="container-fluid colorfondoblanco">
                       <br>
-                      <label>Tutor</label>
+                      <label>Tutor asignado</label>
                       <table class="table table-hover">
                       @foreach($tutor as $tu)
                       @if($tu->TUT_nombre=="")
@@ -350,13 +350,14 @@
                   <div class="col-sm-6">
                     <label>Asesor</label>
                     <table class="table">
-                      @foreach( $asesor as $ase )
+                     
 
-                      @if($ase->ASE_nombre=="pendiente")
+                      @if($a==0)
                         <tr>
                           <td><span class="label label-danger">Pendiente</span></td>
                         </tr>
                       @else
+                       @foreach( $asesor as $ase )
                       <tr>
                         <td rowspan="5">
                         <br>
@@ -382,16 +383,25 @@
                         <td><strong>Correo:</strong></td>
                         <td><center>{{ $ase->ASE_cel }}</center></td>
                       </tr>
+                      @endforeach
+
                       @endif
 
-                      @endforeach
                     </table>
                   </div>
                   <div class="col-sm-6">
-                   @foreach( $revisor as $rev )
-                      @if( $alumnos->ALU_semestre==8)
+                  
+                       @if( $alumnos->ALU_semestre==8)
+
                     <label>Revisores</label>
                       <table class="table">
+                        @if ($b==0)
+                         <tr>
+                          <td><span class="label label-danger">Pendiente</span></td>
+                        </tr>
+                        @endif
+                           @foreach( $revisor as $rev )
+
                       <tr>
                         <td rowspan="5">
                         <br>
@@ -417,8 +427,9 @@
                         <td><center>{{ $rev->ASE_cel }}</center></td>
                       </tr>
                       </table>
-                      @endif
                       @endforeach
+
+                      @endif
                     
                   </div>
                 </div>

@@ -120,13 +120,17 @@ class AdminPresidenteController extends Controller
      */
     public function edit($id)
     {
-         $asesores =Presidente::Select('*')
-        ->join('users','users.id','=','presidentes.USU_id')
-        ->join('direcciones','direcciones.id','=','presidentes.DIR_id')
-        ->findOrFail($id);
+        $presidente =Presidente::find($id);
+        $iddir=$presidente->DIR_id;
+        $idusu=$presidente->USU_id;
         
-       # dd($asesores);
-       return view('admin.presidente.edit')->with('asesores', $asesores);
+        $direccion=Direccion::find($iddir);
+        $user=User::find($idusu);
+
+       return view('admin.presidente.edit')
+       ->with('direccion', $direccion)
+       ->with('user', $user)
+       ->with('presidente', $presidente);
     }
 
     /**

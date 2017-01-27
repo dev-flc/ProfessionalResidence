@@ -6,7 +6,7 @@ $gl->foto="foto.png";
 $gl->type="subdirector";
 $gl->save();
 
-INSERT INTO `residence`.`subdirectores` (`id`, `SUB_nombre`, `SUB_apellido_p`, `SUB_apellido_m`, `SUB_tel`, `SUB_cel`, `DIR_id`, `USU_id`) VALUES ('1', '2017', '2017', '2107', NULL, NULL, NULL, '1');
+INSERT INTO `residence`.`subdirectores` (`id`, `SUB_nombre`, `SUB_apellido_p`, `SUB_apellido_m`, `SUB_tel`, `SUB_cel`, `DIR_id`, `USU_id`) VALUES ('1', 'administrador', '2017', 'enuf', NULL, NULL, NULL, '1');
 
 
 INSERT INTO `residence`.`estatus` (`id`, `EST_estatus`) VALUES ('1', '1');

@@ -9,28 +9,7 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ route('admin.perfil.index') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"> </span>  Inicio</a>
                 </li>
-                <li><a href="{{ route('admin.alumnos.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Alumnos</a>
-                </li>
-                <li><a href="{{ route('admin.escuelas.index') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>  Escuelas</a>
-                </li>
-                <li><a href="{{ route('admin.asesores.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Asesores</a>
-                </li>
-                <li><a href="{{ route('admin.esquema.index') }}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Esquemas</a>
-                </li>
-
-                 @if(Auth::user()->type=="subdirector")
-                <li><a href="{{ route('admin.presidente.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Presidente</a>
-                </li>
-                @endif
-                <li><a href="{{ route('admin.secretario.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Secretario</a>
-                </li>
-
-                <li><a href="{{ route('admin.alumnos.list') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Asignar asesores</a>
-                </li>
-                <li><a href="{{ route('admin.revisores.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Asignar revisores</a>
-                </li>
-                <li><a href="{{ route('admin.plan.index') }}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Plan de trabajo</a>
-                </li>
+                
 
             </ul>
             <ul class="nav navbar-nav navbar-right">

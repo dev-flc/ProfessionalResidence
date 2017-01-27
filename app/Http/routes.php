@@ -109,7 +109,7 @@ Route::get('asignar/{id}',[
 		'as' => 'admin.alumnos.updateasesorr'
 		]);
 
-	Route::put('direction/{id}',[
+	Route::put('direc/{id}',[
 		'uses' => 'AlumnosController@updatedirecciones',
 		'as' => 'admin.alumnos.updatedirecciones'
 		]);
@@ -154,7 +154,7 @@ Route::get('asignar/{id}',[
 	Route::resource('perfil','AdminperfilController');
 	Route::resource('perfilsub','AdminsubperfilController');
 	
-	Route::put('direccion/{id}',[
+	Route::put('direction/{id}',[
 		'uses' => 'AdminPresidenteController@updatedireccion',
 		'as' => 'admin.presidente.updatedireccion'
 		]);
@@ -233,7 +233,7 @@ Route::put('escuelaa/{id}',[
 		'as' => 'asesor.alumno.escuelaa'
 		]);
 
-Route::put('updateuserr/{id}',[
+Route::put('updateuserrr/{id}',[
 		'uses' => 'AsesorAlumnosController@updateuserr',
 		'as' => 'asesor.user.updateuserr'
 		]);
@@ -253,9 +253,19 @@ Route::put('comentariodocumento/{id}',[
 		'as' => 'asesor.alumno.comentariodocumento'
 		]);
 
+Route::put('comentarioseguimiento/{id}',[
+		'uses' => 'AsesorAlumnosController@comentarioseguimiento',
+		'as' => 'asesor.alumno.comentarioseguimiento'
+		]);
+
 Route::get('ver/{id}',[
 	'uses' => 'AsesorAlumnosController@ver',
 	'as' => 'asesor.alumno.ver'
+	]);
+
+Route::get('verensayo/{id}',[
+	'uses' => 'AsesorAlumnosController@verensayo',
+	'as' => 'asesor.alumno.verensayo'
 	]);
 
 Route::get('verdiairio/{id}',[

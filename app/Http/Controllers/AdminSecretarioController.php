@@ -79,7 +79,7 @@ class AdminSecretarioController extends Controller
         $user->email=($request->correo);
         $user->password=bcrypt($request->pass);
         $user->foto="user.png";
-        $user->type="presidente";
+        $user->type="secretario";
         $user->save();
         $iduser= User::find($user->id);
 
@@ -116,14 +116,19 @@ class AdminSecretarioController extends Controller
      */
     public function edit($id)
     {
+    
         
-        $asesores =Secretario::Select('*')
-        ->join('users','users.id','=','secretarios.USU_id')
-        ->join('direcciones','direcciones.id','=','secretarios.DIR_id')
-        ->findOrFail($id);
+       $secretario =Secretario::find($id);
+        $iddir=$secretario->DIR_id;
+        $idusu=$secretario->USU_id;
         
-       # dd($asesores);
-       return view('admin.secretario.edit')->with('asesores', $asesores);
+        $direccion=Direccion::find($iddir);
+        $user=User::find($idusu);
+
+       return view('admin.secretario.edit')
+       ->with('secretario', $secretario)
+       ->with('direccion', $direccion)
+       ->with('user', $user);
     }
 
     /**

@@ -191,7 +191,7 @@
       <!-- container inicio -->
       <div class="col-sm-9">  
         <div class="panel panel-default">
-          <div class="panel-heading">Panel heading without title</div>
+          <div class="panel-heading">Mi nota</div>
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-6">

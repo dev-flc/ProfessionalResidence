@@ -8,6 +8,7 @@
   <link rel="icon" href="../../img/ENUF.png">
   <link rel="stylesheet" href="{{ asset('plugin/bootstrap/css/bootstrap.min.css') }}">
   
+  
   {!!Html::style('css/index.css')!!}
 </head>
 <body>
@@ -28,7 +29,7 @@
                 <li><a href="contactanos"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Contactanos</a>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-       <li><a href="registro"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Registrarme</a></li>
+      <!-- <li><a href="registro"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Registrarme</a></li>-->
        <li><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Iniciar Sesion</a></li>
       </ul>
         </div>

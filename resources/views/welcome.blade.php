@@ -1,31 +1,31 @@
 @extends('layouts.welcome')
 @section('title','Inicio')
 @section('contenido')
+<style type="text/css">
+  #but{
+      background: rgb(52, 152, 219);
+  }
+</style>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li id="but" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li id="but" data-target="#myCarousel" data-slide-to="1"></li>
+        <li id="but" data-target="#myCarousel" data-slide-to="2"></li>
       </ol>
+
       <div class="carousel-inner" role="listbox">
         <div class="item active">
           <img src="../../img/slyder/slider7.jpg" alt="...">
-          <div class="container">
-            
-          </div>
+         
         </div>         
         <div class="item">
           <img src="../../img/slyder/slider1.jpg" alt="...">
-          <div class="container">
-            
-          </div>
+        
         </div>
         <div class="item">
           <img src="../../img/slyder/slider3.jpg" alt="...">
-          <div class="container">
-            
-          </div>
+         
         </div>
       </div>
       <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -59,26 +59,66 @@
      .img-asesor
      {
       -webkit-box-shadow: 0px 0px 21px 0px rgba(255,255,255, 1);
--moz-box-shadow:    0px 0px 21px 0px rgba(255,255,255, 1);
-box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
+      -moz-box-shadow:    0px 0px 21px 0px rgba(255,255,255, 1);
+       box-shadow:0px 0px 21px 0px rgba(255,255,255, 1);
+     }
+     .mv{
+        background: rgb(244, 246, 246);
+        box-shadow: 0px 5px 5px  #BDC3C7;
+        font-size: 30px;
+        color: rgb(144, 148, 151);
+     }
+
+     .ase{
+        position: relative;
+        background: rgb(40, 116, 166);
+        box-shadow: 0px 5px 5px  rgb(242, 243, 244);
+        font-size: 30px;
+        width: 300px;
+        height: 50px;
+        top: 25px;
+       
+      
      }
    </style>
-
-
-        <div class="col-sm-6">
-        <center><h2>Misión</h2></center>
+    <div class="col-sm-6 ">
+        <center><div class="mv"><p>Misión</p></div></center>
         <p id="mm" >Formar profesores de calidad, para contribuir al mejoramiento de la práctica docente, competencias y desarrollo de las habilidades intelectuales básicas, que permitan responder a las características, intereses y necesidades de los educandos, ampliando los conocimientos y la tecnología, para actuar con iniciativa, eficacia e innovación en las diversas situaciones del entorno social.</p>
-        </div>
+    </div>
         <div class="col-sm-6">
-        <center><h2>Visión</h2></center>
+        <center><div class="mv"><p>Visión</p></div> </center>
         <p  id="mm">Formar una comunidad estudiantil en continuo crecimiento de libertad responsable y capacidades cognitivas, que permitan el desarrollo de sus potencialidades, valores, habilidades, aptitudes y cualidades físicas, para acceder al nivel profesional y a su entorno social.</p>
         </div>
+      
    </div>
-   <br />
+  <center>
+   <div class="ase"><h1>Asesores</h1><br></div>
+
+   </center>
+
    </div>
 
-   <div class="container asesores">
-    <center><h1>Asesores</h1></center><br>
+      <div class="container asesores">
+       
+
+          <br>
+          <br>
+          <br>
+          <style type="text/css">
+            .asesor{
+              background: rgb(93, 173, 226);
+              box-shadow: -5px 4px 2px rgb(133, 193, 233);
+              margin: 5px;
+              color: rgb(242, 243, 244);
+              transition: .7s;
+            }
+            .asesor:hover{
+              border-radius: 20px;
+              background: rgb(255,255,255);
+              box-shadow: -5px 4px 2px rgb(93, 173, 226);
+              color: rgb(93, 173, 226);
+            }
+          </style>
 
       <!-- Three columns of text below the carousel --> 
       <div class="row">
@@ -86,9 +126,8 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
        @if($ase->ASE_nombre=="pendiente")
 
           @else
-        <div class="col-lg-3">
-         
-          <center>
+        <div class="col-lg-2 asesor" >
+          <center><br>
           <img  class="img-circle " id="imgperfil" src="/files/documentos/{{ $ase->foto }} " alt="Generic placeholder image" width="140" height="140">
           <h2>{{ $ase->ASE_nombre }}</h2>
           <h4>{{ $ase->ASE_apellido_p }} {{ $ase->ASE_apellido_m }}</h4>
@@ -99,6 +138,7 @@ box-shadow:         0px 0px 21px 0px rgba(255,255,255, 1;
         
         
       </div><!-- /.row -->
+<br />
 <br />
 
     
